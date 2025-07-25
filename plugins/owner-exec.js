@@ -8,13 +8,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const require = createRequire(__dirname)
 
 let handler = async (m, _2) => {
+  const { conn, isOwner, args, text, metadata } = _2
+  if (!isOwner) return // فقط للمالك
 
-//if (m.fromMe) return
-const { conn, isOwner, isROwner, args, text, metadata } = _2
-if (!isOwner) return
-
-let prefixMatch = (m.originalText || m.text)?.match(/^=?>\s?/)
-if (!prefixMatch) return
+  let prefixMatch = (m.originalText || m.text)?.match(/^=?>\s?/)
+  if (!prefixMatch) return
 
   const noPrefix = m.originalText.replace(prefixMatch[0], '').trim()
   const _text = prefixMatch[0].startsWith('=') ? 'return ' + noPrefix : noPrefix
@@ -42,7 +40,7 @@ if (!prefixMatch) return
     )
 
   } catch (e) {
-    const err = syntaxerror(_text, 'Execution Function', {
+    const err = syntaxerror(_text, 'وظيفة التنفيذ', {
       allowReturnOutsideFunction: true,
       allowAwaitOutsideFunction: true,
       sourceType: 'module'
@@ -56,10 +54,10 @@ if (!prefixMatch) return
 }
 
 handler.help = ['> ', '=> ', '=']
-handler.tags = ['owner']
-handler.customPrefix = /^=?>\s?/
-//handler.command = /(?:)/i
-//handler.owner = true
+handler.tags = ['المالك']
+handler.customPrefix = /^=?>\s?/  // دعم الرموز > أو => أو =
+handler.command = new RegExp('^') // أي شيء بعد البادئة يتطابق
+handler.owner = true
 handler.register = true
 
 export default handler
@@ -69,4 +67,4 @@ class CustomArray extends Array {
     if (typeof args[0] === 'number') return super(Math.min(args[0], 10000))
     else return super(...args)
   }
-}
+      }
