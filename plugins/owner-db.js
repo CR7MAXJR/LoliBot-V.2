@@ -29,34 +29,36 @@ let handler = async (m, { conn }) => {
       `)
     ]);
 
-    const totalUsers = usuarios.rows[0].count;
+    const totalUsuarios = usuarios.rows[0].count;
     const totalRegistrados = registrados.rows[0].count;
     const totalChats = chats.rows[0].count;
-    const totalGroups = grupos.rows[0].count;
-    const totalMessages = mensajes.rows[0].sum || 0;
-    const totalDBSize = totalSize.rows[0].total;
+    const totalGrupos = grupos.rows[0].count;
+    const totalMensajes = mensajes.rows[0].sum || 0;
+    const tamañoTotalBD = totalSize.rows[0].total;
 
-    let text = `📊 *\`ESTADÍSTICAS DE BASE DE DATOS\`*\n`;
-    text += `> 👤 Usuarios: *${totalUsers}*\n`;
-    text += `> ✅ Registrados: *${totalRegistrados}*\n`;
-    text += `> 💬 Chats totales: *${totalChats}*\n`;
-    text += `> 💾 Tamaño total DB: *${totalDBSize}*\n\n`;
+    let texto = `📊 *إحصائيات قاعدة البيانات:*\n`;
+    texto += `> 👤 المستخدمون: *${totalUsuarios}*\n`;
+    texto += `> ✅ المسجلون: *${totalRegistrados}*\n`;
+    texto += `> 💬 جميع الدردشات: *${totalChats}*\n`;
+    texto += `> 👥 المجموعات النشطة: *${totalGrupos}*\n`;
+    texto += `> 💌 عدد الرسائل: *${totalMensajes}*\n`;
+    texto += `> 💾 الحجم الكلي للقاعدة: *${tamañoTotalBD}*\n\n`;
 
-    text += `📁 *\`TAMAÑO POR TABLA:\`*\n`;
+    texto += `📁 *تفاصيل الحجم حسب الجداول:*\n`;
     for (const row of tablasRes.rows) {
-      text += `• *${row.tabla}*: ${row.filas} filas — ${row.tamaño}\n`;
+      texto += `• *${row.tabla}*: ${row.filas} صفوف — ${row.tamaño}\n`;
     }
 
-    await m.reply(text);
+    await m.reply(texto);
   } catch (err) {
-    console.error("❌ Error en /db info:", err);
-    await m.reply('❌ Error al consultar la base de datos.');
+    console.error("❌ خطأ في أمر قاعدة البيانات:", err);
+    await m.reply('❌ حدث خطأ أثناء جلب بيانات القاعدة.');
   }
 };
 
-handler.help = ['db info'];
+handler.help = ['قاعدة'];
 handler.tags = ['owner'];
-handler.command = /^\/?db(info)?$/i;
+handler.command = /^قاعدة$/i;
 handler.rowner = true;
 
 export default handler;
