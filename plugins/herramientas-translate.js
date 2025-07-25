@@ -1,17 +1,18 @@
 import fetch from 'node-fetch';
 
 const handler = async (m, { args, usedPrefix, command }) => {
-const defaultLang = 'es';
-if (!args || !args[0]) return m.reply(`⚠️ *Uso correcto del comando:*  
-» ${usedPrefix + command} (idioma destino) (texto a traducir)
+  const defaultLang = 'es'; // اللغة الافتراضية: الإسبانية
 
-📌 *Ejemplos:*
-• ${usedPrefix + command} es Hello » Español
-• ${usedPrefix + command} en hola » inglés
-• ${usedPrefix + command} fr buenos días » Francés
-• ${usedPrefix + command} pt tudo bem » Portugués
-• ${usedPrefix + command} de cómo estás » Alemán
-• ${usedPrefix + command} it buongiorno » Italiano`);
+  if (!args || !args[0]) return m.reply(`⚠️ *الاستخدام الصحيح للأمر:*  
+» ${usedPrefix + command} (رمز اللغة الهدف) (النص المراد ترجمته)
+
+📌 *أمثلة:*
+• ${usedPrefix + command} es Hello » الإسبانية
+• ${usedPrefix + command} en مرحبًا » الإنجليزية
+• ${usedPrefix + command} fr buenos días » الفرنسية
+• ${usedPrefix + command} pt tudo bem » البرتغالية
+• ${usedPrefix + command} de cómo estás » الألمانية
+• ${usedPrefix + command} it buongiorno » الإيطالية`);
 
   let lang = args[0];
   let text = args.slice(1).join(' ');
@@ -23,7 +24,7 @@ if (!args || !args[0]) return m.reply(`⚠️ *Uso correcto del comando:*
 
   if (!text && m.quoted && m.quoted.text) text = m.quoted.text;
 
-  if (!text) return m.reply(msg);
+  if (!text) return m.reply('⚠️ لم يتم تحديد أي نص للترجمة.');
 
   try {
     const res = await fetch("https://tr.skyultraplus.com/translate", {
@@ -41,18 +42,18 @@ if (!args || !args[0]) return m.reply(`⚠️ *Uso correcto del comando:*
 
     const json = await res.json();
 
-    if (!json || !json.translatedText) throw '❌ No se pudo traducir.';
+    if (!json || !json.translatedText) throw '❌ فشل في الترجمة.';
 
-    await m.reply(`*Traducción:*\n${json.translatedText}`);
+    await m.reply(`*🔤 الترجمة:*\n${json.translatedText}`);
   } catch (e) {
     console.error(e);
-    await m.reply('*[❗𝐈𝐍𝐅𝐎❗] ERROR, VUELVA A INTENTARLO*');
+    await m.reply('*❌ حدث خطأ، يرجى المحاولة لاحقًا.*');
   }
 };
 
-handler.help = ['traducir', 'translate'];
-handler.tags = ['tools'];
-handler.command = /^(translate|traducir|trad)$/i;
+handler.help = ['ترجم'];
+handler.tags = ['أدوات'];
+handler.command = /^(ترجم)$/i;
 handler.register = true;
 
 export default handler;
