@@ -1,14 +1,15 @@
 const handler = async (m) => {
-const uptime = process.uptime() * 1000 // en milisegundos
-const tiempo = clockString(uptime)
-m.reply(`⏱️ *Uptime:* ${tiempo}`)
+  const uptime = process.uptime() * 1000 // بالمللي ثانية
+  const tiempo = صيغة_الوقت(uptime)
+  m.reply(`⏱️ *مدة تشغيل البوت:* ${tiempo}`)
 }
-handler.help = ['uptime'];
-handler.tags = ['main'];
-handler.command = /^uptime$/i
+
+handler.help = ['وقت']
+handler.tags = ['النظام']
+handler.command = /^وقت$/i
 export default handler
 
-function clockString(ms) {
+function صيغة_الوقت(ms) {
   const h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
   const m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   const s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
