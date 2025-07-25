@@ -133,7 +133,7 @@ const handler = async (m, { conn }) => {
         description: null,
         title: `معلومات البوت`,
         previewType: 0,
-        thumbnailUrl: "https://telegra.ph/file/39fb047cdf23c790e0146.jpg",
+        thumbnailUrl: "https://i.postimg.cc/vBKq8JVx/11aae52c8e940a29ee3343c5db135650.jpg",
         sourceUrl: info.yt
       }
     }
