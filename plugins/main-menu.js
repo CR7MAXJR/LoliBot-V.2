@@ -7,45 +7,44 @@ const cooldowns = new Map()
 const COOLDOWN_DURATION = 180000
 
 const tags = {
-main: 'ℹ️ INFOBOT',
-jadibot: '✨ SER SUB BOT',
-downloader: '🚀 DESCARGAS',
-game: '👾 JUEGOS',
-gacha: '✨️ NEW - RPG GACHA',
-rg: '🟢 REGISTRO',
-group: '⚙️ GRUPO',
-nable: '🕹 ENABLE/DISABLE',
-nsfw: '🥵 COMANDO +18',
-buscadores: '🔍 BUSCADORES',
-sticker: '🧧 STICKER',
-econ: '🛠 RPG',
-convertidor: '🎈 CONVERTIDORES',
-logo: '🎀 LOGOS',
-tools: '🔧 HERRAMIENTA',
-randow: '🪄 RANDOW',
-efec: '🎙 EFECTO NOTA DE VOZ',
-owner: '👑 OWNER'
+main: 'ℹ️ معلومات البوت',
+jadibot: '✨ تنصيب بوت',
+downloader: '🚀 التنزيلات',
+game: '👾 العاب',
+gacha: '✨️ لعبة - جديدة',
+rg: '🟢 التسجيل',
+group: '⚙️ المجموعه',
+nable: '🕹 تفعيل/تعطيل',
+buscadores: '🔍 قسم البحث',
+sticker: '🧧 ملصقات',
+econ: '🛠 اقتصاد',
+convertidor: '🎈 المحولات',
+logo: '🎀 لوغو',
+tools: '🔧 الادوات',
+randow: '🪄 عشوائي',
+efec: '🎙 الصوتيات',
+owner: '👑 المالك'
 }
 
 const defaultMenu = {
 before: `「 %wm 」
 
-Hola 👋🏻 *%name*
+مرحبا 👋🏻 *%name*
 
-*• Fecha:* %fecha
-*• Hora:* %hora (🇦🇷) 
-*• Usuario:* %totalreg
-*• Tiempo activos:* %muptime
-*• Tu limite:* %limit
+*• التاريخ:* %fecha
+*• الوقت:* %hora (🇸🇩) 
+*• عدد المستخدمين:* %totalreg
+*• مدة التشغيل:* %muptime
+*• الحد الخاص بك:* %limit
 %botOfc
 
-*• Usuario registrados:* %toUserReg de %toUsers
+*• المستخدمون المسجلون:* %toUserReg من %toUsers
 
-Unirte a nuestro canal de WhatsApp y informarte de todas la novedades/Actualizaciones del bot y mas
+انضم إلى قناتنا على WhatsApp لتتعرف على كل جديد وتحديثات البوت والمزيد  
 %nna2
 
-*Puede hablar con bot de esta forma ej:*
-@%BoTag ¿Que es una api?
+*يمكنك التحدث مع البوت بهذه الطريقة، مثال:*  
+@%BoTag ما هي الـ API؟
 `.trimStart(),
   header: '`<[ %category ]>`',
   body: ' %cmd %islimit %isPremium',
