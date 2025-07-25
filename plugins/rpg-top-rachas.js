@@ -3,7 +3,7 @@ const handler = async (m, { conn, args }) => {
   const pageSize = 10;
   const offset = (page - 1) * pageSize;
   const now = Date.now();
-  const twoDaysMs = 172800000; // 2 días
+  const twoDaysMs = 172800000; // يومين
 
   const res = await m.db.query(`
     SELECT id, nombre, dailystreak, lastclaim 
@@ -15,13 +15,13 @@ const handler = async (m, { conn, args }) => {
   const users = res.rows.filter(u => now - Number(u.lastclaim) <= twoDaysMs);
   const totalActivos = users.length; 
 
-  if (!users.length) return m.reply(`⚠️ No hay usuarios activos en racha.\n\n¡Recuerda reclamar tu recompensa diaria usando /claim para aparecer aquí!`);
+  if (!users.length) return m.reply(`⚠️ لا يوجد مستخدمون نشطون في سلسلة اليومية.\n\n📌 لا تنسَ استخدام الأمر /مطالبة يوميًا لتظهر هنا!`);
 
   const paginated = users.slice(offset, offset + pageSize);
 
-  if (!paginated.length) return m.reply(`⚠️ No hay usuarios en esta página.\n\n¡Recuerda reclamar tu recompensa diaria usando /claim para aparecer aquí!`);
+  if (!paginated.length) return m.reply(`⚠️ لا يوجد مستخدمون في هذه الصفحة.\n\n📌 لا تنسَ استخدام الأمر /مطالبة يوميًا لتظهر هنا!`);
 
-  let ranking = `🏆 *TOP RACHAS DIARIAS* (Página ${page})\n📊 Usuario(s) activo(s) en racha: *${totalActivos}*\n\n`;
+  let ranking = `🏆 *أعلى السلاسل اليومية* (صفحة ${page})\n📊 المستخدمون النشطون حاليًا: *${totalActivos}*\n\n`;
 
   for (let i = 0; i < paginated.length; i++) {
     const user = paginated[i];
@@ -33,7 +33,7 @@ const handler = async (m, { conn, args }) => {
     let premio = '';
 
     if (streak >= 100) {
-      premio = '🏆'; //pro
+      premio = '🏆';
     } else if (streak >= 50) {
       premio = '🥇'; 
     } else if (streak >= 30) {
@@ -44,17 +44,17 @@ const handler = async (m, { conn, args }) => {
 
     const corona = (puesto === 1) ? '(👑)' : '';
 
-    ranking += `${puesto}. *${nombre}* ${corona}\n    🔥 Racha: ${streak} día(s) ${premio}\n\n`;
+    ranking += `${puesto}. *${nombre}* ${corona}\n    🔥 سلسلة: ${streak} يوم/أيام ${premio}\n\n`;
   }
 
-  ranking += `\n✨ _Sigue reclamando tu recompensa diaria usando /claim para aparecer en el ranking y ganar bonos épicos._ ✨`;
+  ranking += `\n✨ _استمر في المطالبة اليومية باستخدام الأمر /مطالبة لتحافظ على السلسلة وتربح مكافآت مميزة!_ ✨`;
 
   m.reply(ranking.trim());
 };
 
-handler.help = ['topstreak [página]'];
-handler.tags = ['econ'];
-handler.command = ['topstreak', 'streaktop', 'streak'];
+handler.help = ['الرتبة [الصفحة]'];
+handler.tags = ['اقتصاد'];
+handler.command = ['الرتبة'];
 handler.register = true;
 
 export default handler;
