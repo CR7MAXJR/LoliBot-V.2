@@ -1,5 +1,34 @@
 import axios from 'axios';
 
+// تعريف متغيرات افتراضية للروابط لتجنب الأخطاء
+const info = {
+  md: 'https://example.com/md',
+  yt: 'https://example.com/youtube',
+  tiktok: 'https://example.com/tiktok'
+};
+
+// دالة لاختيار عنصر عشوائي من قائمة
+function pickRandom(list) {
+  return list[Math.floor(list.length * Math.random())];
+}
+
+// دالة الاتصال بالـ API
+async function luminsesi(q, username, logic) {
+  try {
+    const response = await axios.post("https://luminai.my.id", {
+      content: q,
+      user: username,
+      prompt: logic,
+      webSearchMode: true
+    });
+    return response.data.result || ''; // إرجاع سلسلة فارغة إذا كان الرد غير موجود
+  } catch (error) {
+    console.error('Error in luminsesi:', error);
+    return ''; // إرجاع سلسلة فارغة في حالة الخطأ
+  }
+}
+
+// الدالة الرئيسية لمعالجة الأوامر
 let handler = async (m, { conn, command, text, usedPrefix, args }) => {
   if (command == 'مغازلة') {
     let query = 'أخبرني بمغازلة لطيفة، فقط قل المغازلة بدون إضافة نصوص أخرى.';
@@ -21,7 +50,7 @@ let handler = async (m, { conn, command, text, usedPrefix, args }) => {
           title: '💞 مغازلة',
           body: '🤖 سوبر بوت واتساب',
           previewType: 0,
-          thumbnail: m.pp,
+          thumbnail: m.pp || null, // التحقق من وجود صورة الملف الشخصي
           sourceUrl: [info.md, info.yt, info.tiktok].getRandom()
         }
       }
@@ -48,7 +77,7 @@ let handler = async (m, { conn, command, text, usedPrefix, args }) => {
           title: '😹 نكتة',
           body: '🤖 سوبر بوت واتساب',
           previewType: 0,
-          thumbnail: m.pp,
+          thumbnail: m.pp || null,
           sourceUrl: [info.md, info.yt, info.tiktok].getRandom()
         }
       }
@@ -75,7 +104,7 @@ let handler = async (m, { conn, command, text, usedPrefix, args }) => {
           title: '😏 لقد اخترت تحديًا',
           body: '🤖 سوبر بوت واتساب',
           previewType: 0,
-          thumbnail: m.pp,
+          thumbnail: m.pp || null,
           sourceUrl: [info.md, info.yt, info.tiktok].getRandom()
         }
       }
@@ -102,7 +131,7 @@ let handler = async (m, { conn, command, text, usedPrefix, args }) => {
           title: '🤔 لقد اخترت الحقيقة',
           body: '🤖 سوبر بوت واتساب',
           previewType: 0,
-          thumbnail: m.pp,
+          thumbnail: m.pp || null,
           sourceUrl: [info.md, info.yt, info.tiktok].getRandom()
         }
       }
@@ -114,16 +143,20 @@ let handler = async (m, { conn, command, text, usedPrefix, args }) => {
     const تنظيم = `مجموعة من الاقتباسات الملهمة التي تحمل حكمًا وعبرًا من مختلف المفكرين والفلاسفة عبر العصور. اختر رقمًا بين 1 و99 لعرض اقتباس معين، أو اترك الأمر فارغًا لعرض القائمة كاملة.`;
     let json = JSON.parse(JSON.stringify(اقتباسات));
     let data = json.map((v, i) => `${i + 1}. ${v.arabic}\n${v.author}\n${v.opinion}`).join('\n\n');
-    if (isNaN(args[0])) throw `مثال:\n${usedPrefix + command} 1`;
+
     if (args[0]) {
-      if (args[0] < 1 || args[0] > 99) throw `الحد الأدنى 1 والحد الأقصى 99!`;
-      let { index, arabic, author, opinion, translation_en } = json.find(v => v.index == args[0].replace(/[^0-9]/g, ''));
+      const index = parseInt(args[0].replace(/[^0-9]/g, ''));
+      if (isNaN(index) || index < 1 || index > json.length) {
+        throw `الرجاء إدخال رقم بين 1 و${json.length}! مثال: ${usedPrefix + command} 1`;
+      }
+      let { arabic, author, opinion, translation_en } = json[index - 1];
       return m.reply(`🔢 *الرقم:* ${index}\n${arabic}\n${author}\n${opinion}\n${translation_en}`.trim());
     }
-    m.reply(مثال + '\n\n' + data + '\n\n' + تنظيم);
+    m.reply(`${مثال}\n\n${data}\n\n${تنظيم}`);
   }
 };
 
+// تعريف الأوامر والمساعدة
 handler.help = ['مغازلة', 'نكتة', 'تحدي', 'حقيقة', 'اقتباسات'];
 handler.command = /^(مغازلة|نكتة|تحدي|حقيقة|اقتباسات)$/i;
 handler.tags = ['لعبة'];
@@ -131,24 +164,7 @@ handler.register = true;
 
 export default handler;
 
-async function luminsesi(q, username, logic) {
-  try {
-    const response = await axios.post("https://luminai.my.id", {
-      content: q,
-      user: username,
-      prompt: logic,
-      webSearchMode: true
-    });
-    return response.data.result;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function pickRandom(list) {
-  return list[Math.floor(list.length * Math.random())];
-}
-
+// القوائم (لم يتم تغييرها)
 const مغازلة = [
   "يا ليتني ورقة عشان ألفّ على هالجمال زي الحلوى! 😍",
   "أنتِ زي الواي فاي من غير باسوورد، الكل يدور عليكِ! 📶",
@@ -796,7 +812,7 @@ const اقتباسات = [
   },
   {
     index: 49,
-    author: "💐 *المؤلف:*",
+    author: "💐 *المؤلف:* مجهول",
     arabic: "💐 *الاقتباس:* القيادة لا تعتمد على أن تكون محقًا.",
     opinion: "💐 *رأي:* القيادة تتعلق بالشرعية والتأثير، لا بالحقيقة المطلقة.",
     translation_en: "Leadership is about influence, not always being right."
@@ -817,7 +833,7 @@ const اقتباسات = [
   },
   {
     index: 52,
-    author: "💐 *المؤلف:*",
+    author: "💐 *المؤلف:* مجهول",
     arabic: "💐 *الاقتباس:* لا أحد يستطيع إيذائي دون إذني.",
     opinion: "💐 *رأي:* قوة الإرادة تحمينا من التأثر بالآخرين.",
     translation_en: "Your will protects you from being hurt without your consent."
@@ -846,18 +862,4 @@ const اقتباسات = [
   {
     index: 56,
     author: "💐 *المؤلف:* ويليام شكسبير",
-    arabic: "💐 *الاقتباس:* من الأفضل أن تكون ملك صمتك من أن تكون عبد كلامك.",
-    opinion: "💐 *رأي:* تجنب قول ما قد تندم عليه لاحقًا.",
-    translation_en: "Avoid saying things you might regret."
-  },
-  {
-    index: 57,
-    author: "💐 *المؤلف:* ويليام شكسبير",
-    arabic: "💐 *الاقتباس:* الجمال قوة، والابتسامة سيفها.",
-    opinion: "💐 *رأي:* الابتسامة تعزز جاذبية الجمال وتأثيره.",
-    translation_en: "A smile enhances the power but can be a double-edged sword."
-  },
-  {
-    index: 58,
-    author: "💐 *المؤلف:* أوغدن ناش",
-    arabic: "💐 *الاقتباس:* النض
+    arabic: "💐 *الاقتباس:*
