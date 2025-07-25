@@ -1,12 +1,16 @@
 import fs from 'fs';
-const handler = async (m, {conn, args}) => {
-const group = m.chat;
-m.reply('https://chat.whatsapp.com/' + await conn.groupInviteCode(group)) 
+
+const handler = async (m, { conn }) => {
+  const group = m.chat;
+  const code = await conn.groupInviteCode(group);
+  m.reply('🔗 رابط المجموعة:\nhttps://chat.whatsapp.com/' + code);
 };
-handler.help = ['linkgroup'];
+
+handler.help = ['رابط'];
 handler.tags = ['group'];
-handler.command = /^link(gro?up)?$/i;
+handler.command = /^رابط$/i; // الأمر العربي فقط
 handler.group = true;
 handler.botAdmin = true;
-handler.register = true 
+handler.register = true;
+
 export default handler;
