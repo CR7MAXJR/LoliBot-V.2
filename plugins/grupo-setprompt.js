@@ -9,52 +9,53 @@ const presets = {
 };
 
 const prompt_name = {
-  1: '💣 exploit mode',
-  2: '🇨🇳 china',
-  3: '💸 NeneFlok',
-  4: '🧠 IA multipersonalidad'
+  1: '💣 وضع الاستغلال',
+  2: '🇨🇳 وضع الصين',
+  3: '💸 نيني فلوك',
+  4: '🧠 ذكاء متعدد الشخصيات'
 };
 
 const handler = async (m, { text, usedPrefix, command, isOwner }) => {
 const input = text?.trim().toLowerCase();
 
-if (command === 'clearmemory' || command === 'clearai' || command === 'resetai') {
+if (command === 'مسح,الذاكرة' || command === 'مسح,الذكاء' || command === 'اعادة,الذكاء') {
 await db.query('DELETE FROM chat_memory WHERE chat_id = $1', [m.chat]);
-return m.reply('🧠 Memoria del chat borrada correctamente. El bot empezará desde cero.');
+return m.reply('🧠 تم مسح ذاكرة الدردشة بنجاح. سيبدأ البوت من جديد.');
 }
 
-if (command === 'timeIA' || command === 'memttl') {
-if (!isOwner) return m.reply('⛔ Solo el *OWNER* puede poner más de 24 horas.');
-if (!text) return m.reply(`⏱️ *Uso:* ${usedPrefix + command} 10m | 2h | 1d | 0
-Unidades válidas: s (seg), m (min), h (horas), d (días)
-Ejemplos:
-${usedPrefix + command} 30m      → memoria se borra tras 30 minutos
-${usedPrefix + command} 2h       → 2 horas
-${usedPrefix + command} 0        → se borra en cada mensaje
+if (command === 'مؤقت,الذكاء' || command === 'مدة,الذاكرة') {
+if (!isOwner) return m.reply('⛔ هذا الخيار خاص *بالمالك فقط*.');
+if (!text) return m.reply(`⏱️ *الاستخدام:* ${usedPrefix + command} 10m | 2h | 1d | 0
+الوحدات المسموحة: s (ثواني)، m (دقائق)، h (ساعات)، d (أيام)
+أمثلة:
+${usedPrefix + command} 30m      ← الذاكرة تُمسح بعد 30 دقيقة
+${usedPrefix + command} 2h       ← بعد ساعتين
+${usedPrefix + command} 0        ← تُمسح في كل رسالة
 `);
 
 if (text === '0') {
 await db.query('UPDATE group_settings SET memory_ttl = 0 WHERE group_id = $1', [m.chat]);
-return m.reply('🧠 Memoria desactivada. El bot responderá sin historial.');
+return m.reply('🧠 تم إلغاء تفعيل الذاكرة. البوت سيرد بدون سجل سابق.');
 }
 
 const match = text.match(/^(\d+)([smhd])$/i);
-if (!match) return m.reply('❌ Formato inválido. Usa: 10m, 2h, 1d');
+if (!match) return m.reply('❌ تنسيق غير صالح. استخدم: 10m، 2h، 1d');
 const num = parseInt(match[1]);
 const unit = match[2].toLowerCase();
 const unitToSeconds = { s: 1, m: 60, h: 3600, d: 86400 };
 const seconds = num * unitToSeconds[unit];
 await db.query('UPDATE group_settings SET memory_ttl = $1 WHERE group_id = $2', [seconds, m.chat]);
-return m.reply(`✅ Tiempo de memoria actualizado a *${num}${unit}* (${seconds} segundos).`);
+return m.reply(`✅ تم تحديث مدة الذاكرة إلى *${num}${unit}* (${seconds} ثانية).`);
 }
 
-if (!text) return m.reply(`📌 *Uso del comando ${command} de esta forma:*
+if (!text) return m.reply(`📌 *استخدام الأمر ${command} بهذا الشكل:*
 ${usedPrefix + command} 1  - ${prompt_name[1]}
 ${usedPrefix + command} 2 - ${prompt_name[2]}
 ${usedPrefix + command} 3 - ${prompt_name[3]}
 ${usedPrefix + command} 4 - ${prompt_name[4]}
-${usedPrefix + command} tu texto - ✍️ prompt personalizado
-${usedPrefix + command} delete|borrar - 🧹 borrar prompt y memoria`);
+${usedPrefix + command} أي نص - ✍️ برومبت مخصص
+${usedPrefix + command} delete|borrar - 🧹 حذف البرومبت والذاكرة`);
+
 let prompt = null;
 const isPreset = ['1', '2', '3', '4'].includes(input);
 const isDelete = ['delete', 'borrar'].includes(input);
@@ -74,11 +75,12 @@ await db.query(`INSERT INTO group_settings (group_id, sAutorespond)
 if (resetMemory) {
 await db.query('DELETE FROM chat_memory WHERE chat_id = $1', [m.chat]);
 }
-return m.reply(prompt ? `✅ *Configuración exitosa.*\n\n*Has establecido un nuevo prompt para este chat.*\n💬 A partir de ahora, el bot usará las indicaciones que hayas establecido.\n\n> *Recuerda etiquetar "@tag" o responder a un mensaje del bot para que te responda.*\n\n` + (prompt_name[input] || prompt) : '🗑️ *Prompt borrado con éxito.*');
+return m.reply(prompt ? `✅ *تم التكوين بنجاح.*\n\n*تم تعيين برومبت جديد لهذه الدردشة.*\n💬 من الآن فصاعدًا، سيستخدم البوت التعليمات التي وضعتها.\n\n> *تأكد من الرد على رسالة البوت أو منشنه بـ"@الاسم" ليتم الرد عليك.*\n\n` + (prompt_name[input] || prompt) : '🗑️ *تم حذف البرومبت بنجاح.*');
 };
-handler.help = ['setprompt', 'resetai', 'timeIA'];
+
+handler.help = ['ضبط,البرومبت', 'اعادة,الذكاء', 'مؤقت,الذكاء'];
 handler.tags = ['group'];
-handler.command = /^setprompt|autorespond|clearmemory|clearai|resetai|memttl|timeIA$/i;
+handler.command = /^ضبط,البرومبت|الرد,الآلي|مسح,الذاكرة|مسح,الذكاء|اعادة,الذكاء|مدة,الذاكرة|مؤقت,الذكاء$/i;
 handler.group = true;
 handler.admin = true;
 
