@@ -2,23 +2,24 @@ import fs from 'fs';
 import fuzzysort from 'fuzzysort';  
 
 let handler = async (m, { usedPrefix, command, text }) => {
-  let ar = Object.keys(plugins);
-  let ar1 = ar.map(v => v.replace('.js', ''));
+  let الملفات = Object.keys(plugins);
+  let الأوامر = الملفات.map(v => v.replace('.js', ''));
 
-  if (!text) return m.reply( `*¿Qué buscar?*\nEjemplo:\n${usedPrefix + command} sticker`)
+  if (!text) return m.reply(`*📦 ماذا تريد أن أبحث؟*\n\n📌 مثال:\n${usedPrefix + command} sticker`);
 
-  let results = fuzzysort.go(text, ar1);
+  let النتائج = fuzzysort.go(text, الأوامر);
 
-  if (results.length === 0) {
-   return m.reply(`'${text}' no encontrado.\n\nSugerencias:\n${ar1.map(v => ' ' + v).join`\n`}`);
+  if (النتائج.length === 0) {
+    return m.reply(`❌ لم أجد: '${text}'\n\n🧠 ربما تقصد:\n${الأوامر.map(v => '🔹 ' + v).join`\n`}`);
   }
 
-  let match = results[0].target;
-  m.reply(fs.readFileSync('./plugins/' + match + '.js', 'utf-8'));
+  let المطابقة = النتائج[0].target;
+  m.reply(fs.readFileSync('./plugins/' + المطابقة + '.js', 'utf-8'));
 };
 
-handler.help = ['getplugin'].map(v => v + ' <texto>');
-handler.tags = ['owner'];
-handler.command = /^(getplugin|gp)$/i;
+handler.help = ['جلب <نص>'];
+handler.tags = ['المالك'];
+handler.command = /^جلب$/i;
 handler.rowner = true;
+
 export default handler;
