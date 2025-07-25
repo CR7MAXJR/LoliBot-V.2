@@ -1,68 +1,69 @@
 const handler = async (m, { conn }) => {
-const cooldown = 600_000; // 10 min
-const now = Date.now();
-const res = await m.db.query('SELECT exp, lastslut FROM usuarios WHERE id = $1', [m.sender]);
-const user = res.rows[0];
-const lastSlut = Number(user?.lastslut) || 0;
-const remaining = Math.max(0, lastSlut + cooldown - now);
-const mins = Math.floor(remaining / 60000);
-const secs = Math.floor((remaining % 60000) / 1000);
-if (remaining > 0) return conn.reply(m.chat, `*💦 Debes descansar ${msToTime(remaining)} antes de volver a prostituirte...*`, m);
+  const cooldown = 600_000; // 10 دقائق
+  const now = Date.now();
+  const res = await m.db.query('SELECT exp, lastslut FROM usuarios WHERE id = $1', [m.sender]);
+  const user = res.rows[0];
+  const lastSlut = Number(user?.lastslut) || 0;
+  const remaining = Math.max(0, lastSlut + cooldown - now);
 
-const ganancias = Math.floor(Math.random() * 2500) + 1000;
-const textoo = slut.getRandom();
-await m.db.query(`UPDATE usuarios SET exp = exp + $1, lastslut = $2 WHERE id = $3`, [ganancias, now, m.sender]);
-await conn.reply(m.chat, `*${textoo}*\n\nGanaste: *${formatNumber(ganancias)} XP*`, m);
+  if (remaining > 0)
+    return conn.reply(m.chat, `💦 يجب أن تنتظر ${msToTime(remaining)} قبل أن تخرج في مشوار آخر...`, m);
+
+  const ganancias = Math.floor(Math.random() * 2500) + 1000;
+  const النص = slut.getRandom();
+
+  await m.db.query(`UPDATE usuarios SET exp = exp + $1, lastslut = $2 WHERE id = $3`, [ganancias, now, m.sender]);
+  await conn.reply(m.chat, `*${النص}*\n\nربحت: *${formatNumber(ganancias)} XP*`, m);
 };
 
-handler.help = ['slut'];
+handler.help = ['مشوار'];
 handler.tags = ['rpg', 'hot'];
-handler.command = /^slut$/i;
+handler.command = /^مشوار$/i;
 handler.register = true;
 
 export default handler;
 
 const slut = [
-  "Te vendiste por un combo del McDonald's",
-  "Le diste una buena mamada a un admin del grupo",
-  "Le hiciste un baile sensual al admin y te pagó",
-  "Tu OnlyFans explotó por 10 minutos",
-  "Tu cliente era un furry y te pagó el doble",
-  "Te disfrazaste de maid y funcionó",
-  "El viejo verde del grupo te dio propina",
-  "Ofreciste abrazos por monedas, pero te malinterpretaron",
-  "Trabajaste en una esquina pixelada de San Andreas",
-  "Te pagaron por quedarte calladito... y lo hiciste muy bien",
-  "Fuiste a la zona roja del grupo y volviste con billete",
-  "Tu cosplay de Nezuko encendió el ambiente",
-  "Hiciste roleplay con el bot y te pagaron por no romper personaje",
-  "Te disfrazaste de emoji y alguien pagó por usarte",
-  "Un sugar daddy te ofreció XP a cambio de cariñitos virtuales",
-  "Participaste en un 'verdad o reto' y te pasaste de atrevid@",
-  "Tu avatar provocó donaciones en un grupo de solteros",
-  "Te alquilaste como fondo de pantalla personalizado",
-  "Vendiste besos digitales y fue un éxito",
-  "Tu waifu interior salió a facturar",
-  "Tu foto de perfil enamoró a un moderador",
-  "Aceptaste una cita con alguien que solo habla en stickers",
-  "Te disfrazaste de bot NSFW y nadie notó la diferencia",
-  "Hiciste un dúo de TikTok caliente y lo monetizaste",
-  "Un VTuber te contrató como su asistente picante",
-  "Tu pack de stickers se volvió viral y pediste comisión",
-  "Te pagaron por enviar audios diciendo ‘papi’",
-  "Te disfrazaste de Siri y alguien te pidió comandos indecentes",
-  "Te ofreciste para dar tutoriales privados en el grupo",
-  "Fuiste la estrella de una noche en la taberna del RPG",
-  "Le vendiste ‘fotos de pies’ en formato ASCII",
-  "Cobraste por dejar que te usaran de NPC caliente",
-  "Participaste en un evento hot en un servidor de Minecraft",
-  "Le hiciste un peter al admins del grupo",
-  "Te grabaste susurrando comandos y alguien lo compró",
-  "Creaste un OnlyBots y fuiste trending",
-  "Te hiciste pasar por moderador sexy y cobraste multas",
-  "Tu nombre salió en un fanfic y alguien te recompensó",
-  "Organizaste un evento de ‘nalgadas virtuales’ con entrada paga",
-  "Le bailaste a un bot de economía y te soltó todo su saldo"
+  "بعت نفسك مقابل وجبة من ماكدونالدز",
+  "سويت شغل خاص مع الأدمن وكافئك",
+  "سويت رقصة مغرية للأدمن وأعطاك بقشيش",
+  "حسابك في OnlyFans انفجر 10 دقائق فجأة",
+  "العميل كان فوري ودفعلّك دبل",
+  "لبست لبس خادمة وضبطت معك",
+  "الشيبة في القروب عطاك بقشيش",
+  "عرضت حضن بفلوس، وفهموك غلط",
+  "اشتغلت على زاوية مظلمة في سان أندرياس",
+  "دفعوا لك علشان تسكت... وسكت تمام",
+  "رحت المنطقة الحمراء ورجعت بفلوس",
+  "تنكرت بزي نيزوكو وولّعت الجو",
+  "سويت تمثيل مع البوت وكافأوك على التزامك بالدور",
+  "تنكرت كإيموجي وواحد دفعلك علشان يستخدمك",
+  "شوجر دادي أعطاك XP مقابل دلع",
+  "دخلت تحدي (حقيقة أو تحدي) وانفلتت الأمور",
+  "صورتك جذبت تبرعات بقروب العزاب",
+  "أجّرت نفسك كخلفية جوال مخصصة",
+  "بعت بوسات رقمية وكسبت كثير",
+  "الوايفو اللي بداخلك اشتغلت وجابت فلوس",
+  "صورة بروفايلك أعجبت مشرف وكافئك",
+  "قبلت تطلع مع شخص ما يتكلم إلا استكرات",
+  "لبست لبس بوت NSFW وما حد لاحظ الفرق",
+  "سويت دويتو تيك توك حار وربحت",
+  "VTuber وظفك كمساعد شخصي جريء",
+  "استيكراتك انتشرت وطلبت نسبة",
+  "أرسلوا لك فلوس بس علشان تقول (دادي) بصوتك",
+  "تنكرت مثل سيري وطلبوا منك أوامر غريبة",
+  "قدّمت دروس خصوصية مشبوهة في القروب",
+  "كنت نجم سهرة في كازينو RPG",
+  "بعت صور رجلين مرسومة بنص ASCII",
+  "أجّرت نفسك كشخصية NPC مثيرة",
+  "شاركت في فعالية حارة في سيرفر ماينكرافت",
+  "سويت أشياء مشبوهة للأدمن مقابل XP",
+  "سجلت أوامر بصوتك وبعتها بفلوس",
+  "سويت حساب OnlyBots وصرت ترند",
+  "تظاهرت إنك مشرف مغري وفرضت غرامات",
+  "اسمك طلع في فان فيك وكافئك الكاتب",
+  "نظمت حفلة نعلات افتراضية بتذاكر مدفوعة",
+  "رقصت لبوت الاقتصاد وسحب لك رصيده"
 ];
 
 function formatNumber(num) {
@@ -73,5 +74,5 @@ function msToTime(duration) {
   const totalSeconds = Math.floor(duration / 1000);
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
-  return `${minutes} minutos ${seconds} segundos`;
+  return `${minutes} دقيقة و ${seconds} ثانية`;
 }
