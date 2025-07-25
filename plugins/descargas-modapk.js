@@ -1,6 +1,5 @@
 import axios from 'axios';
-//import cheerio from 'cheerio';
-//import { search, download } from 'aptoide-scraper';
+// import { search, download } from 'aptoide-scraper';
 const userMessages = new Map();
 const userRequests = {};
 
@@ -8,13 +7,10 @@ const handler = async (m, { conn, usedPrefix, command, text }) => {
   const apkpureApi = 'https://apkpure.com/api/v2/search?q=';
   const apkpureDownloadApi = 'https://apkpure.com/api/v2/download?id=';
 
-  if (!text) return m.reply(`⚠️ *اكتب اسم التطبيق الذي تريد تحميله*`);
+  if (!text) return m.reply(`⚠️ *اكتب اسم التطبيق الذي تريد تحميله بصيغة APK*`);
 
   if (userRequests[m.sender]) {
-    return await conn.reply(m.chat,
-      `⚠️ مرحبًا @${m.sender.split('@')[0]}، أنت بالفعل تقوم بتحميل تطبيق حاليًا 🙄\nيرجى الانتظار حتى تنتهي عملية التحميل الحالية. 👆`,
-      userMessages.get(m.sender) || m
-    );
+    return await conn.reply(m.chat, `⚠️ مرحبًا @${m.sender.split('@')[0]}، أنت بالفعل تقوم بتحميل APK 📦\nيرجى الانتظار حتى انتهاء التحميل الحالي.`, userMessages.get(m.sender) || m);
   }
 
   userRequests[m.sender] = true;
@@ -25,40 +21,19 @@ const handler = async (m, { conn, usedPrefix, command, text }) => {
       async () => {
         const res = await fetch(`https://api.dorratz.com/v2/apk-dl?text=${text}`);
         const data = await res.json();
-        if (!data.name) throw new Error('لم يتم العثور على بيانات من واجهة dorratz');
-        return {
-          name: data.name,
-          package: data.package,
-          lastUpdate: data.lastUpdate,
-          size: data.size,
-          icon: data.icon,
-          dllink: data.dllink
-        };
+        if (!data.name) throw new Error('لم يتم العثور على بيانات في واجهة Dorratz');
+        return { name: data.name, package: data.package, lastUpdate: data.lastUpdate, size: data.size, icon: data.icon, dllink: data.dllink };
       },
       async () => {
         const res = await fetch(`${info.apis}/download/apk?query=${text}`);
         const data = await res.json();
         const apkData = data.data;
-        return {
-          name: apkData.name,
-          developer: apkData.developer,
-          publish: apkData.publish,
-          size: apkData.size,
-          icon: apkData.image,
-          dllink: apkData.download
-        };
+        return { name: apkData.name, developer: apkData.developer, publish: apkData.publish, size: apkData.size, icon: apkData.image, dllink: apkData.download };
       },
       async () => {
         const searchA = await search(text);
         const data5 = await download(searchA[0].id);
-        return {
-          name: data5.name,
-          package: data5.package,
-          lastUpdate: data5.lastup,
-          size: data5.size,
-          icon: data5.icon,
-          dllink: data5.dllink
-        };
+        return { name: data5.name, package: data5.package, lastUpdate: data5.lastup, size: data5.size, icon: data5.icon, dllink: data5.dllink };
       }
     ];
 
@@ -68,30 +43,30 @@ const handler = async (m, { conn, usedPrefix, command, text }) => {
         apkData = await attempt();
         if (apkData) break;
       } catch (err) {
-        console.error(`خطأ في المحاولة: ${err.message}`);
+        console.error(`خطأ في محاولة التحميل: ${err.message}`);
         continue;
       }
     }
 
-    if (!apkData) throw new Error('لم أتمكن من تحميل التطبيق من أي مصدر');
+    if (!apkData) throw new Error('فشل تحميل ملف APK من جميع المصادر');
 
-    const response = `≪📦 تم العثور على تطبيق 🚀≫
+    const response = `≪📲 تـفـاصـيـل الـتـطـبـيـق≫
 
 ┏━━━━━━━━━━━━━━━━━━━━━━• 
-┃📱 *الاسم:* ${apkData.name}
-${apkData.developer ? `┃👨‍💻 *المطور:* ${apkData.developer}` : `┃📦 *الباكيج:* ${apkData.package}`}
-┃📅 *آخر تحديث:* ${apkData.developer ? apkData.publish : apkData.lastUpdate}
-┃📦 *الحجم:* ${apkData.size}
+┃📱 الاسم: ${apkData.name}
+${apkData.developer ? `┃👨‍💻 المطور: ${apkData.developer}` : `┃📦 الحزمة: ${apkData.package}`}
+┃🕒 آخر تحديث: ${apkData.developer ? apkData.publish : apkData.lastUpdate}
+┃📦 الحجم: ${apkData.size}
 ┗━━━━━━━━━━━━━━━━━━━━━━━•
 
-⏳ *يرجى الانتظار، يتم الآن إرسال ملف APK...*`;
+⏳ *جاري إرسال ملف الـAPK، يرجى الانتظار...*`;
 
     const responseMessage = await conn.sendFile(m.chat, apkData.icon, 'apk.jpg', response, m);
     userMessages.set(m.sender, responseMessage);
 
     const apkSize = apkData.size.toLowerCase();
     if (apkSize.includes('gb') || (apkSize.includes('mb') && parseFloat(apkSize) > 999)) {
-      await m.reply('*⚠️ التطبيق كبير الحجم ولن يتم تحميله تلقائيًا.*');
+      await m.reply('⚠️ *التطبيق كبير جدًا، قد يستغرق وقتًا في الإرسال.*');
       return;
     }
 
@@ -103,7 +78,6 @@ ${apkData.developer ? `┃👨‍💻 *المطور:* ${apkData.developer}` : `�
     }, { quoted: m });
 
     m.react("✅");
-
   } catch (e) {
     m.react('❌');
     console.log(e);
@@ -113,22 +87,21 @@ ${apkData.developer ? `┃👨‍💻 *المطور:* ${apkData.developer}` : `�
   }
 };
 
-handler.help = ['تطبيق'];
-handler.tags = ['التحميل'];
-handler.command = /^(تطبيق|تنزيلتطبيق|تحميلتطبيق|apkmod|apk|modapk|aptoide|aptoidedl)$/i;
+handler.help = ['تحميل', 'تحميل_مود'];
+handler.tags = ['downloader'];
+handler.command = /^(تحميل|تحميل_مود|ملف_تطبيق|apkmod|apk|modapk|dapk2|aptoide|aptoidedl)$/i;
 handler.register = true;
 handler.limit = 2;
 
 export default handler;
 
+// وظائف إضافية (لم تُستخدم فعليًا هنا لكن مهيأة لو أردت إضافتها لاحقًا)
 async function searchApk(text) {
   const response = await axios.get(`${apkpureApi}${encodeURIComponent(text)}`);
-  const data = response.data;
-  return data.results;
+  return response.data.results;
 }
 
 async function downloadApk(id) {
   const response = await axios.get(`${apkpureDownloadApi}${id}`);
-  const data = response.data;
-  return data;
+  return response.data;
 }
