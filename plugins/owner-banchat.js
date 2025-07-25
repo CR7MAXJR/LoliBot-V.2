@@ -1,14 +1,18 @@
 import { db } from "../lib/postgres.js";
 
 const handler = async (m, { conn }) => {
-await db.query(`INSERT INTO group_settings (group_id, banned)
-      VALUES ($1, true)
-      ON CONFLICT (group_id) DO UPDATE SET banned = true`, [m.chat]);
-m.reply("✅ Este grupo ha sido *baneado*. El bot ya no responderá aquí.");
+  await db.query(
+    `INSERT INTO group_settings (group_id, banned)
+     VALUES ($1, true)
+     ON CONFLICT (group_id) DO UPDATE SET banned = true`,
+    [m.chat]
+  );
+  m.reply("✅ تم *حظر* هذا الجروب، البوت لن يستجيب هنا بعد الآن.");
 };
-handler.help = ['banchat']
-handler.tags = ['owner']
-handler.command = /^banchat|ban2|banchat1$/i
-//handler.botAdmin = true
-handler.owner = true
-export default handler
+
+handler.help = ['حظر_جروب'];
+handler.tags = ['المالك'];
+handler.command = /^(حظر|حظر_جروب)$/i;
+handler.owner = true;
+
+export default handler;
