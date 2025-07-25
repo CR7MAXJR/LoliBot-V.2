@@ -1,59 +1,56 @@
 import { db } from '../lib/postgres.js'
 
-const handler = async (m, { args, command, conn, text }) => {
-if (!text) {
-const tipo = command === 'setwelcome' ? 'bienvenida' : command === 'setbye' ? 'despedida' : command === 'setpromote' ? 'ascenso' : 'degradación'
-
-const variables = ['@user → Menciona al usuario',
-...(command !== 'setpromote' && command !== 'setdemote' ? ['@group → Nombre del grupo'] : []),
-...(command === 'setwelcome' ? ['@desc → Descripción del grupo'] : []),
-...(command === 'setpromote' || command === 'setdemote' ? ['@author → Quien ejecuta la acción'] : [])
+...(command !== 'setpromote' && command !== 'setdemote' && command !== 'ترقية' && command !== 'تنزيل' ? ['@group → اسم المجموعة'] : []),
+...(command === 'setwelcome' || command === 'ترحيب' ? ['@desc → وصف المجموعة'] : []),
+...(command === 'setpromote' || command === 'setdemote' || command === 'ترقية' || command === 'تنزيل' ? ['@author → من قام بالتنفيذ'] : [])
 ].join('\n• ')
 
-const opciones = (command === 'setwelcome' || command === 'setbye') ? `*Opciones adicionales:*
-• --foto → Para enviar el mensaje con imagen
-• --nofoto → Para enviar solo texto` : ''
+const opciones = (command === 'setwelcome' || command === 'setbye' || command === 'ترحيب' || command === 'وداع') ? `*خيارات إضافية:*
+• --foto → لإرسال الرسالة مع صورة
+• --nofoto → لإرسال نص فقط بدون صورة` : ''
 
-const ejemplo = command === 'setwelcome' ? `Hola @user, bienvenido a @group. Lee las reglas: @desc`
-: command === 'setbye' ? `Chao @user, gracias por estar en @group.`
-: command === 'setpromote' ? `@user ha sido promovido por @author.`
-: `@user ha sido degradado por @author.`
+const ejemplo = command === 'setwelcome' || command === 'ترحيب' ? `مرحبًا @user، أهلاً بك في @group. اقرأ القوانين: @desc`
+: command === 'setbye' || command === 'وداع' ? `وداعًا @user، شكرًا لتواجدك في @group.`
+: command === 'setpromote' || command === 'ترقية' ? `@user تمت ترقيته بواسطة @author.`
+: `@user تم تنزيل رتبته بواسطة @author.`
 
-return m.reply(`*⚙️ Personaliza el mensaje de ${tipo} del grupo:*
+return m.reply(`*⚙️ تخصيص رسالة ${tipo} الخاصة بالمجموعة:*
 
-*Puedes usar las siguientes variables:*
+*يمكنك استخدام المتغيرات التالية:*
 • ${variables}\n${opciones}
-*Ejemplo de uso:*
+*مثال على الاستخدام:*
 ➤ /${command} ${ejemplo} --foto`)
 }
-    
+
 const hasFoto = text.includes('--foto')
 const hasNoFoto = text.includes('--nofoto')
 const cleanText = text.replace('--foto', '').replace('--nofoto', '').trim()
+
 await db.query(`INSERT INTO group_settings (group_id) VALUES ($1) ON CONFLICT DO NOTHING`, [m.chat])
 
-if (command === 'setwelcome') {
-await db.query(`UPDATE group_settings SET swelcome = $1${hasFoto ? ', photowelcome = true' : ''}${hasNoFoto ? ', photowelcome = false' : ''} WHERE group_id = $2`, [cleanText, m.chat])
-return m.reply(`✅ Mensaje de bienvenida guardado${hasFoto ? ' con imagen' : hasNoFoto ? ' sin imagen' : ''}.`)
+if (command === 'setwelcome' || command === 'ترحيب') {
+  await db.query(`UPDATE group_settings SET swelcome = $1${hasFoto ? ', photowelcome = true' : ''}${hasNoFoto ? ', photowelcome = false' : ''} WHERE group_id = $2`, [cleanText, m.chat])
+  return m.reply(`✅ تم حفظ رسالة الترحيب${hasFoto ? ' مع صورة' : hasNoFoto ? ' بدون صورة' : ''}.`)
 }
 
-if (command === 'setbye') {
-await db.query(`UPDATE group_settings SET sbye = $1${hasFoto ? ', photobye = true' : ''}${hasNoFoto ? ', photobye = false' : ''} WHERE group_id = $2`, [cleanText, m.chat])
-return m.reply(`✅ Mensaje de despedida guardado${hasFoto ? ' con imagen' : hasNoFoto ? ' sin imagen' : ''}.`)
-}
-    
-if (command === 'setpromote') {
-await db.query(`UPDATE group_settings SET spromote = $1 WHERE group_id = $2`, [cleanText, m.chat])
-return m.reply("✅ Mensaje de ascenso guardado.")
+if (command === 'setbye' || command === 'وداع') {
+  await db.query(`UPDATE group_settings SET sbye = $1${hasFoto ? ', photobye = true' : ''}${hasNoFoto ? ', photobye = false' : ''} WHERE group_id = $2`, [cleanText, m.chat])
+  return m.reply(`✅ تم حفظ رسالة الوداع${hasFoto ? ' مع صورة' : hasNoFoto ? ' بدون صورة' : ''}.`)
 }
 
-if (command === 'setdemote') {
-await db.query(`UPDATE group_settings SET sdemote = $1 WHERE group_id = $2`, [cleanText, m.chat])
-return m.reply("✅ Mensaje de degradación guardado.")
+if (command === 'setpromote' || command === 'ترقية') {
+  await db.query(`UPDATE group_settings SET spromote = $1 WHERE group_id = $2`, [cleanText, m.chat])
+  return m.reply("✅ تم حفظ رسالة الترقية.")
+}
+
+if (command === 'setdemote' || command === 'تنزيل') {
+  await db.query(`UPDATE group_settings SET sdemote = $1 WHERE group_id = $2`, [cleanText, m.chat])
+  return m.reply("✅ تم حفظ رسالة التنزيل.")
 }}
-handler.help = ['setwelcome <texto>', 'setbye <texto>']
+
+handler.help = ['setwelcome <نص>', 'setbye <نص>', 'ترحيب <نص>', 'وداع <نص>']
 handler.tags = ['group']
-handler.command = ['setwelcome', 'setbye', 'setpromote', 'setdemote']
+handler.command = ['setwelcome', 'setbye', 'setpromote', 'setdemote', 'ترحيب', 'وداع', 'ترقية', 'تنزيل']
 handler.group = true
 handler.admin = true
 handler.register = true
