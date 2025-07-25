@@ -1,20 +1,23 @@
 import { startSubBot } from '../lib/subbot.js';
-let commandFlags = {}; 
+let commandFlags = {};
 
 const handler = async (m, { conn, command }) => {
-commandFlags[m.sender] = true;
-  
-const rtx = `*🔰 LoliBot-MD 🔰*\nㅤㅤㅤㅤSer sub bot\n\n*Con otro telefono que tengas o en la PC escanea este QR para convertirte en un sub bot*\n\n*1. Haga clic en los tres puntos en la esquina superior derecha*\n*2. Toca WhatsApp Web*\n*3. Escanee este código QR*\n*Este código QR expira en 45 segundos!*\n\n> *⚠️ No nos hacemos responsable del mal uso que se le pueda dar.*`;
-const rtx2 = `*🔰 LoliBot-MD 🔰*\nㅤㅤㅤㅤSer sub bot\n\n*1️⃣ Dirígete a los tres puntos en la esquina superior derecha*\n*2️⃣ Opción: Dispositivos vinculados*\n*3️⃣ Vincular con código de teléfono*\n*4️⃣ Pega el código a continuación*\n> Codigo de 8 digitos vencen en 60 segundos`;
+  commandFlags[m.sender] = true;
 
-const phone = m.sender?.split('@')[0];
-const isCode = /^(serbot|code)$/.test(command);
-const caption = isCode ? rtx2 : rtx;
-await startSubBot(m, conn, caption, isCode, phone, m.chat, commandFlags);
+  const نصQR = `*🤖 بوت لولي - LoliBot-MD 🤖*\n\n📲 *لجعل هذا الجهاز بوت فرعي (Sub Bot)*\n\n🟢 *من هاتف آخر أو من الكمبيوتر، امسح هذا الرمز QR لتصبح بوتًا فرعيًا:*\n\n1️⃣ افتح النقاط الثلاث أعلى الواجهة\n2️⃣ اختر "واتساب ويب"\n3️⃣ امسح الكود QR المعروض\n\n⚠️ *ينتهي صلاحية هذا الكود خلال 45 ثانية!*\n\n❗️ لسنا مسؤولين عن أي استخدام غير قانوني.`;
+
+  const نصكود = `*🤖 بوت لولي - LoliBot-MD 🤖*\n\n📲 *لجعل هذا الجهاز بوت فرعي باستخدام كود هاتف:*\n\n1️⃣ افتح النقاط الثلاث أعلى الواجهة\n2️⃣ اختر "الأجهزة المرتبطة"\n3️⃣ اضغط "ربط بجهاز جديد"\n4️⃣ اختر "استخدام كود هاتف"\n\n🔢 *أدخل الكود المكون من 8 أرقام هنا خلال 60 ثانية:*`;
+
+  const الهاتف = m.sender?.split('@')[0];
+  const استخدام_كود = /^(بوتكود|كود)$/i.test(command);
+  const الرد = استخدام_كود ? نصكود : نصQR;
+
+  await startSubBot(m, conn, الرد, استخدام_كود, الهاتف, m.chat, commandFlags);
 };
-handler.help = ['jadibot', 'serbot', 'code'];
+
+handler.help = ['بوت', 'بوتكود', 'كود'];
 handler.tags = ['jadibot'];
-handler.command = /^(serbot|code|jadibot|qr)$/i;
+handler.command = /^(بوت|بوتكود|كود|qr)$/i;
 handler.register = false;
 
 export default handler;
