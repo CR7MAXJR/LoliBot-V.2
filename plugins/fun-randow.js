@@ -1,1042 +1,863 @@
-import axios from 'axios' 
-let handler = async (m, { conn, command, text, usedPrefix, args}) => {
+import axios from 'axios';
 
-if (command == 'piropo') {
-let query = 'Cuéntame un piropo, solo di el piropo no agregue mas texto.';
-let username = m.sender;
-let logic = "piropo";
-let result;
-try {
-result = await luminsesi(query, username, logic);
-if (!result || result.trim() === "") throw new Error("Respuesta vacía");
-} catch (error) {
-result = pickRandom(piropo); 
-}
-await conn.reply(m.chat,  `*╭╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼*\n➢ ${result}\n*╰╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼*`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '💞 PIROPO', body: '𝐒𝐮𝐩𝐞𝐫 𝐁𝐨𝐭 𝐃𝐞 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩', previewType: 0, thumbnail: m.pp, sourceUrl: [info.md, info.yt, info.tiktok].getRandom()}}})
-}
+let handler = async (m, { conn, command, text, usedPrefix, args }) => {
+  if (command == 'مغازلة') {
+    let query = 'أخبرني بمغازلة لطيفة، فقط قل المغازلة بدون إضافة نصوص أخرى.';
+    let username = m.sender;
+    let logic = "مغازلة";
+    let result;
+    try {
+      result = await luminsesi(query, username, logic);
+      if (!result || result.trim() === "") throw new Error("الرد فارغ");
+    } catch (error) {
+      result = pickRandom(مغازلة);
+    }
+    await conn.reply(m.chat, `*╭╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼*\n➢ ${result}\n*╰╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼*`, m, {
+      contextInfo: {
+        externalAdReply: {
+          mediaUrl: null,
+          mediaType: 1,
+          description: null,
+          title: '💞 مغازلة',
+          body: '🤖 سوبر بوت واتساب',
+          previewType: 0,
+          thumbnail: m.pp,
+          sourceUrl: [info.md, info.yt, info.tiktok].getRandom()
+        }
+      }
+    });
+  }
 
-if (command == 'chiste') {
-let query = 'Cuéntame un chiste, puede ser de cualquier tipo de humor, no repita los chiste haz chiste como jaimito, yayo, solo di el chiste no agregue mas texto y haz chiste nuevo 2024 no repitan los mismo chiste pasado xD.'; 
-let username = m.sender;
-let logic = "chiste";
-let result;
-try {
-result = await luminsesi(query, username, logic);
-if (!result || result.trim() === "") throw new Error("Respuesta vacía");
-} catch (error) {
-result = pickRandom(chiste);
-}
-await conn.reply(m.chat,  `*┏━━━━━━━━━━━━┓*\n😹 ${result} 😹\n*┗━━━━━━━━━━━━┛*`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '😹 CHISTE', body: '𝐒𝐮𝐩𝐞𝐫 𝐁𝐨𝐭 𝐃𝐞 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩', previewType: 0, thumbnail: m.pp, sourceUrl: [info.md, info.yt, info.tiktok].getRandom()}}})
-}
+  if (command == 'نكتة') {
+    let query = 'أخبرني بنكتة مضحكة، يمكن أن تكون من أي نوع، لا تكرر النكات، اجعلها جديدة وممتعة لعام 2024، فقط قل النكتة بدون إضافة نصوص أخرى.';
+    let username = m.sender;
+    let logic = "نكتة";
+    let result;
+    try {
+      result = await luminsesi(query, username, logic);
+      if (!result || result.trim() === "") throw new Error("الرد فارغ");
+    } catch (error) {
+      result = pickRandom(نكتة);
+    }
+    await conn.reply(m.chat, `*┏━━━━━━━━━━━━┓*\n😹 ${result} 😹\n*┗━━━━━━━━━━━━┛*`, m, {
+      contextInfo: {
+        externalAdReply: {
+          mediaUrl: null,
+          mediaType: 1,
+          description: null,
+          title: '😹 نكتة',
+          body: '🤖 سوبر بوت واتساب',
+          previewType: 0,
+          thumbnail: m.pp,
+          sourceUrl: [info.md, info.yt, info.tiktok].getRandom()
+        }
+      }
+    });
+  }
 
-if (command == 'reto') {
-let query = 'Dame un reto interesante para hacer, solo di el reto no agregue mas texto y no repitan los reto, que sea diferentes y divertido.'; 
-let username = m.sender; 
-let logic = "reto"; 
-let result;
-try {
-result = await luminsesi(query, username, logic);
-if (!result || result.trim() === "") throw new Error("Respuesta vacía");
-} catch (error) {
-result = pickRandom(bucin);
-}
-await conn.reply(m.chat, `[ 𝙍𝙀𝙏𝙊 😏 ]\n\n"${result}"`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '😏 HE COJISTE RETO', body: '𝐒𝐮𝐩𝐞𝐫 𝐁𝐨𝐭 𝐃𝐞 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩', previewType: 0, thumbnail: m.pp, sourceUrl: [info.md, info.yt, info.tiktok].getRandom()}}})
-}
+  if (command == 'تحدي') {
+    let query = 'أعطني تحديًا ممتعًا ومختلفًا، فقط قل التحدي بدون إضافة نصوص أخرى.';
+    let username = m.sender;
+    let logic = "تحدي";
+    let result;
+    try {
+      result = await luminsesi(query, username, logic);
+      if (!result || result.trim() === "") throw new Error("الرد فارغ");
+    } catch (error) {
+      result = pickRandom(تحدي);
+    }
+    await conn.reply(m.chat, `[ 😏 تحدي ]\n\n"${result}"`, m, {
+      contextInfo: {
+        externalAdReply: {
+          mediaUrl: null,
+          mediaType: 1,
+          description: null,
+          title: '😏 لقد اخترت تحديًا',
+          body: '🤖 سوبر بوت واتساب',
+          previewType: 0,
+          thumbnail: m.pp,
+          sourceUrl: [info.md, info.yt, info.tiktok].getRandom()
+        }
+      }
+    });
+  }
 
-if (command == 'verdad') {
-let query = 'Dame una pregunta de verdad intrigante'; 
-let username = m.sender;
-let logic = "verdad"; 
-let result;
-try {
-result = await luminsesi(query, username, logic);
-if (!result || result.trim() === "") throw new Error("Respuesta vacía");
-} catch (error) {
-result = pickRandom(bucin);
-}
-await conn.reply(m.chat,  `[ 𝙑𝙀𝙍𝘿𝘼𝘿 🤔 ]\n\n“${result}”`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '🤔 ELIGIRTE VERDAD', body: '𝐒𝐮𝐩𝐞𝐫 𝐁𝐨𝐭 𝐃𝐞 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩', previewType: 0, thumbnail: m.pp, sourceUrl: [info.md, info.yt, info.tiktok].getRandom()}}})
-}
+  if (command == 'حقيقة') {
+    let query = 'أعطني سؤالًا مثيرًا للاهتمام للعبة الحقيقة';
+    let username = m.sender;
+    let logic = "حقيقة";
+    let result;
+    try {
+      result = await luminsesi(query, username, logic);
+      if (!result || result.trim() === "") throw new Error("الرد فارغ");
+    } catch (error) {
+      result = pickRandom(حقيقة);
+    }
+    await conn.reply(m.chat, `[ 🤔 حقيقة ]\n\n"${result}"`, m, {
+      contextInfo: {
+        externalAdReply: {
+          mediaUrl: null,
+          mediaType: 1,
+          description: null,
+          title: '🤔 لقد اخترت الحقيقة',
+          body: '🤖 سوبر بوت واتساب',
+          previewType: 0,
+          thumbnail: m.pp,
+          sourceUrl: [info.md, info.yt, info.tiktok].getRandom()
+        }
+      }
+    });
+  }
 
-if (command == 'frases') { 
-const ejemplo = `*Asmaul Husna*` 
-const organizar = `Desde Abu Hurairah radhiallahu anhu, Rasulullah SAW dijo: "Tengo noventa y nueve nombres, cien menos 1. Quien los memorice entrará en el Paraíso, y él es un acorde que ama el acorde."
-Significado: "De hecho, yo tengo noventa y nueve nombres, también conocido como cien menos uno. Quien los cuente, entrará en el cielo; Él es Witr y ama a Witr".`
-let json = JSON.parse(JSON.stringify(asmaulhusna))
-let data = json.map((v, i) => `${i + 1}. ${v.latin}\n${v.arabic}\n${v.translation_id}`).join('\n\n')
-if (isNaN(args[0])) throw `Ejemplo:\n${usedPrefix + command} 1`
-if (args[0]) {
-if (args[0] < 1 || args[0] > 99) throw `mínimo 1 y máximo 99!`
-let { index, latin, arabic, translation_id, translation_en } = json.find(v => v.index == args[0].replace(/[^0-9]/g, ''))
-return m.reply(`🔢 *Número:* ${index}
-${arabic}
- 
-${latin}
+  if (command == 'اقتباسات') {
+    const مثال = `*اقتباسات ملهمة*`;
+    const تنظيم = `مجموعة من الاقتباسات الملهمة التي تحمل حكمًا وعبرًا من مختلف المفكرين والفلاسفة عبر العصور. اختر رقمًا بين 1 و99 لعرض اقتباس معين، أو اترك الأمر فارغًا لعرض القائمة كاملة.`;
+    let json = JSON.parse(JSON.stringify(اقتباسات));
+    let data = json.map((v, i) => `${i + 1}. ${v.arabic}\n${v.author}\n${v.opinion}`).join('\n\n');
+    if (isNaN(args[0])) throw `مثال:\n${usedPrefix + command} 1`;
+    if (args[0]) {
+      if (args[0] < 1 || args[0] > 99) throw `الحد الأدنى 1 والحد الأقصى 99!`;
+      let { index, arabic, author, opinion, translation_en } = json.find(v => v.index == args[0].replace(/[^0-9]/g, ''));
+      return m.reply(`🔢 *الرقم:* ${index}\n${arabic}\n${author}\n${opinion}\n${translation_en}`.trim());
+    }
+    m.reply(مثال + '\n\n' + data + '\n\n' + تنظيم);
+  }
+};
 
-${translation_id}
+handler.help = ['مغازلة', 'نكتة', 'تحدي', 'حقيقة', 'اقتباسات'];
+handler.command = /^(مغازلة|نكتة|تحدي|حقيقة|اقتباسات)$/i;
+handler.tags = ['لعبة'];
+handler.register = true;
 
-${translation_en}
-`.trim())}
-m.reply(ejemplo + data + organizar)
-}}
-handler.help = handler.command = ['piropo', 'chiste', 'reto', 'verdad', 'frases']
-handler.tags = ['game'];
-handler.register = true
-export default handler
+export default handler;
 
 async function luminsesi(q, username, logic) {
-try {
-const response = await axios.post("https://luminai.my.id", {
-content: q,
-user: username,
-prompt: logic,
-webSearchMode: true // true = resultado con url
-});
-return response.data.result;
-} catch (error) {
-console.error(error);
-}}
+  try {
+    const response = await axios.post("https://luminai.my.id", {
+      content: q,
+      user: username,
+      prompt: logic,
+      webSearchMode: true
+    });
+    return response.data.result;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 function pickRandom(list) {
-return list[Math.floor(list.length * Math.random())]}
+  return list[Math.floor(list.length * Math.random())];
+}
 
-const piropo = ["Me gustaría ser papel para poder envolver ese bombón.", "Eres como wifi sin contraseña, todo el mundo te busca", "Quién fuera bus para andar por las curvas de tu corazón.", "Quiero volar sin alas y salir de este universo, entrar en el tuyo y amarte en silencio.", "Quisiera ser mantequilla para derretirme en tu arepa.", "Si la belleza fuera pecado vos ya estarías en el infierno.", "Me Gustaría Ser Un Gato Para Pasar 7 Vidas A Tu Lado.", "Robar Está Mal Pero Un Beso De Tu Boca Sí Me Lo Robaría.", "Qué Hermoso Es El Cielo Cuando Está Claro Pero Más Hermoso Es El Amor Cuando Te Tengo A Mi Lado.", "Bonita, Camina Por La Sombra, El Sol Derrite Los Chocolates.", "Si Fuera Un Correo Electrónico Serías Mi Contraseña.", "Quisiera que fueses monte para darte machete", "Perdí mi número de teléfono ¿Me das el tuyo?", "¿Cómo te llamas para pedirte de regalo a Santa Claus?", " En el cielo hay muchas estrellas, pero la más brillante está en la Tierra y eres tú.", "¿Acaba de salir el sol o es la sonrisa que me regalas hoy?", "No es el ron ni la cerveza, eres tú quien se me ha subido a la cabeza", "Si hablamos de matemáticas eres la suma de todos mis deseos.", "Pareces Google porque tienes todo lo que yo busco.", "Mi café favorito, es el de tus ojos.", "Quiero ser photoshop para retocarte todo el cuerpo.", "Quisiera que fueras cereal, para cucharearte en las mañanas.", "Quien fuera hambre, para darte tres veces al día."]
+const مغازلة = [
+  "يا ليتني ورقة عشان ألفّ على هالجمال زي الحلوى! 😍",
+  "أنتِ زي الواي فاي من غير باسوورد، الكل يدور عليكِ! 📶",
+  "يا ريتني باص عشان ألفّ على منحنيات قلبك! 🚌❤️",
+  "نفسي أطير بلا جناحات وأدخل عالمك، أحبك بهدوء. 🕊️",
+  "يا ليتني زبدة عشان أذوب على خبزتك! 🥐",
+  "لو الجمال ذنب، كنتِ خلاص في النار! 🔥😉",
+  "نفسي أكون قطة عشان أعيش سبع حيوات جنبك! 🐾",
+  "السرقة غلط، بس بوسة من شفايفك أكيد بسرقها! 😘",
+  "السماء مليانة نجوم، بس أجمل نجمة على الأرض وهي أنتِ! 🌟",
+  "يا ليتني هدية عشان أطلبك من بابا نويل! 🎅",
+  "لو كنتِ إيميل، كنتِ أكيد باسووردي! 🔒",
+  "نفسي أكون فوتوشوب عشان أعدّل جمالك كله! 📸",
+  "يا ريتني كنتِ سيريال عشان أكلك كل صباح! 🥣",
+  "لو كنتِ جوع، كنت أكيد أجيكِ تلات مرات باليوم! 🍽️",
+  "نفسي أكون قلم عشان أكتب حبي ليكِ على قلبك! ✍️",
+  "أنتِ زي القمر، حتى لو غبتِ الناس بتفضل تتكلم عنكِ! 🌙",
+  "لو كنتِ كتاب، كنتِ أكيد رواية بحب أقراها كل يوم! 📖",
+  "يا ريتني شمس عشان أنور طريقك كل يوم! ☀️",
+  "أنتِ زي السكر، حتى لو ذوبتِ في قلبي، بتفضلي حلوة! 🍬",
+  "نفسي أكون ساعة عشان أكون دايمًا على إيديكِ! ⌚",
+  "لو الدنيا مدرسة، كنتِ أكيد أجمل حصة فيها! 🏫",
+  "أنتِ زي الموسيقى، من غيرك الدنيا ساكتة! 🎶",
+  "يا ليتني مراية عشان أشوفك كل يوم! 🪞"
+];
 
-const chiste = ["¿Cuál es el último animal que subió al arca de Noé? El del-fin..", "¿Cómo se dice pañuelo en japonés? Saka-moko", "¿Cómo se dice disparo en árabe? Ahí-va-la-bala..", "¿Qué le dice un gusano a otro gusano? Voy a dar una vuelta a la manzana.", "Un gato empieza a ladrar en el tejado de una casa. Otro gato, sorprendido, le dice: Estás loco gato, ¿por qué ladras en vez de maullar? El gatito le responde: ¿A caso no puedo aprender otro idioma?", "El doctor le dice al paciente: respire profundo que lo voy a auscultar. El paciente le responde: doctor, ¿de quién me va a ocultar si no le debo a nadie?\nSale el doctor después de un parto y el padre de la criatura le pregunta: ¿Doctor cómo salió todo? El doctor le dice: todo salió bien, pero tuvimos que colocarle oxígeno al bebé. El padre, horrorizado, le dice: pero doctor, nosotros queríamos ponerle Gabriel..", "Un pez le pregunta a otro pez: ¿qué hace tu mamá? Este le contesta: Nada, ¿y la tuya qué hace? Nada también.", "¿Cuál es el colmo de Aladdín? Tener mal genio", "El profesor le dice al estudiante después de haberle corregido la tarea: Tu trabajo me ha conmovido. El estudiante, sorprendido, le pregunta: ¿Y eso por qué profesor? El profesor con cara de burla le dice: Porque me dio mucha pena.", "Le dice el niño a la madre: Mamá, no quiero jugar más con Pedrito. La madre le pregunta al niño: ¿Por qué no quieres jugar más con él? Porque cuando jugamos a los tacos de madera y le pego con uno en la cabeza, de repente se pone a llorar.", "A Juanito le dice la maestra: Juanito, ¿qué harías si te estuvieses ahogando en la piscina? Juanito le responde: Me pondría a llorar mucho para desahogarme.", "Hijo, me veo gorda, fea y vieja. ¿Qué tengo hijo, qué tengo? Mamá, tienes toda la razón.", "¿Cómo se dice pelo sucio en chino? Chin cham pu.", "Había una vez un niño tan, tan, tan despistado que... ¡da igual, me he olvidado del chiste!", "Una amiga le dice a otra amiga: ¿Qué tal va la vida de casada? Pues no me puedo quejar, dice ella. ¿O sea que va muy bien, no? No, no me puedo quejar porque mi marido está aquí al lado.", "¿Por qué las focas miran siempre hacia arriba? ¡Porque ahí están los focos!", "Camarero, ese filete tiene muchos nervios. Pues normal, es la primera vez que se lo comen.", "¿Cómo se llama el primo de Bruce Lee? Broco Lee.", "Una madre le dice a su hijo: Jaimito, me ha dicho un pajarito que te drogas. La que te drogas eres tú, que hablas con pajaritos."]
+const نكتة = [
+  "إيش آخر حيوان دخل سفينة نوح؟ الدولفين! 🐬",
+  "إزاي تقول منديل بالياباني؟ ساكا-موكو! 😅",
+  "إزاي تقول طلقة بالعربي؟ آهي-جت-البندقية! 🔫",
+  "دودة بتقول لدودة تانية: أنا رايح ألف لفة حوالين التفاحة! 🍎",
+  "قطة بدأت تنبح على سطح البيت، قطة تانية مستغربة قالت: إنتِ مجنونة ليه بتنبحي بدل ما تموئي؟ ردت القطة: يعني مش ممكن أتعلم لغة تانية؟ 😺",
+  "الدكتور للمريض: خد نفس عميق عشان أفحصك. المريض رد: دكتور، هتخبيني من مين وأنا ما أدينش لحد؟ 😆",
+  "سمكة بتسأل سمكة تانية: أمك بتعمل إيه؟ ردت: ولا حاجة، وأمك بتعمل إيه؟ قالت: برضو ولا حاجة! 🐟",
+  "إيش أكبر مصيبة لعلاء الدين؟ إنه عصبي جدًا! 🧞‍♂️",
+  "الأستاذ للطالب بعد ما صحح الواجب: شغلك ده حرّك مشاعري. الطالب مستغرب: ليه يا أستاذ؟ رد: عشان حسيت بالشفقة عليك! 😜",
+  "ولد بيقول لأمه: ماما مش عايز ألعب مع بيتر تاني. سألته: ليه؟ قال: لما نلعب بالخشب وأضربه على راسه، فجأة يبكي! 😅",
+  "المعلمة لجوان: لو كنت بتغرق في المسبح، هتعمل إيه؟ رد جوان: أبكي كتير عشان أرتاح! 😭",
+  "ابن بيقول لأمه: أنا شكلي تخين ووحش وعجوز. أنا عندي إيه؟ ردت أمه: عندك حق يا حبيبي! 😆",
+  "إزاي تقول شعر وسخ بالصيني؟ شين-شام-بو! 🧴",
+  "كان في ولد غبي جدًا جدًا... خلاص، نسيت النكتة! 😅",
+  "صاحبة بتقول لصاحبتها: إزاي حياتك الزوجية؟ ردت: مش أقدر أشتكي. قالت: يعني تمام؟ قالت: لا، عشان جوزي جنبي! 😬",
+  "ليه الفيل بيشرب عصير؟ عشان يبقى فيل-كول! 🐘",
+  "إزاي تعرف إن التمساح كداب؟ لما يعيط دموع تماسيح! 🐊",
+  "واحد بيسأل صاحبه: ليه الطيارة بتطير؟ رد: عشان عندها جناحات، وإلا كنت عايزها تزحف؟ ✈️",
+  "إيه الفرق بين الكمبيوتر والإنسان؟ الكمبيوتر بيعلّق لوحده، والإنسان بيعلّق على كل حاجة! 💻"
+];
 
-const bucin = ["Pasa el pack de una hormiga",
-"Dile a tus amigos que te vas a vivir a EU y mándame una captura de lo que te haya dicho",
-"Grita desde la ventana que quieres mamar y mándame el vídeo",
-"Escribe el nombre de tu crush",
-"Debes de poner el nombre de mi creador en tu estado de WhatsApp, sin dar contexto",
-"Envíame una fotografía tuya",
-"Debes de dibujar en alguna parte de tu cuerpo el nombre de algún integrante del grupo, luego realiza una foto y envíala",
-"Hazte una foto dándole un beso a una Televisión",
- "Mándame una fotografía en ropa interior",
-"Escribe en tu estado de WhatsApp que te gusta comer tierra",
-"Debes de poner la fotografía de un participante del grupo que sea del sexo opuesto al tuyo en tu perfil de WhatsApp durante 3 días 📸📸",
-"Tienes que mandar un audio cantando la canción: Un pato que va cantando alegremente cua cua 🦆",
-"Envía un mensaje a tu ex y dile todavía me gustas", "Envía un audio diciendo amo a The Shadow Brokers - Bot", 
-"Dile a tu crush que la amas y pasa captura al grupo", "Envía un audio cantando", 
-"Envía una foto en la que salgas tu sin taparte la cara ni nada", "Envía un video bailando", 
-"Invita a personas que no conoces a tomarse una selfi contigo y luego envíalo al grupo", 
-"Elija algunos números aleatorios de sus contactos y envíeles un mensaje de texto con el mensaje 'Estoy embarazad@'.", 
-"¡Tome cualquier bebida que esté cerca de usted, luego mézclela con chile y beba!", 
-"Tome un número aleatorio de sus contactos, llámelo y dígale 'te amo' ", 
-"Compre la comida más barata en la cafetería (o compre una botella de agua) y diga entre sollozos a sus compañeros de clase: 'Esta ... es la comida más cara que he comprado)' ", 
-" Compre una botella de coca cola y salpique flores con ella frente a la multitud.", 
-" Párese cerca del refrigerador, cierre los ojos, elija alimentos al azar en él, incluso cuando coma, sus ojos deben estar cerrados.", 
-" De pie en medio de la cancha de baloncesto y gritando: 'TE AMO MI PRÍNCIPE / PRINCESA' ", 
-"Presenta tus respetos a alguien de la clase y luego di: 'Estoy a su servicio, Majestad' ", 
-" Caminando aplaudiendo y cantando la canción 'Feliz cumpleaños' de la clase al pasillo.", 
-" Arrodíllate sobre una rodilla y di '¿Cásate conmigo?' la primera persona en entrar a la habitación.", 
-" Haz un tocado absurdo con tejido, sea lo que sea, sigue pidiendo poses frente a la cámara, sigue subiendo", 
-"Dile 'ERES HERMOSA / MUY HERMOSA, NO MIENTES' a la chica que crees que es la más bonita de esta clase.", 
-" Dile a alguien en clase: 'Primero me dijeron que era tu gemelo, nos separamos y luego me sometí a una cirugía plástica. Y esto es lo más serio que he dicho' ", 
-" Tirar el cuaderno de alguien a la basura, frente a sus ojos, diciendo 'Este libro nadie puede entender' ", 
-" ¡Arranca el pelo de tu propia pierna 3 veces!", 
-" Chatea con tus padres, diles que los extrañas con emoticonos tristes.", 
-" Intente buscar en Google cosas aterradoras o ridículas como tripofobia, etc.", 
-" Siéntese relajado en medio de la cancha de baloncesto mientras finge que es una playa para tomar el sol.", 
-" Llena tu boca de agua y tienes que aguantar hasta dos rondas, si te ríes y derramas o bebes, entonces tienes que volver a llenar y agregar una ronda más.", 
-" Salude a la primera persona que entre en esta sala y diga '¡Bienvenido a Quién quiere ser millonario!' ", 
-"Envía un mensaje de texto a tus padres '¡Hola, hermano! ¡Acabo de comprar el último número de la revista Playboy!' ", 
-"Envíales un mensaje de texto a tus padres: 'Mamá, papá, ya sé que soy un niño adoptado del orfanato. No ocultes esto más'.", 
-" Envía tres números aleatorios en tus contactos y escribe 'Me acabo de convertir en modelo de la revista Playboy' ", 
-" ¡Come una cucharada de salsa de soja dulce y salsa de soja!", 
-" Come algo pero no uses las manos.", 
-" Enojarse con sus amigos que no vienen a pesar de que tienen una cita para jugar 'Verdad o Reto' juntos", 
-"¡Rompe el huevo con la cabeza!", 
-"Coma alimentos que se hayan mezclado y tendrán un sabor extraño, pero asegúrese de que los alimentos no sean dañinos para la salud a largo o corto plazo.", 
-"Baila como Girls 'Generation para los niños frente a la clase, o baila como Super Junior para las niñas.", 
-"Izar el asta de la bandera sin la bandera.", 
-"Hablando de la persona que te gusta, de tus amigos más cercanos, del sexo opuesto que no conoces en absoluto y cosas por el estilo.", 
-"Copia los peinados de todos tus amigos.", 
-"Cantando la canción HAI TAYO frente a mucha gente mientras baila", 
-"Cante la canción Baby Shark en voz alta en el aula.", 
-"Pedir prestado algo a los vecinos", 
-"Pide la firma de uno de los profesores más feroces mientras dices 'Eres verdaderamente la persona que más admiro en el mundo' ", 
-" Pídale dinero a alguien (al azar ) en la calle diciendo 'No tengo dinero para tomar un angkot'.", 
-" Beba algo que haya sido preparado / acordado, pero asegúrese de que no sea peligroso, puede ser como beber jarabe mezclado con salsa de soja.", 
-" Hablando con el emoticono-miedo de la persona que te gusta, está bien conversar con lo que quieras, a través de cualquier medio que puedas.", 
-" Canta tu película de Disney favorita fuera de casa mientras gritas.", 
-" Nombra de 1 azul a 20 azules rápidamente y no debes cometer ningún error. Si está mal, debe repetirse desde el principio.", 
-" Póngase una corona de papel de copia y diga a todos en la habitación 'HONOR AL REY' mientras señala a cada persona con una regla.", 
-" Vuelve a ponerte los pantalones hasta la mañana siguiente.", 
-" Abraza a la persona que NO te agrada en clase y di: 'Muchas gracias por ser la mejor persona para mí' ", 
-" Ve a un campo amplio, luego corre lo más rápido posible mientras dices 'Estoy loco, estoy loco' ", 
-" Elija una flor y luego conéctela a alguien que no conoce (debe ser del sexo opuesto)", 
-" Elige a una persona al azar en la calle, luego di 'No sabes que eres hermosa' (ala One Direction)", 
-" Fingir estar poseído ejm: poseído por un tigre, etc.", 
-" Pídale que silbe ya que su boca está nuevamente llena de comida.", 
-" Pide ser un mesero para que te sirva con tus amigos para el almuerzo.", 
-" Dígales que usen calcetines para hacer guantes.", 
-"Dígales que usen el sombrero más extraño / el casco más absurdo durante la próxima ronda.", 
-"Llama a tu mamá y dile 'mamá, quiero casarme lo antes posible' ", 
-"Llama a tu ex y di 'te extraño' ", 
-"Cambia de ropa con la persona más cercana hasta la siguiente ronda.", 
-"Actualice el estado en WhatsApp lo que sea con palabras que comiencen con 'S' ", 
-"Sube un video de canto a YouTube que esté cantando canciones populares.", 
-"Colorea tus uñas de las manos y de los pies de diferentes colores durante una semana.", 
-"come 2 cucharadas de arroz sin guarniciones", 
-"Envie el emoji '🦄💨' cada vez que escriba en un grupo 1 día", 
-"diga '¡Bienvenido a Quién quiere ser millonario!' a todos los grupos que tienes", 
-"canta el coro de la última canción que tocaste", 
-"Envia un audio de voz a tu ex / enamorado / novia, dile hola (nombre), quiero llamar, solo un momento. Te Extraño🥺👉🏼👈🏼 ", 
-"Dile a la gente al azar: Primero me dijeron que era tu gemelo, nos separamos y luego me sometí a una cirugía plástica. Y esto", 
-"¡Haz 1 rima para el primer jugador!", 
-"cuenta tu propia versión de cosas vergonzosas", 
-"cambiar el nombre a 'Gay' durante 24 horas", 
-"¡Menciona tu tipo de novia!", 
-"Di 'Estoy enamorado de ti, ¿quieres ser mi novio o no?' al último sexo opuesto con el que conversaste en WhatsApp, espera a que responda", 
-"Háblale a tu ex por WhatsApp y dile 'te amo, por favor vuelve'. Manda una captura de pantalla como evidencia de reto cumplido!"] 
+const تحدي = [
+  "أرسل صورة لنملة!",
+  "قول لأصحابك إنك هتروح تعيش في أمريكا وأرسلي سكرين شوت بردودهم!",
+  "اصرخ من الشباك إنك عايز تكلم حد وأرسلي فيديو!",
+  "اكتب اسم اللي بتحبه!",
+  "حط اسم مطوري في حالة الواتساب بتاعتك بدون ما تقول ليه!",
+  "أرسلي صورة ليك!",
+  "ارسم اسم حد من الجروب على جزء من جسمك، صوّرها وأرسلها!",
+  "صوّر نفسك وأنت بتبوس تلفزيون!",
+  "اكتب في حالة الواتساب إنك بتحب تاكل تراب!",
+  "حط صورة حد من الجروب من الجنس الآخر في بروفايل الواتساب بتاعك لمدة 3 أيام 📸",
+  "أرسل رسالة صوتية وأنت بتغني: بطة بتغني بفرحة كوا كوا 🦆!",
+  "أرسل رسالة لإكس بتاعك وقوله: لسه بحبك!",
+  "أرسل رسالة صوتية تقول: بحب The Shadow Brokers - Bot!",
+  "قول للي بتحبه إنك بتحبه وأرسل سكرين شوت للجروب!",
+  "أرسل رسالة صوتية وأنت بتغني أي أغنية!",
+  "أرسل صورة ليك من غير ما تغطي وشك!",
+  "أرسل فيديو وأنت بترقص!",
+  "اعزم ناس مش تعرفهم يتصوروا سيلفي معاك وأرسل الصورة للجروب!",
+  "اختر أرقام عشوائية من جهات الاتصال بتاعتك وأرسلهم رسالة: أنا حامل!",
+  "اشرب أي مشروب جنبك، خلّيه مع شطة واشربه!",
+  "اتصل برقم عشوائي من جهات الاتصال وقوله: بحبك!",
+  "اشتري أرخص أكلة في الكافيتريا وأنت بتعيط قول لزمايلك: دي أغلى أكلة اشتريتها!",
+  "اشتري زجاجة كولا ورشها على زهور قدام الناس!",
+  "قف جنب التلاجة، اغمض عينيك، اختر أكل عشوائي وكله وعينيك مغمضة!",
+  "قف في وسط ملعب كرة السلة واصرخ: بحبك يا أميري/أميرتي!",
+  "اركع قدام حد من زمايلك وقول: أنا في خدمتك يا مولاي!",
+  "امشي وصفق وغني أغنية عيد ميلاد من الفصل للرواق!",
+  "اركع على ركبة وقول: تتجوزني؟ لأول واحد يدخل الأوضة!",
+  "اعمل تاج غريب من مناديل واتصور بيه قدام الكاميرا!",
+  "قول لأجمل بنت في الفصل: إنتِ حلوة جدًا، مش بكدب!",
+  "قول لحد في الفصل: قالولي إني توأمك، افترقنا وعملت عملية تجميل!",
+  "ارمي كراسة حد في الزبالة قدام عينيه وقول: محدش يفهم الكتاب ده!",
+  "اقطع 3 شعرات من رجلك!",
+  "كلّم أهلك وقولهم إنك مفتقدهم بإيموجي حزين 😢",
+  "ابحث في جوجل عن حاجات مرعبة أو مضحكة زي التريبوفوبيا!",
+  "اقعد في وسط ملعب كرة السلة واتصنع إنك على الشاطئ بتتشمس!",
+  "املا بقك مية واستحمل لحد جولتين، لو ضحكت أو بلعت، كرر وأضف جولة!",
+  "رحب بأول واحد يدخل الأوضة وقول: مرحبًا بك في من سيربح المليون!",
+  "أرسل رسالة لأهلك: مرحبًا يا أخويا، اشتريت آخر عدد من مجلة بلاي بوي!",
+  "أرسل رسالة لأهلك: ماما، بابا، أنا عارف إني متبنى من دار أيتام، متخبوش عليا!",
+  "أرسل رسالة لتلات أرقام عشوائية: أنا بقيت موديل في مجلة بلاي بوي!",
+  "كل معلقة صويا صوص مع صويا حلوة!",
+  "كل حاجة من غير ما تستخدم إيديك!",
+  "اتضايق من أصحابك اللي مجوش مع إنكم متفقين تلعبوا حقيقة أو تحدي!",
+  "اكسر بيضة براسك!",
+  "كل أكل مخلوط بطعم غريب، بس تأكد إنه مش مضر!",
+  "ارقص زي جيرلز جينيريشن قدام الولاد، أو زي سوبر جونيور قدام البنات!",
+  "ارفع العلم من غير علم!",
+  "اتكلم عن اللي بتحبه، أو أصحابك المقربين، أو حد من الجنس الآخر متعرفوش!",
+  "قلّد تسريحات شعر أصحابك كلهم!",
+  "غني أغنية هاي تايو قدام ناس كتير وأنت بترقص!",
+  "غني أغنية بيبي شارك بصوت عالي في الفصل!",
+  "استلف حاجة من الجيران!",
+  "اطلب توقيع من أشرس مدرس وقول: إنت أكتر واحد بيحترمه في العالم!",
+  "اطلب فلوس من حد في الشارع وقول: معنديش فلوس أركب مواصلات!",
+  "اشرب حاجة متفق عليها، بس تأكد إنها مش خطرة، زي شراب مخلوط بصويا صوص!",
+  "كلّم اللي بتحبه بإيموجي خايف، واتكلم زي ما تحب!",
+  "غني أغنية ديزني مفضلة برا البيت وأنت بتصرخ!",
+  "عد من 1 أزرق لـ 20 أزرق بسرعة ومن غير غلط، لو غلطت ابدأ من الأول!",
+  "اعمل تاج من ورق وأشر على الكل وقول: تحية للملك!",
+  "البس البنطلون بالمقلوب لحد الصبح التاني!",
+  "عانق حد مش بتحبه في الفصل وقول: شكرًا إنك أفضل واحد بالنسبة لي!",
+  "روح مكان واسع واجري بسرعة وأنت بتقول: أنا مجنون، أنا مجنون!",
+  "اقطف وردة واديها لحد متعرفوش من الجنس الآخر!",
+  "اختر حد عشوائي في الشارع وقوله: إنت مش عارف إنك حلو!",
+  "اتصنع إنك ممسوس، زي نمر مثلًا!",
+  "اطلب من حد يصفر وهو بيأكل!",
+  "اطلب من حد يكون نادل ويخدمك أنت وأصحابك في الغدا!",
+  "قول لأصحابك يلبسوا جوارب كقفازات!",
+  "قول لأصحابك يلبسوا أغرب قبعة أو خوذة في الجولة الجاية!",
+  "اتصل بأمك وقولها: ماما، عايز أتجوز بأسرع وقت!",
+  "اتصل بإكس بتاعك وقوله: وحشتيني!",
+  "بدّل هدومك مع أقرب واحد لحد الجولة الجاية!",
+  "حط حالة واتساب كلها كلمات تبدأ بحرف السين!",
+  "ارفع فيديو وأنت بتغني أغنية مشهورة على يوتيوب!",
+  "لوّن ضوافر إيديك ورجليك بألوان مختلفة لمدة أسبوع!",
+  "كل معلقتين رز من غير إضافات!",
+  "أرسل إيموجي 🦄💨 كل ما تكتب في جروب لمدة يوم!",
+  "قول: مرحبًا بك في من سيربح المليون! لكل الجروبات اللي عندك!",
+  "غني كورس آخر أغنية سمعتها!",
+  "أرسل رسالة صوتية لإكس بتاعك أو اللي بتحبه وقول: مرحبًا (الاسم)، عايز أكلمك بس لحظة، وحشتيني 🥺👉🏼👈🏼!",
+  "قول لحد عشوائي: قالولي إني توأمك، افترقنا وعملت عملية تجميل!",
+  "اعمل ريما واحدة لأول لاعب!",
+  "احكي قصة محرجة عن نفسك بطريقتك!",
+  "غيّر اسمك لـ 'متميز' لمدة 24 ساعة!",
+  "قول نوع البنت اللي بتحبها!",
+  "قول لآخر واحد من الجنس الآخر كلمتك في الواتساب: أنا بحبك، عايز تكون حبيبي ولا لأ؟ واستنى رده!",
+  "كلّم إكس بتاعك في الواتساب وقوله: بحبك، ارجع بقى! وأرسل سكرين شوت كدليل!"
+];
 
-const verdad = ["¿Alguna vez te ha gustado alguien? ¿Cuánto tiempo?",
-  "Si es posible o si quieres, en gc / fuera de gc, ¿con quién harás amistad? (Puede ser diferente / del mismo tipo)",
-  "¿cual es tu mas grande miedo?",
-  "¿Alguna vez te ha gustado alguien y has sentido a esa persona como tú también?",
-  "¿Cuál es el nombre del exnovio de tu amiga que una vez te gustó en secreto?",
-  "¿Alguna vez has robado el dinero de tu madre o de tu padre? ¿La razón?",
-  "lo que te hace feliz cuando estás triste",
-  "¿Alguna vez has sido amor no correspondido? ¿Si has estado con quién? ¿Cómo se siente brou?",
-  "¿Alguna vez has tenido una aventura con alguien?",
-  "lo más temido",
-  "quién es la persona más influyente en tu vida",
-  "qué orgullo tienes este año",
-  "quién es la persona que puede enfermarte",
-  "quien es la persona que alguna vez te puso cachondo",
-  "(para los musulmanes) ¿nunca has rezado en todo el día?",
-  "¿Quién es el más cercano a su tipo de pareja ideal aquí",
-  "¿Con quién te gusta jugar?",
-  "¿Alguna vez has rechazado a alguien? ¿Por qué?",
-  "Menciona el incidente que te hizo daño y que aún recuerdas",
-  "¿Qué logros has obtenido este año?",
-  "¿Cuál es tu peor hábito en la escuela?", "¿Qué programa de televisión odias más? ¡Da la razón!", "¿Cuál es el vestido más feo (en su opinión) que ha usado y cuándo lo usó?", "¿Qué es lo peor (chisme) que has dicho sobre tu amigo?","¿Qué es lo más vergonzoso de ti?"," ¿Qué es lo primero que ves cuando miras a otra persona (del sexo opuesto)?", 
-"¿Qué es lo primero que te viene a la mente cuando te miras al espejo?","¿Que es lo mas tonto que has hecho en tu vida?"," ¿Cuál es el peor sueño que has tenido?"," ¿Cuál es el sueño más loco que puedes recordar hasta ahora?",
-" ¿Cuál es tu peor rasgo en tu opinión?", 
-" ¿Qué rasgo te gustaría cambiar de ti mismo?", 
-" ¿Qué rasgo te gustaría cambiar en tu amigo?", 
-" ¿Qué harías si tu novio te dijera que tienes mala nariz o dedos?", 
-" ¿En qué piensas antes de dormir? ej .: fantasear con una pareja, etc.", 
-"¿Qué crees que se destaca más de ti?"," ¿Qué parte del cuerpo de tu amigo te gusta más y desearías tener?", 
-"¿Qué parte de tu cuerpo odias más?"," De todas las clases de la escuela, ¿a qué clase le gustaría ingresar y qué clase le gustaría evitar?", 
-"¡Describe a tu amigo más cercano!"," ¡Descríbete en una palabra!"," ¿Qué películas y canciones te han hecho llorar?", 
-" ¿Qué es algo que has mantenido en secreto hasta ahora y nadie lo ha descubierto?", 
-" ¿Qué es lo más romántico que alguien (del sexo opuesto) te ha hecho o regalado?", 
-"¿Qué es lo más desagradable que has experimentado?", 
-" Si nacieras de nuevo y tuvieras que ser uno de tus amigos, ¿a quién elegirías ser?", 
-" Si tienes superpoder / superpoder, ¿qué quieres hacer?", 
-" Si el apocalipsis llega pronto, ¿qué haces?", 
-" Si te pidieran que te sometieras a una cirugía plástica con una muestra de rostro de tu compañero de clase, ¿a quién imitarías?", 
-" Alguna vez has robado algo?", 
-" ¿Tiene miedo a morir? ¿Por qué?", 
-" ¿Cuándo fue la última vez que lloraste y por qué?", 
-" ¿Cuáles son tus habilidades especiales?", 
-" ¿Cómo te puede gustar la persona que te gusta?", 
-" ¿Cuál crees que es un buen rasgo de tu amigo más cercano que él o ella no conozca?", 
-" ¿Con qué tipo de persona te gustaría casarte algún día?", 
-" En tu opinión, ¿cuál es el trabajo más atractivo para el amigo que está sentado a tu lado? ¿Y por qué?", 
-" ¿Con quién quieres intercambiar por un día? (amigos más cercanos que ambos conocen) y por qué", 
-" ¿Alguna vez has esperado en secreto que la relación de alguien con su novia se rompiera? ¿Quién?", 
-" ¿Prefiere AMIGAS o AMIGOS? ¿Por qué?", 
-" ¿Qué cita recuerdas más y te gusta?", 
-" ¿Qué secretos nunca les has contado a tus amigos hasta ahora?", 
-" ¿Quiénes son sus verdaderos modelos a seguir?", 
-" ¿Cuál de tus amigos crees que es matre?", 
-" ¿Cuál de tus amigos crees que tiene menos corte de pelo?", 
-" ¿Cuál de tus amigos es el más fotogénico? ", 
-" ¿Quién es tu mejor ex? ¡¿Y por qué rompieron ?!", 
-" ¿Cómo se llama el artista con el que hablaste en secreto?", 
-" ¿Cómo se llamaba el profesor que te gustaba?", 
-" ¿Cuál es el nombre de la exnovia de tu amigo que te ha gustado en secreto?", 
-" ¿Cuál es el nombre de la persona (del sexo opuesto) que crees que sería divertido ser novia?", 
-" ¿Cuál es el nombre de la persona que odias, pero crees que le gustas a esa persona (no necesariamente del sexo opuesto)?", 
-" ¿Cuál es el nombre de la persona a la que has estado señalando en secreto?", 
-" ¿Quién es la persona (del sexo opuesto) que más se te pasa por la cabeza?", 
-" ¿Quién es la persona más molesta entre tus amigos? ¡la razón!", 
-" ¿A quién de tus amigos crees que debería renovarse?", 
-" ¿Quién está más cerca de tu pareja ideal aquí?", 
-"Padre o madre", 
-"La parte del cuerpo que no te gusta", 
-"¿Alguna vez has hecho trampa?", 
-"¿Alguna vez te han besado?", 
-"¿Qué es lo primero que harías si te despertaras como del sexo opuesto?", 
-"¿Alguna vez has dejado que alguien más se meta en problemas por algo que hiciste?", 
-"¿Qué es lo más embarazoso que has hecho en tu vida?", 
-" ¿Cuál es la razón más ridícula por la que has roto con alguien?", 
-" ¿Cuál es el peor hábito que tienes?", 
-" ¿Cuál crees que es tu mejor característica? ¿Y que es lo peor?", 
-" ¿Cuál es la cosa más valiente que has hecho?", 
-" ¿Cuándo fue la última vez que mojaste la cama?", 
-" ¿Con qué sueñas más sobre dormir?", 
-" Si va a ganar dinero ilegalmente, ¿cómo lo hace?", 
-" ¿Qué cosas infantiles sigues haciendo?", 
-" Si fueras ciego, ¿quién sería tu perro guía?", 
-" ¿Qué es lo que más te impresiona?", 
-" Si se le permitiera usar solo 3 palabras durante el resto de la noche a partir de ahora, ¿cuál sería?", 
-" Si fueras un dictador, ¿qué ley promulgarías primero?", 
-"Si vivieras durante la era nazi, ¿quién serías?", 
-"¿Cuál fue la experiencia más vergonzosa en la escuela / tiempo de estudio / educación / el año pasado?", 
-"¿Cuál es el mayor error de tu vida?", 
-"¿Qué no harías nunca, incluso si supieras que solo te quedan 12 horas de vida?", 
-" ¿Qué delitos ha cometido?", 
-" Cuéntame un secreto de tu infancia.", 
-" ¿Cuál es su mayor representante (secreto)?", 
-" ¿Qué quieres hacer conmigo… ( x persona), si luego puedes borrar su memoria (él,…)?", 
-" ¿Qué es lo peor que le has hecho a alguien?", 
-" ¿Quién te gusta más?", 
-"¿Alguna vez te has enamorado de alguno de los presentes?", 
-" Si fueras un vampiro, ¿a cuál de nosotros morderías ahora?", 
-" ¿Ha defecado alguna vez en público?", 
-" ¿Cuál es tu fantasía más oscura?", 
-" ¿Qué es lo mejor que has tenido con alguien más?", 
-" ¿Cuál es el mayor desvío para ti?", 
-" ¿Qué es lo que más te gusta de tu cuerpo y qué es lo más feo?", 
-" ¿A quien te gustaría ver desnuda?", 
-" ¿Quién en esta ronda puede enamorarte?", 
-" ¿Alguna vez has tenido un sueño erótico donde sucedió alguien de este grupo?", 
-" Si te vas a tatuar en el área genital, ¿que habrá allí?", 
-" ¿Qué es más importante en una relación: el sexo o el amor?", 
-" ¿Crees que el sexo es genial, bueno, bueno, divertido a veces, o realmente no te importa?", 
-" ¿Qué te hace realmente amar?", 
-"¿Cuántas veces a la semana / mes tiene relaciones sexuales y con qué frecuencia desea tener relaciones sexuales?", 
-" ¿Con cuántas parejas sexuales te has acostado?",
-" ¿Qué parte del cuerpo te hace más?", 
-" ¿Cómo, dónde y con quién estuviste primero?", 
-" ¿Qué importancia tienen para ti los juegos previos prolongados?", 
-" ¿Qué debe hacer un hombre o una mujer para seducirte?", 
-" ¿Alguna vez has tenido sexo con un buen amigo?", 
-" ¿Alguna vez ha tenido relaciones sexuales con alguno de estos grupos, excepto con su pareja?", 
-"¿Qué animal se adapta mejor a ti y por qué?", 
-" ¿Cuál es tu peor cita?", 
-" ¿A quién quieres besar ahora?", 
-" ¿Cuál es tu oscura fantasía secreta?", 
-" ¿Prefieres tatuarte el culo o perforarte la lengua?", 
-" ¿Eres siempre leal?", 
-" ¿Tienes un enamoramiento adolescente?", 
-" ¿De qué persona te enamoraste?", 
-" ¿Con qué celebridad te gustaría salir?", 
-" ¿Cuál fue el momento más embarazoso de tu vida?", 
-" ¿Qué boca te gusta más del grupo de aquí?", 
-" ¿Qué jugador tiene la mano más hermosa?", 
-" ¿Dónde fue tu primer beso?", 
-" ¿A quién del grupo te gustaría besar más?", 
-" ¿Quién en la mesa es quizás el más divertido?", 
-" ¿Cuál es el mayor error de tu vida?", 
-" ¿Te pasó algo vergonzoso en una cita?", 
-" ¿Ha estado alguna vez en contacto con drogas?", 
-" ¿A qué persona quieres besar ahora?", 
-" ¿Cuándo fue la última vez que estuvo borracho?", 
-" ¿Alguna vez has hecho trampa en un examen escolar?", 
-" ¿Has robado algo en el pasado?", 
-" ¿Roncas por la noche?", 
-" ¿Cuales tu cancion favorita?", 
-" ¿Con qué jugadores comerciará durante 1 semana y por qué?", 
-" Te mudaste a una isla desierta, ¿a quién te llevaste de aquí?", 
-" ¿A que temes más?", 
-" ¿Dónde te afeitas en todas partes?", 
-"¿Tienes un apodo?", 
-" ¿Miras en el baño antes de lavarte?", 
-"¿Quién te dio la peor angustia?", 
-" Cuantas veces te has besado", 
-"¿Qué es lo más embarazoso que te ha pasado?", 
-"¿Cuántos chicos / chicas has besado?", 
-"¿De quien estas enamorado(a) ?", 
-"Que estrella te gusta", 
-"¿Empezaste algo con XY (insertar nombre)?", 
-"Alguna vez has robado algo?"] 
+const حقيقة = [
+  "هل سبق وأعجبتك حد؟ لمدة قد إيه؟",
+  "لو ممكن، في الجروب أو براه، مين اللي هتكون صاحب ليه؟ (ممكن يكون مختلف/نفس النوع)",
+  "إيه أكبر خوف عندك؟",
+  "هل سبق وأعجبتك حد وحسيت إنه معجب بيك برضو؟",
+  "إيه اسم إكس صاحبك اللي كنت معجب بيه في السر؟",
+  "هل سبق وسرقت فلوس من أمك أو أبوك؟ ليه؟",
+  "إيه اللي بيفرحك لما تكون زعلان؟",
+  "هل سبق وكنت في حب من طرف واحد؟ مع مين؟ إحساسك كان إيه؟",
+  "هل سبق وخنت حد؟",
+  "إيه أكتر حاجة بتخوفك؟",
+  "مين أكتر واحد أثر في حياتك؟",
+  "إيه أكبر إنجاز فخور بيه السنة دي؟",
+  "مين اللي ممكن يخليك مريض؟",
+  "مين اللي مرة خلّاك متحمس؟",
+  "هل سبق ومصليتش طول اليوم؟ (للمسلمين)",
+  "مين أقرب واحد لنوع شريكك المثالي هنا؟",
+  "مين بتحب تلعب معاه؟",
+  "هل سبق ورفضت حد؟ ليه؟",
+  "احكي عن موقف ألمك ولسه فاكره؟",
+  "إيه أكبر إنجازاتك السنة دي؟",
+  "إيه أسوأ عادة عندك في المدرسة؟",
+  "إيه البرنامج التلفزيوني اللي بتكرهه أكتر؟ قول السبب!",
+  "إيه أوحش لبس (برأيك) لبسته وامتى؟",
+  "إيه أسوأ إشاعة قلتها عن صاحبك؟",
+  "إيه أكتر حاجة محرجة فيك؟",
+  "إيه أول حاجة بتبص عليها لما تشوف حد من الجنس الآخر؟",
+  "إيه أول حاجة بتيجي في دماغك لما تبص في المراية؟",
+  "إيه أغبى حاجة عملتها في حياتك؟",
+  "إيه أسوأ حلم حلمت بيه؟",
+  "إيه أغرب حلم فاكره لحد دلوقتي؟",
+  "إيه أسوأ صفة فيك برأيك؟",
+  "إيه الصفة اللي نفسك تغيرها في نفسك؟",
+  "إيه الصفة اللي نفسك تغيرها في صاحبك؟",
+  "لو حبيبك قالك إن أنفك أو صوابعك وحشة، هتعمل إيه؟",
+  "بتفكر في إيه قبل ما تنام؟ زي تخيّل شريك حياتك مثلًا؟",
+  "إيه أكتر حاجة بارزة فيك؟",
+  "إيه أكتر جزء في جسم صاحبك بتحبه ونفسك يكون عندك؟",
+  "إيه أكتر جزء في جسمك بتكرهه؟",
+  "من كل حصص المدرسة، أي حصة نفسك تدخلها وأي حصة نفسك تتجنبها؟",
+  "وصف أقرب صاحب ليك!",
+  "وصف نفسك بكلمة واحدة!",
+  "إيه الأفلام والأغاني اللي خلتك تعيط؟",
+  "إيه الحاجة اللي مخبيها سر لحد دلوقتي ومحدش عرفها؟",
+  "إيه أكتر حاجة رومانسية حد من الجنس الآخر عملها أو اداهالك؟",
+  "إيه أكتر حاجة مقززة مريت بيها؟",
+  "لو اتولدت من جديد وكان لازم تكون واحد من أصحابك، هتختار مين؟",
+  "لو عندك قوة خارقة، عايز تعمل بيها إيه؟",
+  "لو الدنيا هتنتهي قريب، هتعمل إيه؟",
+  "لو طلبوا منك تعمل عملية تجميل بوجه زي حد من زمايلك، هتقلّد مين؟",
+  "هل سبق وسرقت حاجة؟",
+  "بتخاف من الموت؟ ليه؟",
+  "آخر مرة عيطت فيها كانت امتى وليه؟",
+  "إيه مهاراتك الخاصة؟",
+  "إزاي ممكن تخلّي اللي بتحبه يحبك؟",
+  "إيه أفضل صفة في أقرب صاحب ليك وهو مش عارفها؟",
+  "نفسك تتجوز واحد زي إيه يوم من الأيام؟",
+  "برأيك، إيه أجمل شغلانة لصاحبك اللي جنبك؟ وليه؟",
+  "مين اللي نفسك تبدّل معاه ليوم واحد؟ (أصحاب مقربين تعرفوهم كلكم) وليه؟",
+  "هل سبق وتمنيت في سرك علاقة حد مع حبيبته تنتهي؟ مين؟",
+  "بتفضل أصحاب بنات ولا ولاد؟ ليه؟",
+  "إيه أكتر موعد فاكره وبيفرحك؟",
+  "إيه الأسرار اللي مخبيها عن أصحابك لحد دلوقتي؟",
+  "مين هما قدوتك الحقيقية؟",
+  "مين من أصحابك بتعامل زيادة عن اللزوم؟",
+  "مين من أصحابك بتعامل إنه أقل واحد في قصة شعر؟",
+  "مين من أصحابك أكتر واحد بيطلع حلو في الصور؟",
+  "مين أفضل إكس عندك؟ وليه انفصلتوا؟",
+  "إيه اسم الممثل اللي كنت معجب بيه في السر؟",
+  "إيه اسم الأستاذ اللي كنت معجب بيه؟",
+  "إيه اسم إكس صاحبك اللي كنت معجب بيه في السر؟",
+  "إيه اسم الشخص من الجنس الآخر اللي لو كان حبيبتك هيبقى ممتع؟",
+  "إيه اسم الشخص اللي بتكرهه بس بتحس إنه معجب بيك؟",
+  "إيه اسم الشخص اللي كنت بتحبه في السر؟",
+  "مين أكتر واحد من الجنس الآخر بيفضل في دماغك؟",
+  "مين أكتر واحد مزعج من أصحابك؟ قول السبب!",
+  "مين من أصحابك بتحس إنه لازم يجدد نفسه؟",
+  "مين أقرب واحد لشريكك المثالي هنا؟",
+  "أبوك ولا أمك؟",
+  "إيه الجزء في جسمك اللي مش بتحبه؟",
+  "هل سبق وغشيت في امتحان؟",
+  "هل سبق واتبوست؟",
+  "إيه أول حاجة هتعملها لو صحيت من الجنس الآخر؟",
+  "هل سبق وخليت حد يتحمل مصيبة عملتها؟",
+  "إيه أكتر حاجة محرجة عملتها في حياتك؟",
+  "إيه أغبى سبب انفصلت بيه عن حد؟",
+  "إيه أسوأ عادة عندك؟",
+  "إيه أفضل صفة عندك؟ وإيه أسوأ صفة؟",
+  "إيه أشجع حاجة عملتها؟",
+  "آخر مرة بلّيت السرير كانت امتى؟",
+  "بتحلم بإيه أكتر وأنت نايم؟",
+  "لو هتكسب فلوس بطريقة غير قانونية، هتعملها إزاي؟",
+  "إيه الحاجات الطفولية اللي لسه بتعملها؟",
+  "لو كنت أعمى، مين هتختاره يكون كلبك المرشد؟",
+  "إيه أكتر حاجة بتعجبك؟",
+  "لو مسموحلك تستخدم 3 كلمات بس لباقي الليل، هتكون إيه؟",
+  "لو كنت ديكتاتور، إيه أول قانون هتصدره؟",
+  "لو عشت في عصر النازية، كنت هتبقى مين؟",
+  "إيه أكتر موقف محرج حصلك في المدرسة/الدراسة/السنة اللي فاتت؟",
+  "إيه أكبر غلطة في حياتك؟",
+  "إيه الحاجة اللي عمرك ما هتعملها حتى لو عشت 12 ساعة بس؟",
+  "إيه الجرائم اللي ارتكبتها؟",
+  "احكي سر من طفولتك!",
+  "إيه أكبر حاجة بتمثلك (سر)؟",
+  "نفسك تعمل إيه مع (اسم شخص)، لو بإمكانك تمسح ذاكرته بعد كده؟",
+  "إيه أسوأ حاجة عملتها لحد؟",
+  "مين بتحبه أكتر؟",
+  "هل سبق واتعلقت بحد من اللي موجودين هنا؟",
+  "لو كنت مصاص دماء، مين منا هتعضه دلوقتي؟",
+  "هل سبق وعملت حمام في مكان عام؟",
+  "إيه أغرب خيال عندك؟",
+  "إيه أفضل حاجة عشتها مع حد تاني؟",
+  "إيه أكتر حاجة بتطفّشك؟",
+  "إيه أكتر حاجة بتحبها في جسمك وإيه أوحش حاجة؟",
+  "مين نفسك تشوفه من غير هدوم؟",
+  "مين من الجروب ممكن يخليك تحبه؟",
+  "هل سبق وحلمت حلم غريب فيه حد من الجروب؟",
+  "لو هتعمل وشم في منطقة حساسة، هتكون إيه؟",
+  "إيه أهم حاجة في العلاقة: الحب ولا العلاقة الجسدية؟",
+  "بتحس إن العلاقة الجسدية ممتعة، كويسة، أحيانًا حلوة، ولا مش بتهتم؟",
+  "إيه اللي بيخليك تحب بجد؟",
+  "كام مرة في الأسبوع/الشهر بتمارس العلاقة الجسدية، وكام مرة نفسك تمارسها؟",
+  "كام شريك كنت معاهم؟",
+  "إيه أكتر جزء في الجسم بيحمسك؟",
+  "إزاي وفين ومع مين كانت أول مرة ليك؟",
+  "المداعبة قبل العلاقة مهمة قد إيه بالنسبة ليك؟",
+  "إيه اللي لازم يعمله راجل أو ست عشان يجذبك؟",
+  "هل سبق وكنت مع صاحب مقرب في علاقة؟",
+  "هل سبق وكنت مع حد من الجروب في علاقة غير شريكك؟",
+  "إيه الحيوان اللي يشبهك وليه؟",
+  "إيه أسوأ موعد خرجت فيه؟",
+  "مين نفسك تبوسه دلوقتي؟",
+  "إيه أغرب خيال سري عندك؟",
+  "بتفضل وشم على المؤخرة ولا ثقب في اللسان؟",
+  "إنت دايمًا مخلّص؟",
+  "عندك حب مراهقة؟",
+  "مين اللي اتعلقت بيه؟",
+  "مع أي نجم نفسك تخرج؟",
+  "إيه أكتر موقف محرج حصلك في حياتك؟",
+  "إيه أجمل شفايف في الجروب؟",
+  "مين في الجروب عنده أجمل إيد؟",
+  "فين كانت أول بوسة ليك؟",
+  "مين في الجروب نفسك تبوسه أكتر؟",
+  "مين في الطاولة أكتر واحد ممتع؟",
+  "إيه أكبر غلطة في حياتك؟",
+  "هل حصلك موقف محرج في موعد؟",
+  "هل سبق وجربت مخدرات؟",
+  "مين نفسك تبوسه دلوقتي؟",
+  "آخر مرة سكرت فيها كانت امتى؟",
+  "هل سبق وغشيت في امتحان المدرسة؟",
+  "هل سبق وسرقت حاجة؟",
+  "بتشخر بالليل؟",
+  "إيه أغنيتك المفضلة؟",
+  "مع مين من اللاعبين هتبدّل لمدة أسبوع وليه؟",
+  "لو هتروح جزيرة مقطوعة، هتاخد مين من هنا؟",
+  "إيه أكتر حاجة بتخوفك؟",
+  "بتحلّق فين بالظبط؟",
+  "عندك لقب؟",
+  "بتبص في الحمام قبل ما تغسله؟",
+  "مين اللي كسر قلبك أكتر؟",
+  "كام مرة بوست؟",
+  "إيه أكتر حاجة محرجة حصلتك؟",
+  "كام بنت/ولد بوست؟",
+  "معجب بحد؟ مين؟",
+  "أي نجم بتحبه؟",
+  "بدأت حاجة مع (اسم شخص)؟",
+  "هل سبق وسرقت حاجة؟"
+];
 
-const asmaulhusna = [
-    {
-        index: 1,
-        latin: "💐 *Autor:* *John Maxwell*",
-        arabic: "💐 *Frase:* _En la vida algunas veces se gana, otras veces se aprende._",
-        translation_id: "💐 *Opinión:* Hay que aprender de esos momentos desagradables, para de esta manera seguir creciendo como individuos. En otras palabras, no importa cómo caes, sino cómo te levantas.",
-        translation_en: "En otras palabras, no importa cómo caes, sino cómo te levantas."
-    },
-    {
-        index: 2,
-        latin: "💐 *Autor:* *Paulo Coelho*",
-        arabic: "💐 *Frase:* _No midas tu riqueza por el dinero que tienes, mídela por aquellas cosas que tienes y que no cambiarías por dinero._",
-        translation_id: "💐 *Opinión:* En una sociedad materialista es fácil autoevaluarse en función de las posesiones que tenemos, y este tipo de valoraciones son muy negativas para la autoestima.",
-        translation_en: "Además, lo que realmente te hará feliz en el día a día, son esas pequeñas cosas y esos momentos agradables."
-    },
-    {
-        index: 3,
-        latin: "💐 *Autor:* *Anónimo*",
-        arabic: "💐 *Frase:* _Pedir perdón es de inteligentes, perdonar es de nobles y perdonarse es de sabios._",
-        translation_id: "💐 *Opinión:* El perdón es una de las mejores terapias emocionales. Si pides perdón y si perdonas, demuestra tu grandeza como individuo. Pero más grande eres, y mejor vas a estar emocionalmente, si también te perdonas a ti mismo. Algo que parece fácil en la teoría, pero que se vuelve complicado en la práctica.",
-        translation_en: "Si te identificas con esta frase porque te cuesta perdonarte a ti mismo, el Mindfulness te puede ser de gran utilidad. También existe una filosofía hawaiana llamada Ho'oponopono que basa su efectividad en el perdón espiritual."
-    },
-    {
-        index: 4,
-        latin: "💐 *Autor:* *Anónimo*",
-        arabic: "💐 *Frase:* _Si quieres algo que nunca tuviste, debes hacer algo que nunca hiciste._",
-        translation_id: "💐 *Opinión:* Si haces siempre lo mismo, seguramente siempre tendrás las mismas consecuencias. ",
-        translation_en: "Si lo que quieres es tener nuevas experiencias, conocer a gente interesante o crecer en el trabajo, mejor que empieces a plantearte nuevas actividades y hagas cosas que habitualmente no haces."
-    },
-    {
-        index: 5,
-        latin: "💐 *Autor:* *Proverbio turco*",
-        arabic: "💐 *Frase:* _El que busca un amigo sin defectos se queda sin amigos._",
-        translation_id: "💐 *Opinión:* La intención esta frase es hacernos notar que todos tenemos defectos y cometemos muchos errores, no hay persona perfecta en este mundo. ",
-        translation_en: "Ser una persona demasiado perfeccionista provoca consecuencias negativas para uno mismo."
-    },
-    {
-        index: 6,
-        latin: "💐 *Autor:* *Proverbio escocés*",
-        arabic: "💐 *Frase:* _La sonrisa cuesta menos que la electricidad y da más luz._",
-        translation_id: "💐 *Opinión:* Esta frase es una de esas frases inspiradoras, pero también es una frase sabia. Sonreír ayuda a mantener el buen humor, embellece el rostro y despierta buenos pensamientos.  ",
-        translation_en: "No es lo mismo pedirle algo a alguien fríamente, que pedirlo con una sonrisa, pues la sonrisa no solamente produce un efecto muy positivo en nosotros mismos, también en la otra persona."
-    },
-    {
-        index: 7,
-        latin: "💐 *Autor:* *Henry Ford*",
-        arabic: "💐 *Frase:* _No encuentres la falta, encuentra el remedio._",
-        translation_id: "💐 *Opinión:* Esta frase me recuerda a una que un buen amigo siempre me decía: “ Si no formas parte de la solución, pasas a formar parte del problema.",
-        translation_en: "Ambas frases no nos quieren decir que no debemos buscar el origen del problema, pues es necesario hacerlo. Pero en lugar de quedarnos lamentando la falla de manera eterna, debemos solucionar lo antes posible lo que ha ocurrido mal. Esta es la clave para mejorar.",
-    },
-    {
-        index: 8,
-        latin: "💐 *Autor:* *William George Ward*",
-        arabic: "💐 *Frase:* _El pesimista se queja del viento; el optimista espera que cambie; el realista ajusta las velas._",
-        translation_id: "💐 *Opinión:* Tanto ser un pesimista como demasiado optimista puede traer consecuencias negativas para uno mismo.",
-        translation_en: "El pesimista todo lo va a ver mal y no existirá nada para que ese mal cambie. El optimista todo lo va a ver bien y distorsiona la realidad para que encaje con sus pensamientos. En cambio, una persona realista trata de solucionar los problemas pese a saber que es complicado en muchas ocasiones. Es decir, mantiene los pies en el suelo y actúa de manera sensata.",
-    },
-    {
-        index: 9,
-        latin: "💐 *Autor:* *Madre Teresa de Calcuta*",
-        arabic: "💐 *Frase:* _A veces sentimos que lo que hacemos es tan solo una gota en el mar, pero el mar sería mucho menos si le faltara una gota._",
-        translation_id: "💐 *Opinión:* Significa que aunque sintamos que lo que hacemos no sirve para nada, cada cosa que hacemos tiene una consecuencia.",
-        translation_en: "A veces no somos capaces de ver esa consecuencia inmediatamente, o a veces es solamente un paso más en un camino que estamos recorriendo. Se trata de ir construyendo y al final llegará la recompensa.",
-    },
-    {
-        index: 10,
-        latin: "💐 *Autor:* *Buddha*",
-        arabic: "💐 *Frase:* _La reflexión es el camino hacia la inmortalidad; la falta de reflexión, el camino hacia la muerte._",
-        translation_id: "💐 *Opinión:* Esta frase extraída de la filosofía budista hace referencia a la importancia de la reflexión en el desarrollo personal y en el aprendizaje por y para la vida.",
-        translation_en: "Todos hemos aprendido de los errores, pero cada uno vive las experiencias de manera única. Para poder retener estas experiencias, es necesario un proceso de pensamiento activo sobre lo que vivimos, para, de esta manera, cuestionarnos el sentido que tienen estas experiencias para nosotros.",
-    },
-    {
-        index: 11,
-        latin: "💐 *Autor:* *Francis Bacon*",
-        arabic: "💐 *Frase:* _La ocasión hay que crearla, no esperar a que llegue._",
-        translation_id: "💐 *Opinión:* Esta frase se refiere a que las oportunidades hay que buscarlas, no van a venir solas.",
-        translation_en: "Es decir, si queremos algo, hay que luchar por ello. Un antídoto contra la Parálisis del análisis.",
-    },
-    {
-        index: 12,
-        latin: "💐 *Autor:* *Napoleón*",
-        arabic: "💐 *Frase:* _Los sabios son los que buscan la sabiduría; los necios piensan haberla encontrado._",
-        translation_id: "💐 *Opinión:* Esta frase se refiere a que las oportunidades hay que buscarlas, no van a venir solas.",
-        translation_en: "Es decir, si queremos algo, hay que luchar por ello. Un antídoto contra la Parálisis del análisis.",
-    },
-    {
-        index: 13,
-        latin: "💐 *Autor:* *Séneca*",
-        arabic: "💐 *Frase:* _No es pobre el que tiene poco, sino el que mucho desea._",
-        translation_id: "💐 *Opinión:* Esta frase es igual a la frase “No es más rico el que más tiene, sino el que menos necesita”, y se refiere a que las personas que menos cosas materiales desean o necesitan, son las que definitivamente van a ser más felices en la vida.",
-        translation_en: "Tener mucho no significa ser más feliz, pues si uno se contenta con poco, no necesita tener mucha riqueza.",
-    },
-    {
-        index: 14,
-        latin: "💐 *Autor:* *William Shakespeare*",
-        arabic: "💐 *Frase:* _Si no recuerdas la más ligera locura en que el amor te hizo caer, no has amado._",
-        translation_id: "💐 *Opinión:* Esta frase del autor de Romeo y Julieta nos recuerda que el enamoramiento es una de las sensaciones más extraordinarias de las que puede disfrutar el ser humano.",
-        translation_en: "El amor es como una droga que te puede hacer sentir en pleno subidón y te puede hacer cometer locuras increíbles que jamás hayas pensado.",
-    },
-    {
-        index: 15,
-        latin: "💐 *Autor:* *Anónimo*",
-        arabic: "💐 *Frase:* _Cuando el sabio señala la luna, el tonto se fija en el dedo._",
-        translation_id: "💐 *Opinión:* Los necios no quieren ver más allá de lo que sus ojos pueden ver.",
-        translation_en: "En cambio, los sabios expanden su mente, son creativos y reflexionan. Mientras el sabio es un explorador, el necio es conformista.",
-    },
-    {
-        index: 16,
-        latin: "💐 *Autor:* *Ralph Waldo Emerson*",
-        arabic: "💐 *Frase:* _Un amigo es una persona con la que se puede pensar en voz alta._",
-        translation_id: "💐 *Opinión:* Un auténtico amigo es esa persona que no te va a fallar y a la que le puedes confiar tus mayores secretos.",
-        translation_en: "Esta frase define el significado de amistad y resalta la importancia de la confianza plena en alguien. Sin duda, quien tiene un amigo tiene un tesoro y debemos valorar esta conexión con otras personas.",
-    },
-    {
-        index: 17,
-        latin: "💐 *Autor:* *Buddha*",
-        arabic: "💐 *Frase:* _El dolor es inevitable pero el sufrimiento es opcional._",
-        translation_id: "💐 *Opinión:* Todos podemos vivir experiencias que nos hagan sufrir y pasarlo mal, y esto tiene un proceso para superarlo pues es parte de la vida.",
-        translation_en: "Pero nosotros tenemos la posibilidad de hacer cosas para no quedarnos estancados en el sufrimiento. Por tanto, es decisión nuestra superar las malas experiencias lo antes posible.",
-    },
-    {
-        index: 18,
-        latin: "💐 *Autor:* *David Abernathy*",
-        arabic: "💐 *Frase:* _Se puede matar al soñador, pero no al sueño._",
-        translation_id: "💐 *Opinión:* Una frase que nos explica que la carne es finita, pero no así las ideas.",
-        translation_en: "Incluso lo intagible es finito.",
-    },
-    {
-        index: 19,
-        latin: "💐 *Autor:* *Benjamin Franklin*",
-        arabic: "💐 *Frase:* _Quien tiene paciencia, obtendrá lo que desea._",
-        translation_id: "💐 *Opinión:* Uno de los primeros presidentes de los Estados Unidos nos informa sobre la gran virtud que es la paciencia.",
-        translation_en: "Dicha virtud que no todos tienen.",
-    },
-    {
-        index: 20,
-        latin: "💐 *Autor:* *Pitágoras*",
-        arabic: "💐 *Frase:* _Educad a los niños, y no será necesario castigar a los hombres._",
-        translation_id: "💐 *Opinión:* Pitágoras el griego sobre la gran trascendencia de la educación en una sociedad.",
-        translation_en: "Hacer el mal a alguien en su plena etapa de cremiento no es bueno.",
-    },
-    {
-        index: 21,
-        latin: "💐 *Autor:* *Confucio*",
-        arabic: "💐 *Frase:* _Aprender sin reflexionar es malgastar la energía._",
-        translation_id: "💐 *Opinión:* El sabio pensador chino Confucio, sobre la necesidad de llevar a cabo un estilo de aprendizaje basado en la reflexión.",
-        translation_en: "Saber no gastar el tiempo.",
-    },
-    {
-        index: 22,
-        latin: "💐 *Autor:* *Maquiavelo*",
-        arabic: "💐 *Frase:* _Las personas ofenden antes a los que aman que a los que temen._",
-        translation_id: "💐 *Opinión:* Las personas que son obstinadas pueden causarnos cierto miedo, es por eso que vamos con pies de plomo a la hora de tratar con ellas.",
-        translation_en: "Tener cuidado con ese tipo de personas.",
-    },
-    {
-        index: 23,
-        latin: "💐 *Autor:* *Francis Bacon*",
-        arabic: "💐 *Frase:* _La amistad duplica las alegrías y divide las angustias por la mitad._",
-        translation_id: "💐 *Opinión:* Una verdad innegable; la vida es menos cruda cuando la pasamos cerca de personas que nos quieren de forma genuina.",
-        translation_en: "La amistad puede ser buena dependiendo de las personas.",
-    },
-    {
-        index: 24,
-        latin: "💐 *Autor:* *Friedrich Nietzsche*",
-        arabic: "💐 *Frase:* _Solamente aquel que construye el futuro tiene derecho a juzgar el pasado._",
-        translation_id: "💐 *Opinión:* Nietzsche nos dejó muchas citas célebres, como por ejemplo esta, que nos indica la relevancia de tomar el control de nuestras vidas.",
-        translation_en: "Recuerda tomar Agua. 👀",
-    },
-    {
-        index: 25,
-        latin: "💐 *Autor:* *Johann Kaspar Lavater*",
-        arabic: "💐 *Frase:* _Si quieres ser sabio, aprende a interrogar razonablemente, a escuchar con atención, a responder serenamente y a callar cuando no tengas nada que decir._",
-        translation_id: "💐 *Opinión:* Unos consejos prácticos para alcanzar altas cotas de inteligencia y sabiduría.",
-        translation_en: "Consejos que salvan vidas.",
-    },
-    {
-        index: 26,
-        latin: "💐 *Autor:* *Jorge Luis Borges*",
-        arabic: "💐 *Frase:* _He cometido el peor pecado que uno puede cometer. No he sido feliz._",
-        translation_id: "💐 *Opinión:* Borges nos dejó esta reflexión, que demuestra que no estuvo suficientemente atento a gozar de la vida.",
-        translation_en: "Vivela, tal vez sea la ultima.",
-    },
-    {
-        index: 27,
-        latin: "💐 *Autor:* *Platón*",
-        arabic: "💐 *Frase:* _La libertad está en ser dueños de nuestra propia vida._",
-        translation_id: "💐 *Opinión:* La libertad es uno de los conceptos más ampliamente estudiados por los filósofos.",
-        translation_en: "Aquí, Platón nos explica cuál es la clave para ser libre.",
-    },
-    {
-        index: 28,
-        latin: "💐 *Autor:* *René Descartes*",
-        arabic: "💐 *Frase:* _Daría todo lo que sé, por la mitad de lo que ignoro._",
-        translation_id: "💐 *Opinión:* El francés René Descartes también era totalmente consciente de que, a pesar de ser uno de los más brillantes pensadores modernos, ignoraba mucho más de lo que conocía.",
-        translation_en: "Ignorar las cosas, no es bueno.",
-    },
-    {
-        index: 29,
-        latin: "💐 *Autor:* *Baltasar Gracián*",
-        arabic: "💐 *Frase:* _Saber y saberlo demostrar es valer dos veces._",
-        translation_id: "💐 *Opinión:* Una de las diferencias entre el conocimiento superficial y el conocimiento profundo, según Baltasar Gracián.",
-        translation_en: "Poner en práctica lo que sabes.",
-    },
-    {
-        index: 30,
-        latin: "💐 *Autor:* *Lao-tsé*",
-        arabic: "💐 *Frase:* _Saber que no se sabe, eso es humildad. Pensar que uno sabe lo que no sabe, eso es enfermedad._",
-        translation_id: "💐 *Opinión:* Lao-tsé ahonda en el asunto de la ignorancia y la percepción de sabiduría, en la línea de otros pensadores que pronunciaron frases similares.",
-        translation_en: "No ser ignorante.",
-    },
-    {
-        index: 31,
-        latin: "💐 *Autor:* *Epicteto de Frigia*",
-        arabic: "💐 *Frase:* _La persona sabia no debe abstenerse de participar en el gobierno del Estado, pues es un delito renunciar a ser útil a los necesitados y un cobardía ceder el paso a los indignos._",
-        translation_id: "💐 *Opinión:* Una reflexión de corte político; los ciudadanos sabios deben intentar participar en la gestión de la polis, para aportar su granito de arena a una administración que debe ser justa con todos.",
-        translation_en: "Recuerda tener tiempo para todo.",
-    },
-    {
-        index: 32,
-        latin: "💐 *Autor:* *Confucio*",
-        arabic: "💐 *Frase:* _La vida es muy simple, pero insistimos en hacerla complicada._",
-        translation_id: "💐 *Opinión:* El filósofo Confucio creía que la vida se rige por principios simples que debemos adoptar como normas para nuestro día a día.",
-        translation_en: "Es tan simple...",
-    },
-    {
-        index: 33,
-        latin: "💐 *Autor:* *Abraham Lincoln*",
-        arabic: "💐 *Frase:* _Al final, no son los años en nuestra vida lo que cuenta, sino la vida en nuestros años._",
-        translation_id: "💐 *Opinión:* Lincoln, sobre el criterio de calidad que según él deberíamos aplicar a la hora de valorar nuestras vidas.",
-        translation_en: "Todos omiten el hecho que cada vez se acercan la muerte con el pasar del tiempo, pero si vives plenamente habrá valido la pena",
-    },
-    {
-        index: 34,
-        latin: "💐 *Autor:* *Voltaire*",
-        arabic: "💐 *Frase:* _Cada persona es una criatura del tiempo en el que vive._",
-        translation_id: "💐 *Opinión:* Voltaire creía que no podemos considerarnos seres independizados del contexto histórico que nos toca vivir.",
-        translation_en: "Nuestras ideas y nuestro modo de vida están siempre condicionados por la fecha de nuestro nacimiento.",
-    },
-    {
-        index: 35,
-        latin: "💐 *Autor:* *Aristóteles*",
-        arabic: "💐 *Frase:* _Somos lo que hacemos repetidamente._",
-        translation_id: "💐 *Opinión:* Aristóteles se distanció del idealismo de Platón; para él importaban más los hechos y el entorno, y esto queda claro en esta frase de la vida eminentemente filosófica.",
-        translation_en: "Repetir nos hace mejor.",
-    },
-    {
-        index: 36,
-        latin: "💐 *Autor:* *Charlie Chaplin*",
-        arabic: "💐 *Frase:* _La vida es una tragedia cuando se ve en primer plano, pero en plano general pasa a ser una comedia._",
-        translation_id: "💐 *Opinión:* Chaplin, como director de cine, sabía que un mismo hecho, o incluso la vida de una persona, cambia dependiendo del modo en el que se presente.",
-        translation_en: "Malos y buenos momentos.",
-    },
-    {
-        index: 37,
-        latin: "💐 *Autor:* *Albert Camus*",
-        arabic: "💐 *Frase:* _El hombre es la única criatura que se niega a ser quien es._",
-        translation_id: "💐 *Opinión:* Albert Camus, en una de sus frases filosóficas acerca de la lucha que el ser humano mantiene con la creación de un sentido para su existencia.",
-        translation_en: "Aprende aceptar lo que eres.",
-    },
-    {
-        index: 38,
-        latin: "💐 *Autor:* *Cassandra Clare*",
-        arabic: "💐 *Frase:* _Todo conocimiento resulta hiriente._",
-        translation_id: "💐 *Opinión:* Una frase sabia referida al modo en el que cada nueva pieza de conocimiento trastoca los cimientos de lo que creíamos que sabíamos.",
-        translation_en: "Siempre hay algo por aprender",
-    },
-    {
-        index: 39,
-        latin: "💐 *Autor:* *Pablo Picasso*",
-        arabic: "💐 *Frase:* _Lleva mucho tiempo llegar a ser joven._",
-        translation_id: "💐 *Opinión:* El reputado pintor invierte el orden temporal en el que se ubica la juventud para dar a entender que es, más que una fase biológica, algo aprendido.",
-        translation_en: "Recuerda ser buena persona 😸",
-    },
-    {
-        index: 40,
-        latin: "💐 *Autor:* *Hannah Arendt*",
-        arabic: "💐 *Frase:* _El tiempo es aquello que más queremos y también lo que peor utilizamos._",
-        translation_id: "💐 *Opinión:* La filósofa Hannah Arendt, sobre el riesgo que conlleva la simple actividad de pensar.",
-        translation_en: "Pensar nos hace mas autosuficientes.",
-    },
-    {
-        index: 41,
-        latin: "💐 *Autor:* *William Penn*",
-        arabic: "💐 *Frase:* _No hay pensamientos peligrosos; pensar es, en sí mismo, algo peligroso._",
-        translation_id: "💐 *Opinión:* Una paradoja planteada por el filósofo inglés William Penn. Para ser conscientes de que la vida está para saberla aprovechar al máximo.",
-        translation_en: "Si fuera posible cambiarlo, es probable el resultado de la paradoja del abuelo.",
-    },
-    {
-        index: 42,
-        latin: "💐 *Autor:* *David Ben-Gurión*",
-        arabic: "💐 *Frase:* _Alguien que no cree en los milagros no es realista._",
-        translation_id: "💐 *Opinión:* Acerca de las anomalías y hechos inexplicables contenidos en la realidad.",
-        translation_en: "Si nunca has estado enfrente de una anomalía, tal vez pienses que no existe.",
-    },
-    {
-        index: 43,
-        latin: "💐 *Autor:* *Francis Bacon*",
-        arabic: "💐 *Frase:* _La esperanza es un buen desayuno, pero una mala cena._",
-        translation_id: "💐 *Opinión:* La esperanza como algo que tiene doble filo. ",
-        translation_en: "Resulta positiva cuando todo un mundo de posibilidades se abre ante nosotros, pero no tanto cuando es el último recurso.",
-    },
-    {
-        index: 44,
-        latin: "💐 *Autor:* *Allan Bloom*",
-        arabic: "💐 *Frase:* _La educación es el movimiento de la oscuridad a la luz._",
-        translation_id: "💐 *Opinión:* Una imagen potente para explica lo que es la educación.",
-        translation_en: "Imagen que dependiendo de como lo imaginas puede tener la verdad sobre ti",
-    },
-    {
-        index: 45,
-        latin: "💐 *Autor:* *Erich Fromm*",
-        arabic: "💐 *Frase:* _La creatividad requiere que la valentía se desprenda de las certezas._",
-        translation_id: "💐 *Opinión:* El padre del psicoanálisis humanista, sobre la relación entre la valentía y la incertidumbre.",
-        translation_en: "Ser valiente te hace creativo/a",
-    },
-    {
-        index: 46,
-        latin: "💐 *Autor:* *Edmund Burke*",
-        arabic: "💐 *Frase:* _Aquellos que no conocen la historia están condenados a repetirla._",
-        translation_id: "💐 *Opinión:* El filósofo conservador Edmund Burke, sobre la necesidad de conocer el pasado.",
-        translation_en: "Conoce el Pasado, te ahorra tiempo a un Futuro.",
-    },
-    {
-        index: 47,
-        latin: "💐 *Autor:* *Cicerón*",
-        arabic: "💐 *Frase:* _Nada es tan increíble como para que la oratoria no lo pueda transformar en aceptable._",
-        translation_id: "💐 *Opinión:* Cicerón habla sobre el poder de los discursos bien diseñados.",
-        translation_en: "Un discurso puede convencer a muchos.",
-    },
-    {
-        index: 48,
-        latin: "💐 *Autor:* *Dante*",
-        arabic: "💐 *Frase:* _De una pequeña chispa puede prender una llama._",
-        translation_id: "💐 *Opinión:* Una frase sabia en la que se entrevé, mediante una imagen poética.",
-        translation_en: "Modos insospechados en los que pueden aparecer fenómenos muy importantes y significativos.",
-    },
-    {
-        index: 49,
-        latin: "💐 *Autor:* *Dante*",
-        arabic: "💐 *Frase:* _El liderazgo no depende de estar en lo cierto._",
-        translation_id: "💐 *Opinión:* Uno de los pensadores sobre la educación más importantes habla aquí sobre el modo en el que tenemos que interpretar la legitimidad del liderazgo.",
-        translation_en: "Recuerda, si dices saberlo todo, eres un ignorante.",
-    },
-    {
-        index: 50,
-        latin: "💐 *Autor:* *B. F. Skinner*",
-        arabic: "💐 *Frase:* _El entorno da forma a las acciones del individuo._",
-        translation_id: "💐 *Opinión:* El referente más importante de la psicología conductista habla sobre lo relativo de esa línea que separa individuo y entorno.",
-        translation_en: "El entorno determina tus acciones.",
-    },
-    {
-        index: 51,
-        latin: "💐 *Autor:* *Stanislaw Jerzy Lec*",
-        arabic: "💐 *Frase:* _La juventud es un reglo de la naturaleza, pero la edad es una obra de arte._",
-        translation_id: "💐 *Opinión:* Un modo optimista de valorar la edad y el paso hacia la vejez.",
-        translation_en: "La edad no determina tu forma de ver el mundo.",
-    },
-    {
-        index: 52,
-        latin: "💐 *Autor:* *Stanislaw Jerzy Lec*",
-        arabic: "💐 *Frase:* _Nadie puede herirme sin mi permiso._",
-        translation_id: "💐 *Opinión:* El influyente líder pacifista se refiere en esta frase sabia al poder de la propia voluntad.",
-        translation_en: "Tener el agrado hacia lo que haces permitira que tu voluntad no se obstruya.",
-    },
-    {
-        index: 53,
-        latin: "💐 *Autor:* *David Carradine*",
-        arabic: "💐 *Frase:* _Si no puedes ser poeta, sé el poema._",
-        translation_id: "💐 *Opinión:* Una perspectiva diferente para ver el modo en el que nuestra vida puede tener carácter artístico.",
-        translation_en: "Aprender a tener varias habilidades.",
-    },
-    {
-        index: 54,
-        latin: "💐 *Autor:* *Eurípides*",
-        arabic: "💐 *Frase:* _Nada tiene más fuerza que la extrema necesidad._",
-        translation_id: "💐 *Opinión:* El poeta griego Eurípides habla sobre cómo, en última instancia , el poder de nuestros actos nace cuando nuestra libertad y situación para tomar decisiones se ven reducidas.",
-        translation_en: "La necesidad puede ser un peligro.",
-    },
-    {
-        index: 55,
-        latin: "💐 *Autor:* *San Agustín*",
-        arabic: "💐 *Frase:* _La soberbia no es grandeza sino hinchazón; y lo que está hinchado parece grande pero no está sano._",
-        translation_id: "💐 *Opinión:* Uno de los problemas de la soberbia es que, tras la apariencia, esconde a alguien herido e inseguro.",
-        translation_en: "La inseguridad hace que te veas menos.",
-    },
-    {
-        index: 56,
-        latin: "💐 *Autor:* *William Shakespeare*",
-        arabic: "💐 *Frase:* _Es mejor ser rey de tu silencio que esclavo de tus palabras._",
-        translation_id: "💐 *Opinión:* Nunca digas cosas de las que te puedas arrepentir en el futuro.",
-        translation_en: "Cuando sucede eso, estas pensando de manera irracional.",
-    },
-    {
-        index: 57,
-        latin: "💐 *Autor:* *William Shakespeare*",
-        arabic: "💐 *Frase:* _La belleza es poder; una sonrisa es su espada._",
-        translation_id: "💐 *Opinión:* Una reflexión sobre la belleza y sus principales atributos.",
-        translation_en: "Atributos que pueden ser arma de doble filo.",
-    },
-    {
-        index: 58,
-        latin: "💐 *Autor:* *Ogden Nash*",
-        arabic: "💐 *Frase:* _La edad adulta es cuando te has encontrado con tanta gente que cada nueva persona te recuerda a otra._",
-        translation_id: "💐 *Opinión:* Entonces, nada te sorprende.",
-        translation_en: "La sabiduría de la edad adulta comporta unos ciertos problemas, como este que retrata Ogden Nash.",
-    },
-    {
-        index: 59,
-        latin: "💐 *Autor:* *Severo Ochoa*",
-        arabic: "💐 *Frase:* _En principio, la investigación necesita más cabezas que medios._",
-        translation_id: "💐 *Opinión:* Una frase de la vida y la ciencia que nos muestra la importancia del talento humano.",
-        translation_en: "Talento humano, todos tienen almenos uno.",
-    },
-    {
-        index: 60,
-        latin: "💐 *Autor:* *Maquiavelo*",
-        arabic: "💐 *Frase:* _El que es elegido príncipe con el favor popular debe conservar al pueblo como amigo._",
-        translation_id: "💐 *Opinión:* Una reflexión de corte político según el mítico historiador italiano.",
-        translation_en: "Una frase un tanto medieval.",
-    },
-    {
-        index: 61,
-        latin: "💐 *Autor:* *Camilo José Cela*",
-        arabic: "💐 *Frase:* _La Historia nos enseña dos cosas: que jamás los poderosos coincidieron con los mejores, y que jamás la política fue tejida por los políticos._",
-        translation_id: "💐 *Opinión:* Sobre la política y la hegemonía, del gran escritor Camilo José Cela.",
-        translation_en: "Poderosos que tal vez esten solos.",
-    },
-    {
-        index: 62,
-        latin: "💐 *Autor:* *José Ortega y Gasset*",
-        arabic: "💐 *Frase:* _Con la moral corregimos los errores de nuestros instintos, y con el amor los errores de nuestra moral._",
-        translation_id: "💐 *Opinión:* El ensayista español realiza una disquisición que cada uno debe interpretar.",
-        translation_en: "Aprender a equivocarse. Irónico.",
-    },
-    {
-        index: 63,
-        latin: "💐 *Autor:* *Novalis*",
-        arabic: "💐 *Frase:* _Cuando veas un gigante, examina antes la posición del sol; no vaya a ser la sombra de un pigmeo._",
-        translation_id: "💐 *Opinión:* El engañarse ante su entorno.",
-        translation_en: "Nuestra percepción puede engañarnos, por tanto tómate tu tiempo para reflexionar sobre las pequeñas cosas de la vida.",
-    },
-    {
-        index: 64,
-        latin: "💐 *Autor:* *Platón*",
-        arabic: "💐 *Frase:* _La pobreza no viene por la disminución de las riquezas, sino por la multiplicación de los deseos._",
-        translation_id: "💐 *Opinión:* Una reflexión del filósofo griego en que resalta el vicio de la avaricia.",
-        translation_en: "Avaricia abunda en las personas sin caminos.",
-    },
-    {
-        index: 65,
-        latin: "💐 *Autor:* *Ovidio*",
-        arabic: "💐 *Frase:* _No os entreguéis por demasiado a la ira; una ira prolongada engendra odio._",
-        translation_id: "💐 *Opinión:* La rabia puede traernos consecuencias nefastas en nuestra vida.",
-        translation_en: "No darle importancia al odio.",
-    },
-    {
-        index: 66,
-        latin: "💐 *Autor:* *Kant*",
-        arabic: "💐 *Frase:* _La educación es el desarrollo sobre la persona de toda la perfección de que su naturaleza es capaz._",
-        translation_id: "💐 *Opinión:* Para concluir la selección de frases, esta reflexión del filósofo alemán para evidenciar la importancia de la educación.",
-        translation_en: "La educación lo es todo.",
-    },
-    {
-        index: 67,
-        latin: "💐 *Autor:* *Arturo Pérez-Reverte*",
-        arabic: "💐 *Frase:* _El problema de las palabras es que, una vez echadas, no pueden volverse solas a su dueño. De modo que a veces te las vuelven en la punta de un acero._",
-        translation_id: "💐 *Opinión:* El literato español, sobre la crueldad de lo dicho.",
-        translation_en: "Recuerda decir bien las cosas, sin arrepentimientos.",
-    },
-    {
-        index: 68,
-        latin: "💐 *Autor:* *Winston Churchill*",
-        arabic: "💐 *Frase:* _El esfuerzo constante – no la fuerza o la inteligencia – es la clave para liberar nuestro potencial._",
-        translation_id: "💐 *Opinión:* Mítica reflexión sobre la constancia y la perseverancia.",
-        translation_en: "Todo esfuerzo tiene su recompensa.",
-    },
-    {
-        index: 69,
-        latin: "💐 *Autor:* *Ernesto Sábato*",
-        arabic: "💐 *Frase:* _Ser original es en cierto modo estar poniendo de manifiesto la mediocridad de los demás._",
-        translation_id: "💐 *Opinión:* Una de esas frases sabias no aptas para mentes cerradas.",
-        translation_en: "Hay que saber ser Original en base a ideas que existen con un estilo propio.",
-    },
-    {
-        index: 70,
-        latin: "💐 *Autor:* *Mark Twain*",
-        arabic: "💐 *Frase:* _No hay nada tan grotesco o increíble que el ser humano medio no pueda creer._",
-        translation_id: "💐 *Opinión:* La imaginación no tiene límites, para bien o para mal.",
-        translation_en: "Recuerda imaginar paera bien.",
-    },
-    {
-        index: 71,
-        latin: "💐 *Autor:* *Napoleón*",
-        arabic: "💐 *Frase:* _Nunca interrumpas a tu enemigo cuanto está cometiendo una equivocación._",
-        translation_id: "💐 *Opinión:* Un consejo táctico de este famoso militar.",
-        translation_en: "Recuerda siempre tener ventajas.",
-    },
-    {
-        index: 72,
-        latin: "💐 *Autor:* *Lao-Tsé*",
-        arabic: "💐 *Frase:* _Conocer a los demás es sabiduría; conocerse a uno mismo es iluminación._",
-        translation_id: "💐 *Opinión:* El auto-conocimiento como aspecto fundamental de la vida.",
-        translation_en: "Hay que tener iniciativa para aprender en el camino por cuenta propia.",
-    },
-    {
-        index: 73,
-        latin: "💐 *Autor:* *Charles Bukowski*",
-        arabic: "💐 *Frase:* _Estamos aquí para vivir nuestras vidas tan bien que la Muerte tiemble al arrebatárnoslas._",
-        translation_id: "💐 *Opinión:* Una credencia del vitalismo.",
-        translation_en: "Vive como si fuera el último día.",
-    },
-    {
-        index: 74,
-        latin: "💐 *Autor:* *B.F. Skinner*",
-        arabic: "💐 *Frase:* _No deberíamos instruir en la lectura de libros, sino enseñar a amar los libros._",
-        translation_id: "💐 *Opinión:* Un aprendizaje de tipo emocional.",
-        translation_en: "Un mundo de letras...",
-    },
-    {
-        index: 75,
-        latin: "💐 *Autor:* *Martin Luther King*",
-        arabic: "💐 *Frase:* _Tu verdad aumentará en la medida que sepas escuchar la verdad de los otros._",
-        translation_id: "💐 *Opinión:* La sabiduría no está compuesta de descubrimientos realizados individualmente.",
-        translation_en: "Sino que incluye lo que aprendemos de los demás.",
-    },
-    {
-        index: 76,
-        latin: "💐 *Autor:* *Mario Benedetti*",
-        arabic: "💐 *Frase:* _No te rindas, porque cada día es un comienzo nuevo, porque esta es la hora y el mejor momento._",
-        translation_id: "💐 *Opinión:* Una manera de ver el ahora que además nos sirve como fuente de motivación.",
-        translation_en: "La paz se puede si todos están de acuerdo.",
-    },
-    {
-        index: 77,
-        latin: "💐 *Autor:* *Erasmo de Rotterdam*",
-        arabic: "💐 *Frase:* _La paz más desventajosa es mejor que la guerra más justa._",
-        translation_id: "💐 *Opinión:* Una apreciación moral acerca del valor de la paz.",
-        translation_en: "En la guerra nadie gana, solo hay dolor.",
-    },
-    {
-        index: 78,
-        latin: "💐 *Autor:* *Baruch Spinoza*",
-        arabic: "💐 *Frase:* _Si no quieres repetir el pasado, estúdialo._",
-        translation_id: "💐 *Opinión:* La memoria nos permite aprender de nuestros errores, y eso es algo que hay que aprovechar.",
-        translation_en: "Es la mejor manera de no volver a caer.",
-    },
-    {
-        index: 79,
-        latin: "💐 *Autor:* *Anselmo de Canterbury*",
-        arabic: "💐 *Frase:* _Los desastres nos enseñan humildad._",
-        translation_id: "💐 *Opinión:* Incluso las crisis tienen algo bueno, pues nos recuerdan nuestro escaso poder frente al mundo.",
-        translation_en: "El ser humano no puede con todo.",
-    },
-    {
-        index: 80,
-        latin: "💐 *Autor:* *Nelson Mandela*",
-        arabic: "💐 *Frase:* _No hay nada como volver a un lugar que permanece sin cambiar para encontrar las formas en las que tú mismo has cambiado._",
-        translation_id: "💐 *Opinión:* La interacción con el entorno nos permite conocernos mejor.",
-        translation_en: "Recordar que todo sigue igual... Es un buen sentimiento.",
-    },
-    {
-        index: 81,
-        latin: "💐 *Autor:* *Epícuro*",
-        arabic: "💐 *Frase:* _Cuanto más grande es la dificultad, más gloria hay en superarla._",
-        translation_id: "💐 *Opinión:* El filósofo griego, fundador epicureísmo, nos deja esta gran frase motivadora para la historia.",
-        translation_en: "Saberse superar....",
-    },
-    {
-        index: 82,
-        latin: "💐 *Autor:* *Friedrich Hegel*",
-        arabic: "💐 *Frase:* _Ser independiente de la opinión pública es la primera condición formal para lograr algo grande._",
-        translation_id: "💐 *Opinión:* Pensar nos hace ver las cosas de una manera alterna.",
-        translation_en: "Una frase que habla del pensamiento propio.",
-    },
-    {
-        index: 83,
-        latin: "💐 *Autor:* *Leibniz*",
-        arabic: "💐 *Frase:* _Vivimos en el mejor de los posibles mundos._",
-        translation_id: "💐 *Opinión:* Al menos éste es el único que conocemos.",
-        translation_en: "Con sus cosas buenas y sus cosas malas.",
-    },
-    {
-        index: 84,
-        latin: "💐 *Autor:* *Benjamin Franklin*",
-        arabic: "💐 *Frase:* _El que es bueno para poner excusas rara vez es bueno para cualquier otra cosa._",
-        translation_id: "💐 *Opinión:* Los cobardes ponen excusas en vez de afrontar la realidad.",
-        translation_en: "Solo sabe evadir, y no afrontar.",
-    },
-    {
-        index: 85,
-        latin: "💐 *Autor:* *Noam Chomsky*",
-        arabic: "💐 *Frase:* _Si no creemos en la libertad de expresión de las personas que despreciamos, no creemos en ella en absoluto._",
-        translation_id: "💐 *Opinión:* Una frase que nos recuerda la importancia de la libertad de expresión.",
-        translation_en: "La libertad es buena cuando somos libre de manera educada.",
-    },
-    {
-        index: 86,
-        latin: "💐 *Autor:* *Tales*",
-        arabic: "💐 *Frase:* _La cosa más difícil en la vida es conocerte a ti mismo._",
-        translation_id: "💐 *Opinión:* El autoconocimiento es clave para tener una vida emocional sana.",
-        translation_en: "Siempre es bueno no dejar de aprender.",
-    },
-    {
-        index: 87,
-        latin: "💐 *Autor:* *Epíteto*",
-        arabic: "💐 *Frase:* _No es lo que te ocurre, sino cómo reaccionas lo que importa._",
-        translation_id: "💐 *Opinión:* Sobre la importancia de evaluar de forma positiva los hechos.",
-        translation_en: "Hasta lo malo puede ser bueno.",
-    },
-    {
-        index: 88,
-        latin: "💐 *Autor:* *George Savile*",
-        arabic: "💐 *Frase:* _La persona que es una maestra en la paciencia puede con todo lo demás._",
-        translation_id: "💐 *Opinión:* Una frase del personaje célebre George Savile que hablar del poder de la paciencia.",
-        translation_en: "Si te consideras una persona paciente, vales mucho como persona.",
-    },
-    {
-        index: 89,
-        latin: "💐 *Autor:* *Mark Twain*",
-        arabic: "💐 *Frase:* _No hay una visión más triste que la de un joven pesimista._",
-        translation_id: "💐 *Opinión:* Mark Twain habla sobre el valor asociado a la juventud y el error de desperdiciar esta etapa de la vida.",
-        translation_en: "Es muy joven el mundo como para estar triste.",
-    },
-    {
-        index: 90,
-        latin: "💐 *Autor:* *Umberto Eco*",
-        arabic: "💐 *Frase:* _Nada es más nocivo para la creatividad que el furor de la inspiración._",
-        translation_id: "💐 *Opinión:* Una gran frase del siempre recordado, Umberto Eco.",
-        translation_en: "Todos tenemos una idea de la vida.",
-    },
-    {
-        index: 91,
-        latin: "💐 *Autor:* *Emerson*",
-        arabic: "💐 *Frase:* _El éxito consiste en obtener lo que se desea. La felicidad, en disfrutar lo que se obtiene._",
-        translation_id: "💐 *Opinión:* Una frase que deberíamos tener siempre en nuestra cabeza.",
-        translation_en: "Disfrutar del esfuerzo...",
-    },
-    {
-        index: 92,
-        latin: "💐 *Autor:* *Henry David Thoreau*",
-        arabic: "💐 *Frase:* _Casi todas las personas viven la vida en una silenciosa desesperación._",
-        translation_id: "💐 *Opinión:* Una frase que pretende explicar la complejidad de la vida y los malos momentos que uno puede experimentar.",
-        translation_en: "Experimentar la vida y ver como nos sorprende.",
-    },
-    {
-        index: 93,
-        latin: "💐 *Autor:* *D. Pire*",
-        arabic: "💐 *Frase:* _Andaríamos mejor si no fuera porque hemos construido demasiados muros y no suficientes puentes._",
-        translation_id: "💐 *Opinión:* Una frase sobre lo peor del ser humano. Los muros nunca han sido buenos.",
-        translation_en: "Divider el mundo solo hace ser menos fuerte todo.",
-    },
-    {
-        index: 94,
-        latin: "💐 *Autor:* *Jairo Fowbier Pabón*",
-        arabic: "💐 *Frase:* _La experiencia no es cuanto se vive sino todo el bien que se aprende._",
-        translation_id: "💐 *Opinión:* La experiencia nos sirve para aprender.",
-        translation_en: "Aprender es saber asumir que no lo sabes todo.",
-    },
-    {
-        index: 95,
-        latin: "💐 *Autor:* *Chamfort*",
-        arabic: "💐 *Frase:* _La falsa modestia es la más decente de todas las mentiras._",
-        translation_id: "💐 *Opinión:* Hace referencia a la falsa modestia. Pues, dentro de las mentiras, es la menos mala.",
-        translation_en: "Hay que ser directo(a) en todo.",
-    },
-    {
-        index: 96,
-        latin: "💐 *Autor:* *C.G. Jung*",
-        arabic: "💐 *Frase:* _Tú eres aquello que haces, no aquello que dices que harás._",
-        translation_id: "💐 *Opinión:* Tus acciones determinan aquello que eres, no tus palabras.",
-        translation_en: "Si vas a decirlo demuestra que lo puedes cumplir.",
-    },
-    {
-        index: 97,
-        latin: "💐 *Charles Dickens*",
-        arabic: "💐 *Frase:* _El corazón humano es un instrumento de muchas cuerdas; el perfecto conocedor de personas, las sabe hacer vibrar todas, como un buen músico._",
-        translation_id: "💐 *Opinión:* La persona que se conoce es una persona poderosa.",
-        translation_en: "Siempre hay algo nuevo por conocer.",
-    },
-    {
-        index: 98,
-        latin: "💐 *Solomon Asch*",
-        arabic: "💐 *Frase:* _La mayoría de actos sociales deben ser entendidos en su contexto, ya que pierden significado si son aislados._",
-        translation_id: "💐 *Opinión:* Las personas somos seres biopsicosociales.",
-        translation_en: "Es decir, el contexto es importante en influye en cómo actuamos.",
-    },
-    {
-        index: 99,
-        latin: "💐 *Erich Fromm*",
-        arabic: "💐 *Frase:* _Si una persona ama solo a una persona y es indiferente ante todos los demás, su amor no es amor, sino apego simbiótico o egoísmo ampliada._",
-        translation_id: "💐 *Opinión:* Cuando estamos enamorados de alguien, daríamos la vida por esa persona.",
-        translation_en: "Podemos engañarnos y creer que somos buenas personas, pero hasta los más egoístas pueden perder la cabeza por alguien y parecer personas entregadas.",
-    }
-]
+const اقتباسات = [
+  {
+    index: 1,
+    author: "💐 *المؤلف:* جون ماكسويل",
+    arabic: "💐 *الاقتباس:* في الحياة، أحيانًا نربح وأحيانًا نتعلم.",
+    opinion: "💐 *رأي:* يجب أن نتعلم من اللحظات الصعبة لنستمر في النمو كأفراد. بعبارة أخرى، لا يهم كيف تسقط، بل كيف تنهض.",
+    translation_en: "In other words, it doesn't matter how you fall, but how you get up."
+  },
+  {
+    index: 2,
+    author: "💐 *المؤلف:* باولو كويلو",
+    arabic: "💐 *الاقتباس:* لا تقيس ثروتك بالمال الذي تملكه، بل بالأشياء التي لن تبدلها بالمال.",
+    opinion: "💐 *رأي:* في مجتمع مادي، من السهل أن نقيّم أنفسنا بناءً على ممتلكاتنا، وهذا يؤثر سلبًا على احترام الذات.",
+    translation_en: "What truly makes you happy are the little things and pleasant moments."
+  },
+  {
+    index: 3,
+    author: "💐 *المؤلف:* مجهول",
+    arabic: "💐 *الاقتباس:* طلب العفو من الذكاء، والمسامحة من النبل، والتسامح مع النفس من الحكمة.",
+    opinion: "💐 *رأي:* المسامحة هي أفضل علاج عاطفي. طلب العفو والمسامحة يظهران عظمة الفرد، لكن التسامح مع النفس يعزز السلام الداخلي.",
+    translation_en: "If you identify with this phrase because forgiving yourself is hard, Mindfulness or Ho'oponopono can be very helpful."
+  },
+  {
+    index: 4,
+    author: "💐 *المؤلف:* مجهول",
+    arabic: "💐 *الاقتباس:* إذا أردت شيئًا لم تملكه من قبل، افعل شيئًا لم تفعله من قبل.",
+    opinion: "💐 *رأي:* تكرار نفس الأفعال يؤدي لنفس النتائج. جرب أنشطة جديدة لتجارب مختلفة.",
+    translation_en: "If you want new experiences, start doing things you don't usually do."
+  },
+  {
+    index: 5,
+    author: "💐 *المؤلف:* مثل تركي",
+    arabic: "💐 *الاقتباس:* من يبحث عن صديق بلا عيوب، يبقى بلا أصدقاء.",
+    opinion: "💐 *رأي:* هذا المثل يُذكّرنا بأن الكمال غير موجود، والسعي وراءه يؤدي إلى خسارة العلاقات.",
+    translation_en: "Being overly perfectionist has negative consequences."
+  },
+  {
+    index: 6,
+    author: "💐 *المؤلف:* مثل اسكتلندي",
+    arabic: "💐 *الاقتباس:* الابتسامة تكلف أقل من الكهرباء وتعطي نورًا أكثر.",
+    opinion: "💐 *رأي:* الابتسامة تحسّن المزاج، تجمّل الوجه، وتؤثر إيجابيًا على الآخرين.",
+    translation_en: "Smiling not only benefits you but also those around you."
+  },
+  {
+    index: 7,
+    author: "💐 *المؤلف:* هنري فورد",
+    arabic: "💐 *الاقتباس:* لا تبحث عن العيب، بل ابحث عن الحل.",
+    opinion: "💐 *رأي:* بدلًا من التركيز على المشكلة، ركّز على حلها لتحسين الأمور.",
+    translation_en: "The key to improvement is to focus on solutions, not complaints."
+  },
+  {
+    index: 8,
+    author: "💐 *المؤلف:* ويليام جورج وارد",
+    arabic: "💐 *الاقتباس:* المتشائم يشتكي من الريح، المتفائل ينتظر تغييرها، والواقعي يعدّل الأشرعة.",
+    opinion: "💐 *رأي:* الواقعية تعني مواجهة التحديات بحلول عملية بدلًا من الشكوى أو الأمل العمياء.",
+    translation_en: "A realist acts sensibly, keeping their feet on the ground."
+  },
+  {
+    index: 9,
+    author: "💐 *المؤلف:* الأم تيريزا",
+    arabic: "💐 *الاقتباس:* أحيانًا نشعر أن ما نفعله قطرة في بحر، لكن البحر سيكون أقل بدون تلك القطرة.",
+    opinion: "💐 *رأي:* كل فعل صغير له تأثير، حتى لو لم نره على الفور.",
+    translation_en: "Every step forward counts, even if the reward comes later."
+  },
+  {
+    index: 10,
+    author: "💐 *المؤلف:* بوذا",
+    arabic: "💐 *الاقتباس:* التفكير هو الطريق إلى الخلود، وقلة التفكير هي الطريق إلى الموت.",
+    opinion: "💐 *رأي:* التفكير الواعي يساعدنا على فهم تجاربنا وتعزيز نمونا الشخصي.",
+    translation_en: "Active reflection helps us learn from our experiences."
+  },
+  {
+    index: 11,
+    author: "💐 *المؤلف:* فرانسيس بيكون",
+    arabic: "💐 *الاقتباس:* الفرصة يجب أن نصنعها، لا أن ننتظرها.",
+    opinion: "💐 *رأي:* الفرص لا تأتي من تلقاء نفسها، بل تتطلب جهدًا ومبادرة.",
+    translation_en: "You must fight for what you want, as opportunities don't come on their own."
+  },
+  {
+    index: 12,
+    author: "💐 *المؤلف:* نابليون",
+    arabic: "💐 *الاقتباس:* الحكماء يبحثون عن الحكمة، والأغبياء يظنون أنهم وجدوها.",
+    opinion: "💐 *رأي:* الحكمة تكمن في السعي المستمر للمعرفة، لا في الاعتقاد بالكمال.",
+    translation_en: "True wisdom lies in the continuous pursuit of knowledge."
+  },
+  {
+    index: 13,
+    author: "💐 *المؤلف:* سينيكا",
+    arabic: "💐 *الاقتباس:* الفقير ليس من يملك القليل، بل من يطمع بالكثير.",
+    opinion: "💐 *رأي:* السعادة تأتي من القناعة، لا من تراكم الممتلكات.",
+    translation_en: "Happiness comes from contentment, not from accumulating wealth."
+  },
+  {
+    index: 14,
+    author: "💐 *المؤلف:* ويليام شكسبير",
+    arabic: "💐 *الاقتباس:* إذا لم تتذكر أصغر حماقة ارتكبتها باسم الحب، فأنت لم تحب.",
+    opinion: "💐 *رأي:* الحب يدفعنا لارتكاب أفعال مجنونة، وهذا جزء من سحره.",
+    translation_en: "Love is like a drug that can lead to incredible acts of madness."
+  },
+  {
+    index: 15,
+    author: "💐 *المؤلف:* مجهول",
+    arabic: "💐 *الاقتباس:* عندما يشير الحكيم إلى القمر، ينظر الأحمق إلى الإصبع.",
+    opinion: "💐 *رأي:* الحكيم يرى ما وراء الظواهر، بينما الأحمق يتوقف عند السطح.",
+    translation_en: "The wise explore beyond appearances, while the foolish are conformists."
+  },
+  {
+    index: 16,
+    author: "💐 *المؤلف:* رالف والدو إيمرسون",
+    arabic: "💐 *الاقتباس:* الصديق هو من تستطيع التفكير بصوت عالٍ أمامه.",
+    opinion: "💐 *رأي:* الصديق الحقيقي هو من تثق به بأسرارك وتشعر معه بالراحة.",
+    translation_en: "A true friend is a treasure worth valuing."
+  },
+  {
+    index: 17,
+    author: "💐 *المؤلف:* بوذا",
+    arabic: "💐 *الاقتباس:* الألم لا مفر منه، لكن المعاناة اختيارية.",
+    opinion: "💐 *رأي:* يمكننا تجاوز المعاناة بالعمل على تحسين حالتنا النفسية.",
+    translation_en: "We can choose to overcome suffering by acting proactively."
+  },
+  {
+    index: 18,
+    author: "💐 *المؤلف:* ديفيد أبرناثي",
+    arabic: "💐 *الاقتباس:* يمكنك قتل الحالم، لكن لا يمكنك قتل الحلم.",
+    opinion: "💐 *رأي:* الأفكار والأحلام تظل خالدة حتى بعد زوال صاحبها.",
+    translation_en: "Ideas are eternal, even death cannot erase them."
+  },
+  {
+    index: 19,
+    author: "💐 *المؤلف:* بنجامين فرانكلين",
+    arabic: "💐 *الاقتباس:* من يملك الصبر، يحقق ما يريد.",
+    opinion: "💐 *رأي:* الصبر فضيلة نادرة تؤدي إلى تحقيق الأهداف الكبيرة.",
+    translation_en: "Patience is a rare virtue that leads to great achievements."
+  },
+  {
+    index: 20,
+    author: "💐 *المؤلف:* فيثاغورس",
+    arabic: "💐 *الاقتباس:* علّموا الأطفال، ولن تضطروا لمعاقبة الكبار.",
+    opinion: "💐 *رأي:* التعليم الجيد في الصغر يمنع المشاكل في المستقبل.",
+    translation_en: "Good education prevents future problems."
+  },
+  {
+    index: 21,
+    author: "💐 *المؤلف:* كونفوشيوس",
+    arabic: "💐 *الاقتباس:* التعلم بدون تفكير مضيعة للطاقة.",
+    opinion: "💐 *رأي:* التفكير النقدي ضروري لجعل التعلم مثمرًا.",
+    translation_en: "Learning without reflection is a waste of energy."
+  },
+  {
+    index: 22,
+    author: "💐 *المؤلف:* ميكيافيلي",
+    arabic: "💐 *الاقتباس:* الناس يؤذون من يحبونهم قبل من يخافونهم.",
+    opinion: "💐 *رأي:* نحن أكثر جرأة في إيذاء من نثق بهم بسبب الأمان.",
+    translation_en: "We hurt those we love because we feel safe with them."
+  },
+  {
+    index: 23,
+    author: "💐 *المؤلف:* فرانسيس بيكون",
+    arabic: "💐 *الاقتباس:* الصداقة تضاعف الفرح وتقسم الحزن نصفين.",
+    opinion: "💐 *رأي:* الأصدقاء الحقيقيون يجعلون الحياة أجمل وأخف وطأة.",
+    translation_en: "True friends make life more beautiful and less painful."
+  },
+  {
+    index: 24,
+    author: "💐 *المؤلف:* فريدريك نيتشه",
+    arabic: "💐 *الاقتباس:* من يصنع المستقبل وحده له الحق في الحكم على الماضي.",
+    opinion: "💐 *رأي:* السيطرة على مصيرك تعطيك الحق في تقييم الماضي.",
+    translation_en: "Take control of your future to judge your past."
+  },
+  {
+    index: 25,
+    author: "💐 *المؤلف:* يوهان كاسبار لافاتر",
+    arabic: "💐 *الاقتباس:* إذا أردت أن تكون حكيمًا، تعلم كيف تسأل بعقلانية، وتستمع بتأنٍ، وترد بهدوء، وتصمت عندما لا تملك ما تقول.",
+    opinion: "💐 *رأي:* هذه نصيحة عملية للوصول إلى الحكمة والذكاء.",
+    translation_en: "Practical advice for achieving wisdom and intelligence."
+  },
+  {
+    index: 26,
+    author: "💐 *المؤلف:* خورخي لويس بورخيس",
+    arabic: "💐 *الاقتباس:* ارتكبت أكبر خطيئة ممكنة، لم أكن سعيدًا.",
+    opinion: "💐 *رأي:* السعادة تتطلب الانتباه للحظات الحياة والاستمتاع بها.",
+    translation_en: "Live fully, as it may be your last chance."
+  },
+  {
+    index: 27,
+    author: "💐 *المؤلف:* أفلاطون",
+    arabic: "💐 *الاقتباس:* الحرية هي أن نكون أسياد حياتنا.",
+    opinion: "💐 *رأي:* الحرية الحقيقية تكمن في التحكم بمصيرك الخاص.",
+    translation_en: "True freedom lies in mastering your own destiny."
+  },
+  {
+    index: 28,
+    author: "💐 *المؤلف:* رينيه ديكارت",
+    arabic: "💐 *الاقتباس:* سأعطي كل ما أعرف مقابل نصف ما أجهل.",
+    opinion: "💐 *رأي:* حتى العباقرة يدركون أن الجهل أوسع من المعرفة.",
+    translation_en: "Ignorance is vast, even for the greatest minds."
+  },
+  {
+    index: 29,
+    author: "💐 *المؤلف:* بلتزار غراسيان",
+    arabic: "💐 *الاقتباس:* المعرفة وإظهارها يعادلان قيمتين.",
+    opinion: "💐 *رأي:* المعرفة الحقيقية تظهر في التطبيق العملي.",
+    translation_en: "True knowledge shines through practical application."
+  },
+  {
+    index: 30,
+    author: "💐 *المؤلف:* لاو تسي",
+    arabic: "💐 *الاقتباس:* معرفة أنك لا تعرف هي التواضع، والظن أنك تعرف ما لا تعرف هو المرض.",
+    opinion: "💐 *رأي:* التواضع يكمن في إدراك حدود معرفتك.",
+    translation_en: "Humility is knowing your limits; arrogance is pretending otherwise."
+  },
+  {
+    index: 31,
+    author: "💐 *المؤلف:* إبيكتيتوس",
+    arabic: "💐 *الاقتباس:* الحكيم لا يتخلى عن إدارة الدولة، فالتخلي عن خدمة المحتاجين جريمة، والتنازل للغير المستحق جبن.",
+    opinion: "💐 *رأي:* المشاركة في إدارة المجتمع واجب الحكماء.",
+    translation_en: "Wise citizens must contribute to just governance."
+  },
+  {
+    index: 32,
+    author: "💐 *المؤلف:* كونفوشيوس",
+    arabic: "💐 *الاقتباس:* الحياة بسيطة جدًا، لكننا نصر على تعقيدها.",
+    opinion: "💐 *رأي:* تبسيط الحياة يجعلها أكثر سعادة وراحة.",
+    translation_en: "Life is simple, but we insist on complicating it."
+  },
+  {
+    index: 33,
+    author: "💐 *المؤلف:* أبراهام لينكولن",
+    arabic: "💐 *الاقتباس:* في النهاية، ليست السنوات في حياتنا هي التي تُحسب، بل الحياة في سنواتنا.",
+    opinion: "💐 *رأي:* جودة الحياة أهم من طولها.",
+    translation_en: "Live fully, as every moment counts toward a meaningful life."
+  },
+  {
+    index: 34,
+    author: "💐 *المؤلف:* فولتير",
+    arabic: "💐 *الاقتباس:* كل إنسان مخلوق من زمنه.",
+    opinion: "💐 *رأي:* أفكارنا وأسلوب حياتنا مشروطان بالعصر الذي نعيش فيه.",
+    translation_en: "Our ideas and lifestyle are shaped by the era we live in."
+  },
+  {
+    index: 35,
+    author: "💐 *المؤلف:* أرسطو",
+    arabic: "💐 *الاقتباس:* نحن ما نفعله بشكل متكرر.",
+    opinion: "💐 *رأي:* عاداتنا اليومية هي التي تشكل هويتنا.",
+    translation_en: "Our repeated actions define who we are."
+  },
+  {
+    index: 36,
+    author: "💐 *المؤلف:* تشارلي تشابلن",
+    arabic: "💐 *الاقتباس:* الحياة مأساة عن قرب، لكنها كوميديا من بعيد.",
+    opinion: "💐 *رأي:* منظورنا للحياة يتغير حسب زاوية الرؤية.",
+    translation_en: "Life’s tragedies and comedies depend on perspective."
+  },
+  {
+    index: 37,
+    author: "💐 *المؤلف:* ألبرت كامو",
+    arabic: "💐 *الاقتباس:* الإنسان هو الكائن الوحيد الذي يرفض أن يكون ما هو عليه.",
+    opinion: "💐 *رأي:* الإنسان يصارع دائمًا لإيجاد معنى لوجوده.",
+    translation_en: "Humans struggle to accept their true selves."
+  },
+  {
+    index: 38,
+    author: "💐 *المؤلفة:* كاساندرا كلير",
+    arabic: "💐 *الاقتباس:* كل معرفة تسبب الألم.",
+    opinion: "💐 *رأي:* المعرفة الجديدة تهزّ أسس ما كنا نؤمن به.",
+    translation_en: "New knowledge challenges our beliefs, causing discomfort."
+  },
+  {
+    index: 39,
+    author: "💐 *المؤلف:* بابلو بيكاسو",
+    arabic: "💐 *الاقتباس:* يستغرق وقتًا طويلًا لتصبح شابًا.",
+    opinion: "💐 *رأي:* الشباب ليس مرحلة بيولوجية، بل حالة تُتعلم.",
+    translation_en: "Youth is a mindset learned over time."
+  },
+  {
+    index: 40,
+    author: "💐 *المؤلفة:* هانا آرنت",
+    arabic: "💐 *الاقتباس:* الوقت هو أكثر ما نريد، وأسوأ ما نستخدم.",
+    opinion: "💐 *رأي:* إدارة الوقت تحدٍ كبير يؤثر على إنتاجيتنا.",
+    translation_en: "Time is precious, yet we often misuse it."
+  },
+  {
+    index: 41,
+    author: "💐 *المؤلف:* ويليام بن",
+    arabic: "💐 *الاقتباس:* لا توجد أفكار خطرة، التفكير نفسه خطر.",
+    opinion: "💐 *رأي:* التفكير يفتح آفاقًا جديدة، لكنه قد يكون محفوفًا بالمخاطر.",
+    translation_en: "Thinking opens new horizons but carries inherent risks."
+  },
+  {
+    index: 42,
+    author: "💐 *المؤلف:* ديفيد بن غوريون",
+    arabic: "💐 *الاقتباس:* من لا يؤمن بالمعجزات ليس واقعيًا.",
+    opinion: "💐 *رأي:* الواقع مليء بالظواهر غير المفسرة التي تتحدى التوقعات.",
+    translation_en: "Reality is full of unexplained phenomena."
+  },
+  {
+    index: 43,
+    author: "💐 *المؤلف:* فرانسيس بيكون",
+    arabic: "💐 *الاقتباس:* الأمل إفطار جيد، لكنه عشاء سيء.",
+    opinion: "💐 *رأي:* الأمل مفيد عندما يفتح الإمكانيات، لكنه ضار إذا كان الملاذ الأخير.",
+    translation_en: "Hope is beneficial when it opens possibilities but harmful as a last resort."
+  },
+  {
+    index: 44,
+    author: "💐 *المؤلف:* آلان بلوم",
+    arabic: "💐 *الاقتباس:* التعليم هو الانتقال من الظلام إلى النور.",
+    opinion: "💐 *رأي:* التعليم يوسع الآفاق ويمنح الإنسان القدرة على الفهم.",
+    translation_en: "Education illuminates the path from ignorance to understanding."
+  },
+  {
+    index: 45,
+    author: "💐 *المؤلف:* إريك فروم",
+    arabic: "💐 *الاقتباس:* الإبداع يتطلب الشجاعة للتخلي عن اليقين.",
+    opinion: "💐 *رأي:* الإبداع ينبع من قبول المخاطرة والشك.",
+    translation_en: "Creativity stems from embracing uncertainty."
+  },
+  {
+    index: 46,
+    author: "💐 *المؤلف:* إدموند بورك",
+    arabic: "💐 *الاقتباس:* من لا يعرف التاريخ محكوم بتكراره.",
+    opinion: "💐 *رأي:* دراسة التاريخ تساعدنا على تجنب أخطاء الماضي.",
+    translation_en: "Knowing history prevents us from repeating its mistakes."
+  },
+  {
+    index: 47,
+    author: "💐 *المؤلف:* شيشرون",
+    arabic: "💐 *الاقتباس:* لا شيء مستحيل لدرجة أن لا يجعله الخطاب مقبولاً.",
+    opinion: "💐 *رأي:* الخطابة الجيدة تستطيع تحويل أي فكرة إلى مقنعة.",
+    translation_en: "Well-crafted speeches can make anything persuasive."
+  },
+  {
+    index: 48,
+    author: "💐 *المؤلف:* دانتي",
+    arabic: "💐 *الاقتباس:* من شرارة صغيرة قد تشتعل نار.",
+    opinion: "💐 *رأي:* الأحداث الصغيرة قد تؤدي إلى نتائج كبيرة غير متوقعة.",
+    translation_en: "Small sparks can ignite great flames."
+  },
+  {
+    index: 49,
+    author: "💐 *المؤلف:*",
+    arabic: "💐 *الاقتباس:* القيادة لا تعتمد على أن تكون محقًا.",
+    opinion: "💐 *رأي:* القيادة تتعلق بالشرعية والتأثير، لا بالحقيقة المطلقة.",
+    translation_en: "Leadership is about influence, not always being right."
+  },
+  {
+    index: 50,
+    author: "💐 *المؤلف:* بي. إف. سكينر",
+    arabic: "💐 *الاقتباس:* البيئة تشكل تصرفات الفرد.",
+    opinion: "💐 *رأي:* سلوكنا متأثر بشدة بالبيئة المحيطة بنا.",
+    translation_en: "Our behavior is shaped by our environment."
+  },
+  {
+    index: 51,
+    author: "💐 *المؤلف:* ستانيسلاو جيرزي ليك",
+    arabic: "💐 *الاقتباس:* الشباب هدية الطبيعة، لكن العمر عمل فني.",
+    opinion: "💐 *رأي:* العمر يضيف قيمة من خلال التجارب والإبداع.",
+    translation_en: "Age does not limit your perspective on life."
+  },
+  {
+    index: 52,
+    author: "💐 *المؤلف:*",
+    arabic: "💐 *الاقتباس:* لا أحد يستطيع إيذائي دون إذني.",
+    opinion: "💐 *رأي:* قوة الإرادة تحمينا من التأثر بالآخرين.",
+    translation_en: "Your will protects you from being hurt without your consent."
+  },
+  {
+    index: 53,
+    author: "💐 *المؤلف:* ديفيد كارادين",
+    arabic: "💐 *الاقتباس:* إذا لم تكن شاعرًا، كن القصيدة.",
+    opinion: "💐 *رأي:* عِش حياتك بطريقة فنية تعبر عنك.",
+    translation_en: "Live your life as an artistic expression."
+  },
+  {
+    index: 54,
+    author: "💐 *المؤلف:* يوريبيدس",
+    arabic: "💐 *الاقتباس:* لا شيء أقوى من الضرورة القصوى.",
+    opinion: "💐 *رأي:* الضغط الشديد يولد قوة غير متوقعة.",
+    translation_en: "Extreme necessity can unleash unexpected strength."
+  },
+  {
+    index: 55,
+    author: "💐 *المؤمن:* القديس أوغسطينوس",
+    arabic: "💐 *الاقتباس:* الكبرياء ليست عظمة، بل انتفاخ، والمنتفخ يبدو كبيرًا لكنه ليس صحيًا.",
+    opinion: "💐 *رأي:* الكبرياء غالبًا يخفي انعدام الأمن والضعف.",
+    translation_en: "Pride often hides insecurity and fragility."
+  },
+  {
+    index: 56,
+    author: "💐 *المؤلف:* ويليام شكسبير",
+    arabic: "💐 *الاقتباس:* من الأفضل أن تكون ملك صمتك من أن تكون عبد كلامك.",
+    opinion: "💐 *رأي:* تجنب قول ما قد تندم عليه لاحقًا.",
+    translation_en: "Avoid saying things you might regret."
+  },
+  {
+    index: 57,
+    author: "💐 *المؤلف:* ويليام شكسبير",
+    arabic: "💐 *الاقتباس:* الجمال قوة، والابتسامة سيفها.",
+    opinion: "💐 *رأي:* الابتسامة تعزز جاذبية الجمال وتأثيره.",
+    translation_en: "A smile enhances the power but can be a double-edged sword."
+  },
+  {
+    index: 58,
+    author: "💐 *المؤلف:* أوغدن ناش",
+    arabic: "💐 *الاقتباس:* النض
