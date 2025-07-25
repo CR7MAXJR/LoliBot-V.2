@@ -1,34 +1,37 @@
-let handler  = async (m, { conn, usedPrefix: _p }) => {
-let texto = `*✅ BIENVENIDO A LOS GRUPOS OFICIALES*
+let handler = async (m, { conn, usedPrefix: _p }) => {
+let texto = `*✅ أهلاً بك في المجموعات الرسمية للبوتات:*
 
-  1) *${info.nn}*
-  
-  2) *${info.nn2}*
+1) *${info.nn}*
 
-➤ Grupo del Colaboracion LoliBot & GataBot-MD
- *${info.nn3}*
+2) *${info.nn2}*
 
-➤ Grupo soporte para responder a tu dudas/sugerencia/etc
+➤ مجموعة التعاون بين LoliBot و GataBot-MD  
+*${info.nn3}*
+
+➤ مجموعة الدعم للرد على استفساراتك/اقتراحاتك وغيرها  
 ${info.nn6}
- 
-➤ Infomarte sobre las nuevas actualizaciones/novedades/test sobre LoliBot aqui:
+
+➤ لمتابعة التحديثات والتجارب والنسخ الجديدة من LoliBot:  
 *${nna2}*
- 
-➤ Canal oficial donde encontrarán memes, video, novedades sobre cualquier bot, etc:
+
+➤ القناة الرسمية للميمز والفيديوهات وآخر أخبار البوتات:  
 *${nna}*
 
- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-⇶⃤꙰𝑬𝒏𝒍𝒂𝒄𝒆 𝒍𝒐𝒍𝒊𝒃𝒐𝒕ꦿ⃟⃢
+⇶⃤꙰رابط LoliBot الرسميꦿ⃟⃢  
 *${info.nn4}*
 
-ᥫ᭡༶A༶T༶M༶M༶ᰔᩚ
-*${info.nn5}*`.trim() 
-conn.reply(m.chat, texto, m) 
-//conn.fakeReply(m.chat, info, '0@s.whatsapp.net', '𝙏𝙝𝙚-𝙇𝙤𝙡𝙞𝘽𝙤𝙩-𝙈𝘿', 'status@broadcast')
+ᥫ᭡༶A༶T༶M༶M༶ᰔᩚ  
+*${info.nn5}*`.trim();
+
+conn.reply(m.chat, texto, m);
+// conn.fakeReply(m.chat, info, '0@s.whatsapp.net', '𝙏𝙝𝙚-𝙇𝙤𝙡𝙞𝘽𝙤𝙩-𝙈𝘿', 'status@broadcast')
 }
-handler.help = ['grupos']
+
+handler.help = ['مجموعات']
 handler.tags = ['main']
-handler.command = /^linkgc|grupos|gruposgatabot|gatabotgrupos|gruposdegatabot|groupofc|gruposgb|grupogb|groupgb$/i
-handler.register = true 
-export default handler
+handler.command = /^روابط|قروبات|مجموعات|رابط-قروب|رابطقروب|linkgc|grupos|grupos-gatabot|gatabot-grupos|gruposdegatabot|group-ofc|gruposgb|grupo-gb|group-gb$/i
+handler.register = true;
+
+export default handler;
