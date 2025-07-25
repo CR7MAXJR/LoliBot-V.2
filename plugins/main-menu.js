@@ -10,18 +10,18 @@ const tags = {
 main: 'ℹ️ معلومات البوت',
 jadibot: '✨ تنصيب بوت',
 downloader: '🚀 التنزيلات',
-game: '👾 العاب',
+game: '👾 ألعاب',
 gacha: '✨️ لعبة - جديدة',
 rg: '🟢 التسجيل',
-group: '⚙️ المجموعه',
-nable: '🕹 تفعيل/تعطيل',
-buscadores: '🔍 قسم البحث',
-sticker: '🧧 ملصقات',
-econ: '🛠 اقتصاد',
+group: '⚙️ المجموعة',
+nable: '🕹 التفعيل/التعطيل',
+buscadores: '🔍 البحث',
+sticker: '🧧 الملصقات',
+econ: '🛠 الاقتصاد',
 convertidor: '🎈 المحولات',
-logo: '🎀 لوغو',
-tools: '🔧 الادوات',
-randow: '🪄 عشوائي',
+logo: '🎀 الشعارات',
+tools: '🔧 الأدوات',
+randow: '🪄 العشوائي',
 efec: '🎙 الصوتيات',
 owner: '👑 المالك'
 }
@@ -29,7 +29,7 @@ owner: '👑 المالك'
 const defaultMenu = {
 before: `「 %wm 」
 
-مرحبا 👋🏻 *%name*
+مرحبًا 👋🏻 *%name*
 
 *• التاريخ:* %fecha
 *• الوقت:* %hora (🇸🇩) 
@@ -43,7 +43,7 @@ before: `「 %wm 」
 انضم إلى قناتنا على WhatsApp لتتعرف على كل جديد وتحديثات البوت والمزيد  
 %nna2
 
-*يمكنك التحدث مع البوت بهذه الطريقة، مثال:*  
+*مثال لاستخدام البوت:*  
 @%BoTag ما هي الـ API؟
 `.trimStart(),
   header: '`<[ %category ]>`',
@@ -60,17 +60,17 @@ const timeLeft = COOLDOWN_DURATION - (now - chatData.lastUsed);
 
 if (timeLeft > 0) {
 try {
-const senderTag = m.sender ? `@${m.sender.split('@')[0]}` : '@usuario';
-await conn.reply(chatId, `⚠️ Hey ${senderTag}, pendejo, ahí está el menú 🙄\n> Solo se enviará cada 3 minutos para evitar spam, Desplázate hacia arriba para verlo completo. 👆`, chatData.menuMessage || m);
+const senderTag = m.sender ? `@${m.sender.split('@')[0]}` : '@المستخدم';
+await conn.reply(chatId, `⚠️ مرحبًا ${senderTag}، لقد طلبت القائمة مؤخرًا 🙄\n> يُرجى الانتظار 3 دقائق لتجنب التكرار، مرّر للأعلى لمشاهدتها. 👆`, chatData.menuMessage || m);
 } catch (err) {
 return;
 }
 return;
 }
 
-const name = m.pushName || 'sin name';
-const fecha = moment.tz('America/Argentina/Buenos_Aires').format('DD/MM/YYYY');
-const hora = moment.tz('America/Argentina/Buenos_Aires').format('HH:mm:ss');
+const name = m.pushName || 'بدون اسم';
+const fecha = moment.tz('Africa/Khartoum').format('DD/MM/YYYY');
+const hora = moment.tz('Africa/Khartoum').format('HH:mm:ss');
 const _uptime = process.uptime() * 1000;
 const muptime = clockString(_uptime);
 
@@ -98,12 +98,12 @@ const toUsers = toNum(totalreg);
 const toUserReg = toNum(rtotalreg);
 const nombreBot = conn.user?.name || 'Bot'
 const isPrincipal = conn === global.conn;
-const tipo = isPrincipal ? 'Bot Oficial' : 'Sub Bot';
+const tipo = isPrincipal ? 'البوت الرسمي' : 'بوت فرعي';
 let botOfc = '';
 let BoTag = "";
 if (conn.user?.id && global.conn?.user?.id) {
 const jidNum = conn.user.id.replace(/:\d+/, '').split('@')[0];
-botOfc = (conn.user.id === global.conn.user.id) ? `*• Bot Ofc:* wa.me/${jidNum}` : `*• Soy un sub bot del:* wa.me/${global.conn.user.id.replace(/:\d+/, '').split('@')[0]}`;
+botOfc = (conn.user.id === global.conn.user.id) ? `*• البوت الرسمي:* wa.me/${jidNum}` : `*• أنا بوت فرعي للبوت:* wa.me/${global.conn.user.id.replace(/:\d+/, '').split('@')[0]}`;
 BoTag = jidNum;
 }
 
@@ -158,7 +158,7 @@ nna2: info.nna2
 text = String(text).replace(new RegExp(`%(${Object.keys(replace).join('|')})`, 'g'), (_, key) => replace[key] ?? '');
 try {
 let pp = fs.readFileSync('./media/Menu2.jpg');
-const menuMessage = await conn.sendMessage(chatId, { text: text, contextInfo: { forwardedNewsletterMessageInfo: { newsletterJid: "120363305025805187@newsletter",newsletterName: "LoliBot ✨️" }, forwardingScore: 999, isForwarded: true, mentionedJid: await conn.parseMention(text), externalAdReply: { showAdAttribution: false, renderLargerThumbnail: false, title: "✨️ MENU ✨️", body: `${nombreBot} (${tipo})`, mediaType: 1, thumbnailUrl: info.img2, sourceUrl: "https://skyultraplus.com" }}}, { quoted: m });
+const menuMessage = await conn.sendMessage(chatId, { text: text, contextInfo: { forwardedNewsletterMessageInfo: { newsletterJid: "120363305025805187@newsletter",newsletterName: "LoliBot ✨️" }, forwardingScore: 999, isForwarded: true, mentionedJid: await conn.parseMention(text), externalAdReply: { showAdAttribution: false, renderLargerThumbnail: false, title: "✨️ القائمة ✨️", body: `${nombreBot} (${tipo})`, mediaType: 1, thumbnailUrl: info.img2, sourceUrl: "https://skyultraplus.com" }}}, { quoted: m });
 cooldowns.set(chatId, { lastUsed: now, menuMessage: menuMessage })
 m.react('🙌');
 } catch (err) {    
@@ -167,7 +167,7 @@ console.error(err);
 }}
 handler.help = ['menu']
 handler.tags = ['main']
-handler.command = /^menu|help|allmenu|menú$/i
+handler.command = /^menu|help|allmenu|menú|الاوامر|مساعده$/i
 handler.noprefixOnly = true;
 export default handler
 
