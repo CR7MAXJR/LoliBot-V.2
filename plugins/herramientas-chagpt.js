@@ -7,13 +7,14 @@ import { db } from '../lib/postgres.js';
  
 const handler = async (m, {conn, text, usedPrefix, command}) => {
 let username = m.pushName 
-if (!text) return m.reply(`*Hola cómo esta 😊, El que te puedo ayudar?*, ingrese una petición o orden para usar la función de chagpt\n*Ejemplo:*\n${usedPrefix + command} Recomienda un top 10 de películas de acción`) 
-let syst = `Actuaras como un Bot de WhatsApp el cual fue creado por elrebelde, tu seras LoliBot.`
+if (!text) return m.reply(`*مرحباً 😊، كيف يمكنني مساعدتك؟*\nيرجى كتابة طلب أو سؤال لاستخدام ميزة الذكاء الاصطناعي.\n*مثال:*\n${usedPrefix + command} رشح لي أفضل 10 أفلام أكشن`) 
+
+let syst = `ستتصرف كروبوت واتساب تم إنشاؤه بواسطة elrebelde، اسمك هو LoliBot.`
 let syms1 = await fetch('https://raw.githubusercontent.com/Skidy89/chat-gpt-jailbreak/main/Text.txt').then(v => v.text());
  
 const chatId = m.chat;
 let systemPrompt = '';
-let ttl = 86400; // 1 día por defecto
+let ttl = 86400; // مدة التذكر: يوم واحد
 let memory = [];
 
 try {
@@ -21,7 +22,7 @@ const { rows } = await db.query('SELECT sautorespond, memory_ttl FROM group_sett
 systemPrompt = rows[0]?.sautorespond || '';
 ttl = rows[0]?.memory_ttl ?? 86400;
 } catch (e) {
-console.error("❌ Error obteniendo prompt o TTL:", e.message);
+console.error("❌ خطأ أثناء جلب الإعدادات:", e.message);
 }
 
 if (!systemPrompt) {
@@ -37,7 +38,7 @@ const { history = [], updated_at } = res.rows[0] || {};
 const expired = !ttl || (updated_at && Date.now() - new Date(updated_at) > ttl * 1000);
 memory = expired ? [] : history;
 } catch (e) {
-console.error("❌ Error leyendo memoria:", e.message);
+console.error("❌ خطأ أثناء قراءة الذاكرة:", e.message);
 }
 
 if (!memory.length || memory[0]?.role !== 'system' || memory[0]?.content !== systemPrompt) {
@@ -46,7 +47,7 @@ if (!memory.length || memory[0]?.role !== 'system' || memory[0]?.content !== sys
 memory.push({ role: 'user', content: text });
 if (memory.length > 25) memory = [memory[0], ...memory.slice(-24)];
 
-if (command == 'ia' || command == 'chatgpt') {
+if (command == 'ذكاء' || command == 'شات') {
 await conn.sendPresenceUpdate('composing', m.chat)
 let result = '';
 try {
@@ -57,7 +58,7 @@ let gpt = await fetch(`${info.apis}/ia/gptprompt?text=${text}?&prompt=${systemPr
 let res = await gpt.json();
 result = res.data;
 } catch {
-result = "❌ No se pudo generar una respuesta.";
+result = "❌ لم أتمكن من توليد رد.";
 }}
 memory.push({ role: 'assistant', content: result });
 
@@ -67,12 +68,12 @@ await db.query(`INSERT INTO chat_memory (chat_id, history, updated_at)
       ON CONFLICT (chat_id) DO UPDATE SET history = $2, updated_at = NOW()
     `, [chatId, JSON.stringify(memory)]);
 } catch (e) {
-console.error("❌ No se pudo guardar memoria:", e.message);
+console.error("❌ لم يتم حفظ الذاكرة:", e.message);
 }
 return await m.reply(result);
 }
 
-if (command == 'openai'  || command == 'chatgpt2') {
+if (command == 'ذكاء2'  || command == 'شات2') {
 await conn.sendPresenceUpdate('composing', m.chat);
 try {
 let gpt = await fetch(`https://api.dorratz.com/ai/gpt?prompt=${text}`) 
@@ -97,7 +98,7 @@ await m.reply(res.data)
 } catch (e) {
 }}}}}
 
-if (command == 'deepseek') {
+if (command == 'ديب_سيك') {
 await conn.sendPresenceUpdate('composing', m.chat);
 try {
 const gpt = await fetch(`https://api.dorratz.com/ai/deepseek?prompt=${encodeURIComponent(text)}`);
@@ -105,11 +106,11 @@ const res = await gpt.json();
 const decoded = JSON.parse(`"${res.result}"`);
 await m.reply(decoded);
 } catch (e) {
-console.error('Error DeepSeek:', e);
-await m.reply('❌ Error al consultar DeepSeek API.');
+console.error('خطأ في DeepSeek:', e);
+await m.reply('❌ حدث خطأ أثناء الاتصال بواجهة DeepSeek.');
 }}
 
-if (command == 'gemini') {
+if (command == 'جيميني') {
 await conn.sendPresenceUpdate('composing', m.chat)
 try {
 let gpt = await fetch(`https://api.dorratz.com/ai/gemini?prompt=${text}`)
@@ -123,20 +124,20 @@ await m.reply(res.message)
 } catch {
 }}}
 
-if (command === 'blackbox') {
+if (command === 'بلاك_بوكس') {
 const result = await blackboxAi(text);
 if (result.status) return await m.reply(result.data.response);
-return await m.reply("❌ Error de blackbox.ai: " + result.error);
+return await m.reply("❌ خطأ من blackbox.ai: " + result.error);
 }
     
-if (command == 'copilot' || command == 'bing') {
+if (command == 'كوبيلوت' || command == 'بينج') {
 await conn.sendPresenceUpdate('composing', m.chat)
 try {
 let gpt = await fetch(`https://api.dorratz.com/ai/bing?prompt=${text}`)
 let res = await gpt.json()
 await conn.sendMessage(m.chat, { text: res.result.ai_response, contextInfo: {
 externalAdReply: {
-title: "[ IA COPILOT ]",
+title: "[ مساعد الذكاء الاصطناعي ]",
 body: "LoliBot",
 thumbnailUrl: "https://qu.ax/nTDgf.jpg", 
 sourceUrl: "https://api.dorratz.com",
@@ -144,7 +145,6 @@ mediaType: 1,
 showAdAttribution: false,
 renderLargerThumbnail: false
 }}}, { quoted: m })
-//m.reply(res.result.ai_response)
 } catch {
 try {
 let gpt = await fetch(`${info.apis}/ia/bingia?query=${text}`)
@@ -152,9 +152,11 @@ let res = await gpt.json()
 await m.reply(res.message)
 } catch {
 }}}}
-handler.help = ["chagpt", "ia", "openai", "gemini", "copilot", "blackbox", "deepseek"]
-handler.tags = ["buscadores"]
-handler.command = /^(openai|chatgpt|ia|ai|openai2|chatgpt2|ia2|gemini|copilot|bing|deepseek|blackbox)$/i;
+
+handler.help = ["ذكاء", "شات", "ذكاء2", "جيميني", "كوبيلوت", "بلاك_بوكس", "ديب_سيك"]
+handler.tags = ["ذكاء"]
+handler.command = /^(openai|chatgpt|ia|ai|openai2|chatgpt2|ia2|gemini|copilot|bing|deepseek|blackbox|ذكاء|ذكاء2|شات|شات2|جيميني|ديب_سيك|كوبيلوت|بينج|بلاك_بوكس)$/i;
+
 export default handler;
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
