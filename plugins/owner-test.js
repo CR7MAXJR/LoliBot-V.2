@@ -2,7 +2,7 @@ import { db } from "../lib/postgres.js";
 
 const handler = async (m, { conn, args }) => {
   const id = conn.user?.id;
-  if (!id) return m.reply("❌ No se pudo identificar este bot.");
+  if (!id) return m.reply("❌ لم يتم التعرف على هذا البوت.");
   const cleanId = id.replace(/:\d+/, '');
 
   try {
@@ -18,44 +18,44 @@ const handler = async (m, { conn, args }) => {
 
     if (res.rows.length === 0) {
       return m.reply(tipoFiltro
-        ? `❌ No hay ningún bot del tipo *${tipoFiltro}* en la base de datos.`
-        : "❌ La tabla subbots está vacía, no hay nada pa’ mostrar.");
+        ? `❌ لا يوجد أي بوت من النوع *${tipoFiltro === 'oficial' ? 'رئيسي' : 'فرعي'}* في قاعدة البيانات.`
+        : "❌ جدول البوتات فارغ، لا يوجد ما يُعرض.");
     }
 
-    let mensaje = `📋 *Bots ${tipoFiltro ? ` (${tipoFiltro})` : ''}:*\n`;
+    let mensaje = `📋 *قائمة البوتات${tipoFiltro ? ` (${tipoFiltro === 'oficial' ? 'رئيسية' : 'فرعية'})` : ''}:*\n`;
 
     if (!tipoFiltro && conteo) {
       const { total, oficiales, subbots } = conteo.rows[0];
-      mensaje += `*• Principales:* ${oficiales}\n`;
-      mensaje += `*• Subbots:* ${subbots}\n\n`;
-     mensaje += `\`🤖 CONFIGURACIÓNES :\`\n`;
+      mensaje += `*• الرئيسية:* ${oficiales}\n`;
+      mensaje += `*• الفرعية:* ${subbots}\n\n`;
+      mensaje += `\`⚙️ الإعدادات:\`\n`;
     }
     
     for (const row of res.rows) {
-      mensaje += `- ID: ${row.id} (${row.tipo || 'Desconocido'})\n`;
-      mensaje += `- Modo: ${row.mode || 'Public'}\n`;
-      mensaje += `- Nombre: ${row.name || 'por defecto'}\n`;
-      mensaje += `- Prefijos: ${row.prefix ? row.prefix.join(', ') : '[/,.,#]'}\n`;
-      mensaje += `- Owners: ${row.owners?.length ? row.owners.join(', ') : 'Por defecto'}\n`;
-      mensaje += `- Anti-Private: ${row.anti_private ? 'Sí' : 'No'}\n`;
-      mensaje += `- Anti-Call: ${row.anti_call ? 'Sí' : 'No'}\n`;
-      mensaje += `- Privacidad número: ${row.privacy ? 'Sí' : 'No'}\n`;
-      mensaje += `- Prestar bot: ${row.prestar ? 'Sí' : 'No'}\n`;
-      mensaje += `- Logo: ${row.logo_url || 'Ninguno'}\n`;
+      mensaje += `- 🆔 المعرف: ${row.id} (${row.tipo === 'oficial' ? 'رئيسي' : row.tipo === 'subbot' ? 'فرعي' : 'غير معروف'})\n`;
+      mensaje += `- 🔘 الوضع: ${row.mode || 'عام'}\n`;
+      mensaje += `- 📛 الاسم: ${row.name || 'افتراضي'}\n`;
+      mensaje += `- ☑️ البادئات: ${row.prefix ? row.prefix.join(', ') : '[/,.,#]'}\n`;
+      mensaje += `- 👑 المالكين: ${row.owners?.length ? row.owners.join(', ') : 'افتراضي'}\n`;
+      mensaje += `- 🔒 منع الخاص: ${row.anti_private ? '✅ نعم' : '❌ لا'}\n`;
+      mensaje += `- 📵 منع الاتصالات: ${row.anti_call ? '✅ نعم' : '❌ لا'}\n`;
+      mensaje += `- 🔐 إخفاء الرقم: ${row.privacy ? '✅ نعم' : '❌ لا'}\n`;
+      mensaje += `- 🤝 قابل للإعارة: ${row.prestar ? '✅ نعم' : '❌ لا'}\n`;
+      mensaje += `- 🖼️ الشعار: ${row.logo_url || 'لا يوجد'}\n`;
       mensaje += `\n─────────────\n\n`;
     }
 
     m.reply(mensaje.trim());
 
   } catch (err) {
-    console.error("❌ Error al consultar subbots:", err);
-    m.reply("❌ Error al leer la tabla subbots, reporta esta mierda.");
+    console.error("❌ خطأ أثناء جلب البوتات:", err);
+    m.reply("❌ حصل خطأ أثناء قراءة جدول البوتات، يرجى الإبلاغ.");
   }
 };
 
-handler.help = ['testsubbots [opcional: 1|2]'];
-handler.tags = ['owner'];
-handler.command = /^testsubbots$/i;
+handler.help = ['قائمة-البوتات [اختياري: 1|2]'];
+handler.tags = ['المالك'];
+handler.command = /^قائمة-البوتات$/i;
 handler.register = true;
 handler.owner = true;
 
